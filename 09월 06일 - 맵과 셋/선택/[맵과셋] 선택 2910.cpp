@@ -7,11 +7,11 @@ using namespace std;
 
 map<int, int> order;
 bool cmp(pair<int, int>& a, pair<int, int>& b) {
-	if (a.second == b.second) {//ºóµµ°¡ °°´Ù¸é
-		if (order[a.first] < order[b.first])  return 1;//a°¡ ´õ »¡¸® ³ª¿ÔÀ¸¸é
+	if (a.second == b.second) {//ë¹ˆë„ê°€ ê°™ë‹¤ë©´
+		if (order[a.first] < order[b.first])  return 1;//aê°€ ë” ë¹¨ë¦¬ ë‚˜ì™”ìœ¼ë©´
 		else return 0;
 	}
-	else {//ºóµµ°¡ ´Ù¸£´Ù¸é
+	else {//ë¹ˆë„ê°€ ë‹¤ë¥´ë‹¤ë©´
 		if (a.second > b.second) return 1;
 		else return 0;
 	}
@@ -27,7 +27,7 @@ int main() {
 
 	cin >> N >> C;
 
-	//ÀÔ·Â¹ŞÀº Á¤¼ö°¡ frequency¿¡ ÀÖÀ¸¸é °ª +1 ¾øÀ¸¸é order ±â·ÏÇÏ°í freq+1
+	//ì…ë ¥ë°›ì€ ì •ìˆ˜ê°€ frequencyì— ìˆìœ¼ë©´ ê°’ +1 ì—†ìœ¼ë©´ order ê¸°ë¡í•˜ê³  freq+1
 	for (i = 0; i < N; i++) {
 		cin >> num;
 
@@ -40,7 +40,7 @@ int main() {
 		}
 	}
 
-	//ºóµµ°¡ ¸¹Àº ¼ø¼­ -> ºóµµ°¡ °°´Ù¸é order°ªÀÌ ÀÛÀº....
+	//ë¹ˆë„ê°€ ë§ì€ ìˆœì„œ -> ë¹ˆë„ê°€ ê°™ë‹¤ë©´ orderê°’ì´ ì‘ì€....
 	vector<pair<int, int>> v(frequency.begin(), frequency.end());
 	sort(v.begin(), v.end(), cmp);
 
