@@ -6,7 +6,13 @@
 using namespace std;
 
 map<int, int> order;
+
 bool cmp(pair<int, int>& a, pair<int, int>& b) {
+	if (a.second == b.second) //빈도가 같다면
+		return order[a.first] < order[b.first];
+	return a.second > b.second;
+}
+/*bool cmp(pair<int, int>& a, pair<int, int>& b) {
 	if (a.second == b.second) {//빈도가 같다면
 		if (order[a.first] < order[b.first])  return 1;//a가 더 빨리 나왔으면
 		else return 0;
@@ -16,7 +22,7 @@ bool cmp(pair<int, int>& a, pair<int, int>& b) {
 		else return 0;
 	}
 
-	}
+	}*/
 
 int main() {
 
@@ -38,7 +44,7 @@ int main() {
 	}
 
 	/*
-	* 정렬 순쉬
+	* 정렬 순위
 	* 1. 빈도수 내림차순
 	* 2. 빈도수가 같다면  order 오름차순
 	*/
