@@ -1,4 +1,4 @@
-﻿#include<iostream>
+#include<iostream>
 #include<algorithm>
 #include<map>
 #include<vector>
