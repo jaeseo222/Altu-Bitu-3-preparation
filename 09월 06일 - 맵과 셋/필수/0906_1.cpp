@@ -44,8 +44,6 @@ for(int i=0;i<n;i++){
 
 #include <iostream>
 using namespace std;
-int M;
-int S, reset; // S의 20개의 비트가 1 부터 20까지 숫자의 유무(1 or 0)를 표현할 것입니다
 
 void add(int n){
     if((S & (1 << n)) == 0) S |= (1 << n);
@@ -64,6 +62,8 @@ void toggle(int n){
 int main()
 {
     ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+    int M = 0, S = 0, reset = 0; // S의 20개의 비트가 1 부터 20까지 숫자의 유무(1 or 0)를 표현할 것입니다
+
     //입력
     cin>>M;
     //명령이 all일 때 reset할 수를 초기화해줍니다
