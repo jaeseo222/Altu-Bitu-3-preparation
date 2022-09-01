@@ -10,23 +10,23 @@ using namespace std;
 int main()
 {
     int n, s = 0;
-    vector<int> a, b;
-    
+
     // 입력
     cin >> n;
-    a.assign(n, 0);
-    b.assign(n, 0);
-    for (int i = 0; i < n; i++) // A 입력 받기
-        cin >> a[i];
-    for (int i = 0; i < n; i++) // B 입력 받기
-        cin >> b[i];
+    vector<int> a(n), b(n);
+    for (int i = 0; i < n; i++) { 
+        cin >> a[i]; // A 입력 받기
+    }
+    for (int i = 0; i < n; i++) { 
+        cin >> b[i]; // B 입력 받기
+    }
     sort(a.begin(), a.end()); // A 오름차순 정렬
     sort(b.begin(), b.end(), greater<>()); // B 내림차순 정렬
 
     // 연산
-    for (int i = 0; i < n; i++) // 배열 A, B의 각 원소의 곱 더하기 
-        s += a[i] * b[i];
-
+    for (int i = 0; i < n; i++) { 
+        s += a[i] * b[i]; // 배열 A, B의 각 원소의 곱 더하기
+    }
     // 출력
     cout << s;
 }
