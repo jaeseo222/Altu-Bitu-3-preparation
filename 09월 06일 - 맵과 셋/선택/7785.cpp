@@ -10,11 +10,12 @@ int main() {
 
 	// 입력
 	cin >> n;
-	for (int i = 0; i < n; i++) {
+	while (n--) {
 		cin >> name >> state;
-		company.insert(name);
 
-		if (state == "leave")
+		if (state == "enter")
+			company.insert(name);
+		else
 			company.erase(name);
 	}
 
