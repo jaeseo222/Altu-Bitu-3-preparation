@@ -13,7 +13,7 @@ int main()
 
     // 입력
     cin >> n;
-    vector<int> a(n), b(n);
+    vector<int> a(n, 0), b(n, 0);
     for (int i = 0; i < n; i++) { 
         cin >> a[i]; // A 입력 받기
     }
