@@ -4,8 +4,10 @@
 
 using namespace std;
 
-long long calTip(int n, vector<int>& tips) {
-    long long ans = 0;
+typedef long long ll;
+
+ ll calTip(int n, vector<int>& tips) {
+    ll ans = 0;
     for (int i = 0; i < n; i++) {
         int cur_tip = tips[i] - i;
         if (cur_tip < 0) //음수면 팁에 더하지 않는데 처음에 내림차순 정렬했으므로 아예 break
