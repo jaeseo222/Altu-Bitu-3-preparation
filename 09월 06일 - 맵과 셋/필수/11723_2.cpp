@@ -17,7 +17,8 @@ const int SIZE = 21;
  *
  * 비트마스크에 대해 따로 알아보는걸 추천합니다.
  */
-int main() {
+int main()
+{
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
@@ -26,32 +27,39 @@ int main() {
     int s = 0;
 
     cin >> m;
-    while (m--) {
+    while (m--)
+    {
         cin >> cmd;
-        if (cmd == "all") {
+        if (cmd == "all")
+        {
             s = (1 << SIZE) - 1;
             continue;
         }
-        if (cmd == "empty") {
+        if (cmd == "empty")
+        {
             s = 0;
             continue;
         }
 
         cin >> num;
-        if (cmd == "add") { //OR 연산
+        if (cmd == "add")
+        { // OR 연산
             s |= (1 << num);
             continue;
         }
-        if (cmd == "remove") { //NOT 연산 후 AND 연산
+        if (cmd == "remove")
+        { // NOT 연산 후 AND 연산
             s &= ~(1 << num);
             continue;
         }
-        if (cmd == "check") { //AND 연산
+        if (cmd == "check")
+        { // AND 연산
             int tmp = s & (1 << num);
             cout << ((tmp == 0) ? 0 : 1) << '\n';
             continue;
         }
-        if (cmd == "toggle") { //XOR 연산
+        if (cmd == "toggle")
+        { // XOR 연산
             s ^= (1 << num);
             continue;
         }
