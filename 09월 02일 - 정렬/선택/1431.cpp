@@ -19,16 +19,17 @@ int sumNum(string str) {
 bool cmp(const string &s1, const string &s2) {
     if (s1.size() != s2.size()) { //두 문자열의 길이가 다르다면 짧은 문자열이 먼저 오도록
         return s1.size() < s2.size();
-    } else if (sumNum(s1) != sumNum(s2)) { //두 문자열의 숫자 합이 다르다면 합이 작은 문자열이 먼저 오도록
+    }
+    if (sumNum(s1) != sumNum(s2)) { //두 문자열의 숫자 합이 다르다면 합이 작은 문자열이 먼저 오도록
         return sumNum(s1) < sumNum(s2);
-    } else
-        return s1 < s2; //사전순
+    }
+    return s1 < s2; //사전순
 }
 
 int main() {
     int n;
     vector<string> serial_num;
-
+    
     //입력
     cin >> n;
     serial_num.assign(n, "");
