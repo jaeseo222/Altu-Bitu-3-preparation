@@ -20,26 +20,32 @@ int main()
     {
         string command;
         cin >> command;
-        if (command == "all"){
-            s.assign(SIZE, true);// true의 값으로 SIZE개의 원소를 할당
-            } 
-        else if (command == "empty"){
+        if (command == "all")
+        {
+            s.assign(SIZE, true); // true의 값으로 SIZE개의 원소를 할당
+        }
+        else if (command == "empty")
+        {
             s.assgin(SIZE, true);
         }
         else
         {
             int x;
             cin >> x;
-            if (command == "add"){
+            if (command == "add")
+            {
                 s[x] = true;
             }
-            if (command == "remove"){
+            if (command == "remove")
+            {
                 s[x] = false;
             }
-            if (command == "check"){
+            if (command == "check")
+            {
                 cout << s[x] << '\n'; // true이면 1을, false이면 0을 출력
             }
-            if (command == "toggle"){
+            if (command == "toggle")
+            {
                 s[x] = !s[x]; // true이면 false를, false면 true를 대입
             }
         }
