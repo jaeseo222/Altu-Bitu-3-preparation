@@ -1,62 +1,50 @@
-﻿#include <iostream>
+#include <iostream>
 #include <map>
 #include <algorithm>
 #include <vector>
-
 using namespace std;
 
+typedef pair<int, int> ci;//반복되는 형태는 typedef로 미리 선언하고 사용해요!
 map<int, int> order;
 
-bool cmp(pair<int, int>& a, pair<int, int>& b) {
-	if (a.second == b.second) //빈도가 같다면
-		return order[a.first] < order[b.first];
-	return a.second > b.second;
+bool cmp(const ci& a, const ci& b) {//비교 정렬 함수 사용 시, 비교 변수는 함수 내에서 절대로 값이 변경되면 안돼 상수화를 권장해요!
+	if (a.second != b.second) {//비교함수 작성 시, 가독성을 위해, 같지 않을 경우에 대한 조건을 먼저 처리 하는 것을 권장해요! -> 국영수 문제를 참고해보세요!
+		return a.second > b.second; //빈도가 다르면 빈도수 내림차순
+	}
+	return order[a.first] < order[b.first]; //빈도가 같다면 순서 오름차순
+	 
 }
-/*bool cmp(pair<int, int>& a, pair<int, int>& b) {
-	if (a.second == b.second) {//빈도가 같다면
-		if (order[a.first] < order[b.first])  return 1;//a가 더 빨리 나왔으면
-		else return 0;
-	}
-	else {//빈도가 다르다면
-		if (a.second > b.second) return 1; //a의 빈도가 더 크면 
-		else return 0;
-	}
 
-	}*/
 
 int main() {
 
-	int N, C, i, num;
+	int n,c, num;
 	map<int, int> frequency;
 
-	cin >> N >> C;
+	cin >> n>> c;
+
 	//정수값에 따라서 빈도수와 처음 나온 순서를 frequency와 order에 저장
-	for (i = 0; i < N; i++) {
+	for (int i = 0; i < n; i++) {
 		cin >> num;
 
 		if (!frequency[num]) {//입력받은 정수의 frequency값이 0이면
 			order[num] = i; //order에 처음 나온 순서 i기록
-			frequency[num] = 1; // 빈도수 1로 설정
 		}
-		else { // 입력받은 정수의 frequency값이 0이 아니면 즉 이미 한 번 나왔으면
-			frequency[num]++;//빈도수 증가
-		}
+		frequency[num]++;//빈도수 증가
 	}
 
 	/*
 	* 정렬 순위
 	* 1. 빈도수 내림차순
-	* 2. 빈도수가 같다면  order 오름차순
+	* 2. 빈도수가 같다면 처음 나온 순서 오름차순
 	*/
-	vector<pair<int, int>> v(frequency.begin(), frequency.end());
+	vector<ci> v(frequency.begin(), frequency.end());//map은 정렬 함수가 따로 없어서 vector로 바꿔야해요!
 
-	//빈도순으로 정렬하되 빈도가 같은 경우를 정렬하기 위해 cmp비교 함수 사용
-	sort(v.begin(), v.end(), cmp);
+	sort(v.begin(), v.end(), cmp); //비교 정렬 함수 cmp사용해서 정렬
 
-	for (i =0 ; i < v.size(); i++) {
-		while (v[i].second) {
+	for (int i = 0; i < v.size(); i++) {
+		while (v[i].second--) {
 			cout << v[i].first << ' ';
-			v[i].second--;
 		}
 	}
 
