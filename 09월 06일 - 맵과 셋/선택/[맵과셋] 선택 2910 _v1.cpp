@@ -2,52 +2,49 @@
 #include <map>
 #include <algorithm>
 #include <vector>
-
 using namespace std;
 
+typedef pair<int, int> ci;//반복되는 형태는 typedef로 미리 선언하고 사용해요!
 map<int, int> order;
-bool cmp(pair<int, int>& a, pair<int, int>& b) {
-	if (a.second == b.second) {//�󵵰� ���ٸ�
-		if (order[a.first] < order[b.first])  return 1;//a�� �� ���� ��������
-		else return 0;
-	}
-	else {//�󵵰� �ٸ��ٸ�
-		if (a.second > b.second) return 1;
-		else return 0;
-	}
 
+bool cmp(const ci& a, const ci& b) {//비교 정렬 함수 사용 시, 비교 변수는 함수 내에서 절대로 값이 변경되면 안돼 상수화를 권장해요!
+	if (a.second != b.second) {//비교함수 작성 시, 가독성을 위해, 같지 않을 경우에 대한 조건을 먼저 처리 하는 것을 권장해요! -> 국영수 문제를 참고해보세요!
+		return a.second > b.second; //빈도가 다르면 빈도수 내림차순
 	}
+	return order[a.first] < order[b.first]; //빈도가 같다면 순서 오름차순
+	 
+}
+
 
 int main() {
 
-	int N, C, i, num;
+	int n,c, num;
 	map<int, int> frequency;
-	
-	
 
-	cin >> N >> C;
+	cin >> n>> c;
 
-	//�Է¹��� ������ frequency�� ������ �� +1 ������ order ����ϰ� freq+1
-	for (i = 0; i < N; i++) {
+	//정수값에 따라서 빈도수와 처음 나온 순서를 frequency와 order에 저장
+	for (int i = 0; i < n; i++) {
 		cin >> num;
 
-		if (!frequency[num]) {
-			order[num] = i;
-			frequency[num] = 1;
+		if (!frequency[num]) {//입력받은 정수의 frequency값이 0이면
+			order[num] = i; //order에 처음 나온 순서 i기록
 		}
-		else {
-			frequency[num]++;
-		}
+		frequency[num]++;//빈도수 증가
 	}
 
-	//�󵵰� ���� ���� -> �󵵰� ���ٸ� order���� ����....
-	vector<pair<int, int>> v(frequency.begin(), frequency.end());
-	sort(v.begin(), v.end(), cmp);
+	/*
+	* 정렬 순위
+	* 1. 빈도수 내림차순
+	* 2. 빈도수가 같다면 처음 나온 순서 오름차순
+	*/
+	vector<ci> v(frequency.begin(), frequency.end());//map은 정렬 함수가 따로 없어서 vector로 바꿔야해요!
 
-	for (i =0 ; i < v.size(); i++) {
-		while (v[i].second) {
+	sort(v.begin(), v.end(), cmp); //비교 정렬 함수 cmp사용해서 정렬
+
+	for (int i = 0; i < v.size(); i++) {
+		while (v[i].second--) {
 			cout << v[i].first << ' ';
-			v[i].second--;
 		}
 	}
 
