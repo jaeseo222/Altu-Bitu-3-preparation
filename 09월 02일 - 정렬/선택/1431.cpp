@@ -24,11 +24,13 @@ bool cmp(const string &s1, const string &s2) {
         return sumNum(s1) < sumNum(s2);
     }
     return s1 < s2; //사전순
+
 }
 
 int main() {
     int n;
     vector<string> serial_num;
+
     
     //입력
     cin >> n;
