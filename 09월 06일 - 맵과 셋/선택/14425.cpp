@@ -1,37 +1,33 @@
-#include <iostream>
-#include <set>
-
+#include<iostream>
+#include<set>
 using namespace std;
+int main() {
+	int n, m, cnt = 0;
+	string s;'
 
-/**
-* N,M <=10000 이므로 N개의 문자열을 벡터에 저장하고 존재 여부를 O(N)에 확인하면 시간초과 발생.
-* 따라서 탐색 시간을 줄이기 위해 원소 탐색에 O(logN) 시간이 걸리는 이진트리 구조의 set을 사용한다.
-*/
+	set<string> str;
+	cin >> n >> m;
+
+	while (n--) {
+		cin >> s;
+		str.insert(s);
+	}
+
+	while (m--) {
+		cin >> s;
+		cnt += str.count(s);
+	}
+	cout << cnt;
+}
 
 int main() {
+    string s; //입력(중위표기식)
 
-	int n, m;
-	string str;
-	
-	set<string> s;
+    //입력
+    cin >> s;
 
-	//입력
-	cin >> n >> m;
-	
-	for (int i = 0; i < n; i++) {
-		cin >> str;
-		s.insert(str);
-	}
+    //출력
+    cout << infixToPostfix(s) << '\n';
 
-	int cnt = 0;
-	for (int i = 0; i < m; i++) {
-		cin >> str;
-		if (s.find(str) != s.end()) { //s.find(key)는 원소를 찾지 못하면 s.end() 를 반환
-			cnt++;
-			
-		}
-	}
-
-	//출력
-	cout << cnt;
+    return 0;
 }
