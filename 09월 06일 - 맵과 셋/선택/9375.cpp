@@ -8,11 +8,11 @@ using namespace std;
  */
 
 int main() {
-    int T, n;
+    int t, n;
     string clothes, kind;
 
-    cin >> T;
-    while (T--) {
+    cin >> t;
+    while (t--) {
         map<string, int> m;
 
         //입력
