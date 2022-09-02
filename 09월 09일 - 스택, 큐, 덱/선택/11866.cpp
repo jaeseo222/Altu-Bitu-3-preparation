@@ -15,7 +15,7 @@ void josephProb(int n, int k)
     }
     cout << "<";
     while (!q.empty()) {
-        for (int i = 0; i < k - 1; i++) { // K 번째임에 주의하세요
+        for (int i = 0; i < k - 1; i++) { // K 번째임에 주의
             q.push(q.front()); // 큐의 가장 앞에 있는 원소를 가장 뒤로 옮김
             q.pop();
         }
