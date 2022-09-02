@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include <queue>
 
 using namespace std;
@@ -7,36 +8,43 @@ using namespace std;
  * 큐에 아무것도 남아있지 않을 때까지 N 번째 원소를 큐에서 제거
 */
 
-void josephProb(int n, int k)
+vector<int> josephusProb(int n, int k)
 {
     queue<int> q;
-    for (int i = 0; i < n; i++) { // 큐에 N개의 원소 넣기
-        q.push(i + 1);
+    vector<int> result;
+    for (int i = 1; i <= n; i++) { // 큐에 N개의 원소 넣기
+        q.push(i);
     }
-    cout << "<";
+    int cnt = 0; // 카운트 변수
     while (!q.empty()) {
-        for (int i = 0; i < k - 1; i++) { // K 번째임에 주의
-            q.push(q.front()); // 큐의 가장 앞에 있는 원소를 가장 뒤로 옮김
-            q.pop();
+        int x = q.front();
+        q.pop();
+        cnt++;
+        if (cnt == k) { // k번째 pop하는 원소라면
+            result.push_back(x);
+            cnt = 0;
+            continue;
         }
-      cout << q.front();
-        if (q.size() == 1) {  // 큐의 원소가 하나일 경우
-            cout << ">";
-            
-        }
-        else { // 큐의 원소가 여러 개일 경우
-            cout << ", ";
-        }
-        q.pop(); // 큐에서 원소 제거
+        q.push(x); // pop한 원소 다시 push
     }
-
+    return result;
 }
 
 int main()
 {
     int n, k;
+    vector<int> v;
     // 입력
     cin >> n >> k;
-    // 연산 & 출력
-    josephProb(n, k);
+    // 연산
+    v = josephusProb(n, k);
+    // 출력
+    cout << "<";
+    for (int i = 0; i < v.size(); i++) {
+        cout << v[i];
+        if (i != v.size() - 1) {
+            cout << ", ";
+        }
+    }
+    cout << ">";
 }
