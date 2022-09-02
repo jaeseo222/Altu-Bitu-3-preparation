@@ -13,10 +13,12 @@ int main() {
 	while (n--) {
 		cin >> name >> state;
 
-		if (state == "enter")
+		if (state == "enter") {
 			company.insert(name);
-		else
+		}
+		else {
 			company.erase(name);
+		}
 	}
 
 	// 출력 (역으로 참조)
