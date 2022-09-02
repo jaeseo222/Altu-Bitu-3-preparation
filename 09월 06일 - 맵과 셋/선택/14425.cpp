@@ -1,6 +1,8 @@
 #include<iostream>
 #include<set>
+
 using namespace std;
+
 int main() {
 	int n, m, cnt = 0;
 	string s;'
@@ -18,16 +20,4 @@ int main() {
 		cnt += str.count(s);
 	}
 	cout << cnt;
-}
-
-int main() {
-    string s; //입력(중위표기식)
-
-    //입력
-    cin >> s;
-
-    //출력
-    cout << infixToPostfix(s) << '\n';
-
-    return 0;
 }
