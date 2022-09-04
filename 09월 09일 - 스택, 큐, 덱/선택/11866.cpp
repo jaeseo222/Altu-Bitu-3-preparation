@@ -40,8 +40,8 @@ int main()
     v = josephusProb(n, k);
     // 출력
     cout << "<";
-    for (int i = 0; i < v.size() - 1; i++) {
+    for (int i = 0; i < n - 1; i++) {
         cout << v[i] << ", ";
     }
-    cout << v[v.size() - 1] << ">";
+    cout << v[n - 1] << ">";
 }
