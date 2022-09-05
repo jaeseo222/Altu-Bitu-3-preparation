@@ -26,7 +26,7 @@ int main()
         }
         else if (command == "empty")
         {
-            s.assgin(SIZE, true);
+            s.assgin(SIZE, false);
         }
         else
         {
