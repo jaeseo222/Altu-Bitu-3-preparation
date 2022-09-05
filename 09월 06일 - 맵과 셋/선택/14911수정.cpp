@@ -1,7 +1,5 @@
 ﻿#include<iostream>
-#include<algorithm>
 #include<map>
-#include<vector>
 
 using namespace std;
 
@@ -28,23 +26,16 @@ int findPair(map<int,int> mp, int goal) {
 }
 
 int main(void) {
-    vector<int> arr;
     int num,goal;
-    map<int, int> mpair;
+    map<int, int> mp;
 
-
-    //숫자를 입력 받는 동안 반복 -> arr에 삽입
+    //숫자를 입력 받는 동안 반복 -> 해당 숫자 개수 카운트
     while (cin >> num) {
-        arr.push_back(num);
+        mp[num]++;
     }
-    goal = arr.back(); //원하는 합
-    arr.pop_back();
-
-    //숫자의 개수를 세는 map 생성
-    for (int i = 0; i < arr.size(); i++) {
-        mpair[arr[i]]++;
-    }
+    //원하는 합
+    goal=num;
    
-    cout << findPair(mpair, goal);
+    cout << findPair(mp, goal);
 
 }
