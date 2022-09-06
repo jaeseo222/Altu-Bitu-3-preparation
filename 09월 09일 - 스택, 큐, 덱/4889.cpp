@@ -55,6 +55,7 @@ int main() {
 
         //출력
         cout << ++num << ". " << ans << '\n';
+
     }
 
     return 0;
