@@ -5,6 +5,7 @@ using namespace std;
 
 const int SIZE = 1e6 + 1;
 
+// 역방향 ver
 vector<int> findNumEnd(vector<int>& cnt, vector<int>& arr, int n) {
 	stack<int> st; // 오등큰수 저장
 	vector<int> result(n, -1);
@@ -25,6 +26,8 @@ vector<int> findNumEnd(vector<int>& cnt, vector<int>& arr, int n) {
 	}
 	return result;
 }
+
+// 정방향 ver
 vector<int> findNum(vector<int>& cnt, vector<int>& arr, int n) {
 	stack<int> st; // 오등큰수 인덱스 저장
 	vector<int> result(n, -1);
@@ -44,6 +47,8 @@ vector<int> findNum(vector<int>& cnt, vector<int>& arr, int n) {
 }
 
 /*
+* [오등큰수]
+* 
 * 주의! 빈도수가 같으면 오등큰수x
 *
 * > 역방향 순회
