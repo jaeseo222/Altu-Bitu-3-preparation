@@ -10,19 +10,19 @@ using namespace std;
 
 int main() {
 	int n, m, cnt = 0;
-	string s;'
+	string str;
 
-	set<string> str;
+	set<string> s;
 	cin >> n >> m;
 
 	while (n--) {
-		cin >> s;
-		str.insert(s);
+		cin >> str;
+		s.insert(str);
 	}
 
 	while (m--) {
-		cin >> s;
-		cnt += str.count(s);
+		cin >> str;
+		cnt += s.count(str);
 	}
 	cout << cnt;
 }
