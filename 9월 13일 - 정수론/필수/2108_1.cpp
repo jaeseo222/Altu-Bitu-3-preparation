@@ -39,7 +39,7 @@ int findMode(int max_cnt, vector<int>& frequency) {
 int main() {
 	int n;
 	double sum = 0.0; //입력된 숫자의 합
-	int mode; int max_freq = 0; //최빈값, 최빈값의 빈도수
+	int max_freq = 0; //최빈값, 최빈값의 빈도수
 
 	cin >> n;
 	vector<int> v(n); //입력된 숫자를 저장할 벡터
