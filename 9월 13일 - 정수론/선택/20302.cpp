@@ -10,15 +10,12 @@ vector<int> exponent(MAX + 1, 0); //연산 과정에서 각 소수의 지수 저장
 
 //소수 경로 저장해서 리턴하는 함수
 void isPrime() {
-    // n 이하의 수를 소인수분해하는 경로를 리턴
     for (int i = 2; i * i <= MAX; i++) {
-        // 소수가 아니면 continue
         if (prime[i] != 0) {
             continue;
         }
-        // i가 소수라면
-        // i부터 i*(i-1)은 이미 앞선 소수들에 의해 지워졌음.
-        for (int j = i * i; j <= MAX; j += i) { //배수에 소수(i) 저장
+
+        for (int j = i * i; j <= MAX; j += i) {
             if (prime[j] == 0) {
                 prime[j] = i;
             }
@@ -38,7 +35,7 @@ void countExponent(int a, int cnt) {
 //연산이 끝난 후, 소인수의 지수에 음수 있는지 판단 -> 있다면 유리수 -> true 리턴
 bool isRationalNumber() {
     for (int i = 2; i <= MAX; i++) {
-        if (exponent[i] < 0) { //유리수라면
+        if (exponent[i] < 0) {
             return true;
         }
     }
@@ -60,7 +57,7 @@ int main() {
     int n, a;
     char c;
 
-    isPrime(); //소수 경로 저장
+    isPrime();
 
     //입력
     cin >> n;
@@ -82,10 +79,10 @@ int main() {
         }
 
         if (c == '*') { //곱하기라면 -> 지수 증가
-            countExponent(abs(a), 1); //2번째 매개변수: 지수의 증가값
+            countExponent(abs(a), 1);
         }
         else { //나누기라면 -> 지수 감소
-            countExponent(abs(a), -1); //2번째 매개변수: 지수의 감소값
+            countExponent(abs(a), -1);
         }
     }
 
