@@ -56,10 +56,10 @@ int main() {
 	sort(v.begin(), v.end());
 
 	//출력
-	cout << (int)round(sum / n) << '\n';			//산술평균: -0 안나오게 유의
-	cout << v[n / 2] << '\n';						//중앙값
+	cout << (int)round(sum / n) << '\n';		//산술평균: -0 안나오게 유의
+	cout << v[n / 2] << '\n';			//중앙값
 	cout << findMode(max_freq, frequency) << '\n';	//최빈값
-	cout << v[n - 1] - v[0] << '\n';				//범위
+	cout << v[n - 1] - v[0] << '\n';		//범위
 
 	return 0;
 }
