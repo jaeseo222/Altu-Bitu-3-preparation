@@ -4,21 +4,21 @@
 #include<set>
 using namespace std;
 
-void isPrime(int n, vector<bool> &is_prime) {//¿¡¶óÅä½ºÅ×³×½ºÀÇ Ã¼ 
-	//0°ú 1Àº ¼Ò¼ö°¡ ¾Æ´Ï¹Ç·Î ¸ÕÀú Á¦°Å
+void isPrime(int n, vector<bool> &is_prime) {//ì—ë¼í† ìŠ¤í…Œë„¤ìŠ¤ì˜ ì²´ 
+
 	is_prime[0] = is_prime[1] = false;
-	//2~Á¦°ö±Ù n±îÁö °Ë»ç
+
 	for (int i = 2; i <= sqrt(n); i++) {
-		if (is_prime[i]) {//i°¡ ¼Ò¼ö¶ó¸é
+		if (is_prime[i]) {
 			for (int j = i * i; j <= n; j += i) {
-				is_prime[j] = false;//iÀÇ ¹è¼ö¸¦ Á¦°Å
+				is_prime[j] = false;
 			}
 		}
 	}
 }
 
 
-int calSumNum(int n) {//nÀÇ °¢ ÀÚ¸´¼öÀÇ Á¦°öÀ» ´õÇÑ °ª  sumÀ» ¹İÈ¯ÇÏ´Â ÇÔ¼ö
+int calSumNum(int n) {//ê° ìë¦¿ìˆ˜ì˜ ì œê³±ì„ ë”í•œ ê°’ êµ¬í•˜ëŠ” í•¨ìˆ˜
 	int sum = 0;
 	while (n) {
 		sum += pow(n % 10, 2);
@@ -27,48 +27,60 @@ int calSumNum(int n) {//nÀÇ °¢ ÀÚ¸´¼öÀÇ Á¦°öÀ» ´õÇÑ °ª  sumÀ» ¹İÈ¯ÇÏ´Â ÇÔ¼ö
 	return sum;
 }
 
-void isAnswer(int n, vector<bool>& is_prime, vector<int>& answer) {
-	//´äÀÌ µÇ±â À§ÇØ¼­´Â ¼Ò¼öÀÌ¸é¼­ »ó±Ù¼ö¿©¾ß ÇØ¿ä. ¼Ò¼öÀÎÁö ÆÇ´ÜÇÑ °á°ú´Â is_prime¿¡ ÀúÀåµÇ¾ú´ä´Ï´Ù.
-	//Á¤¼ö nÀÇ °¢ ÀÚ¸´¼ö¸¦ ´õÇÏ´Â °è»êÀ» ¹İº¹ÇÏ¸é¼­ °á°ú°¡ 1ÀÌ ³ª¿À¸é »ó±Ù¼öÀÌ°í ±× Àü¿¡ ³ª¿Â °á°ú°¡ ´Ù½Ã ³ª¿Â´Ù¸é »ó±Ù¼ö°¡ ¾Æ´Ï¿¡¿ä
-	
-	set<int> s;//Àü¿¡ ³ª¿Â °á°ú¸¦ ÀúÀåÇÏ°í Å½»ö±îÁö ÇÒ ¼ö ÀÖ´Â setÀ» »ç¿ëÇØ¿ä
 
-	for (int i = 2; i < n; i ++ ) {
-		if (is_prime[i]) { //i°¡ ¼Ò¼ö¶ó¸é
-			int tmp = i; //i´Â ¹İº¹¹® Á¶°Ç¿¡ »ç¿ëµÇ¹Ç·Î °ªÀÇ º¯È­¸¦ ¹æÁö ÇÏ±â À§ÇØ »õ·Î¿î º¯¼ö¿¡ ÀúÀåÇØ¿ä
-			while (1) {
+bool isSangguen(int n) {
 
-				tmp = calSumNum(tmp); //calSumNumÇÔ¼ö¸¦ ÅëÇØ °¢ ÀÚ¸´¼ö Á¦°öÀÇ ÇÕÀ» tmp¿¡ ÀúÀåÇØ¿ä
+	set<int> s;//ì €ì¥í•œ ìˆ«ìë¥¼ keyë¡œ íƒìƒ‰í•  ìˆ˜ ìˆëŠ” setì„ ì‚¬ìš© (vs ë°°ì—´ì€ ì¸ë°ìŠ¤ í˜•íƒœì´ê¸°ì— ì €ì¥ëœ ìˆ«ìë¥¼ keyë¡œ íƒìƒ‰í•˜ê¸° ì–´ë ¤ì›Œìš”)
+	int tmp = n;
+	while (1) {
 
-				if (tmp == 1) {//ÀÚ¸´¼öÀÇ ÇÕÀÌ 1ÀÌ¸é
-					answer.push_back(i);//´ä¿¡ ÀúÀåÇÏ°í
-					break;//¹İº¹¹®À» ºüÁ®³ª°¡¿ä
-				}
-				
-				if (s.find(tmp) != s.end()) { //ÀÚ¸´¼ö Á¦°öÀÇ ÇÕÀÌ ±× Àü¿¡ °á°ú¿Í °°´Ù¸é
-					break;//¹İº¹¹®À» ºüÁ®³ª°¡¿ä
-				}
-				s.insert(tmp);//ÀÚ¸´¼öÀÇ ÇÕÀÌ 1µµ ¾Æ´Ï°í Àü °á°ú¿Í °ãÄ¡Áö ¾ÊÀ¸¸é s¿¡ »ğÀÔÇÏ°í ¹İº¹¹®ÀÇ Ã³À½À¸·Î µ¹¾Æ°¡¿ä
-			}
+		tmp = calSumNum(tmp); //ê° ìë¦¿ìˆ˜ ì œê³±ì˜ í•© êµ¬í•˜ê¸°
+
+		if (tmp == 1) {// ìƒê·¼ìˆ˜ì´ë©´
+			return true;
 		}
-		s.clear();//´ÙÀ½ Á¤¼ö¸¦ ÆÇ´ÜÇÏ±â Àü¿¡ ²À s¸¦ ºñ¿ö¾ßÇØ¿ä
+		if (s.find(tmp) != s.end()) { //ìƒê·¼ìˆ˜ê°€ ì•„ë‹ˆë©´
+			return false;
+		}
+		s.insert(tmp);
 	}
 }
 
+
+vector<int> isAnswer(int n) {
+
+	vector<bool> is_prime(n + 1, true);
+	vector<int> answer;
+	isPrime(n, is_prime);
+
+	for (int i = 2; i < n; i ++ ) {
+		if (!is_prime[i]) continue; //ì†Œìˆ˜ íŒë‹¨
+		else{ 
+			if (!isSangguen(i)) {//ìƒê·¼ìˆ˜ íŒë‹¨
+				continue;
+			}
+			else {
+				answer.push_back(i);
+			}
+		}
+	}
+	return answer;
+}
+
+/*
+* isPrimeí•¨ìˆ˜ë¡œ ì†Œìˆ˜ì¸ì§€ íŒë‹¨í•˜ê³ 
+* isSangguení•¨ìˆ˜ë¡œ ìƒê·¼ìˆ˜ì¸ì§€ íŒë‹¨í•´ìš”. ìƒê·¼ìˆ˜ íŒë‹¨ ì‹œì—ëŠ” ìƒê·¼ìˆ˜ì¼ ì¡°ê±´ + ìƒê·¼ìˆ˜ê°€ ì•„ë‹Œ ì¡°ê±´ì„ ìƒê°í•´ì£¼ì„¸ìš”
+*/
 
 int main() {
 	int n;
 
 	cin >> n;
 
-	vector<bool> is_prime(n + 1, true); // ¼Ò¼öÀÎÁö ÆÇ´ÜÇÑ bool°ª ÀúÀåÇÒ ¹è¿­
-	vector<int> answer; //¼Ò¼ö »ó±Ù¼ö ÀúÀåÇÒ ¹è¿­
+	 vector<int> v = isAnswer(n);
 
-	isPrime(n, is_prime);//¼Ò¼öÀÎÁö ÆÇ´Ü
-	isAnswer(n, is_prime, answer);//¼Ò¼ö »ó±Ù¼öÀÎÁö ÆÇ´Ü
-
-	for (int i = 0; i < answer.size(); i++) {
-		cout << answer[i] << '\n';
+	for (int i = 0; i <v.size(); i++) {
+		cout << v[i] << '\n';
 	}
 
 	return 0;
