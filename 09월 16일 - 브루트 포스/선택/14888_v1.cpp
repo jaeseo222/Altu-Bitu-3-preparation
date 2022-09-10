@@ -4,11 +4,11 @@
 using namespace std;
 
 vector<int> number(11,0);
-vector<int> opt(4, 0); //°¢ ¿¬»êÀÚ °³¼ö ÀúÀå
-vector<int> opt_order; //¿¬»êÀÚ¸¦ ¼±ÅÃÇÑ ¼ø¼­´ë·Î ÀúÀåÇÏ°í(push_back) Àç±Í¿¡¼­ returnÇßÀ» ¶§ µÚ¿¡¼­ºÎÅÍ ¿ø¼Ò¸¦ »ÌÀ¸´Ï±î(pop_back) vector¸¦ ½á¿ä!
+vector<int> opt(4, 0); //ê° ì—°ì‚°ìž ê°œìˆ˜ ì €ìž¥
+vector<int> opt_order; //ì—°ì‚°ìžë¥¼ ì„ íƒí•œ ìˆœì„œëŒ€ë¡œ ì €ìž¥í•˜ê³ (push_back) ìž¬ê·€ì—ì„œ returní–ˆì„ ë•Œ ë’¤ì—ì„œë¶€í„° ì›ì†Œë¥¼ ë½‘ìœ¼ë‹ˆê¹Œ(pop_back) vectorë¥¼ ì¨ìš”!
 int n;
 
-//¹®Á¦¿¡¼­ ÁÖ¾îÁø ¿¬»ê °á°úÀÇ ¹üÀ§·Î Ã³À½ MAX°ª°ú MIN°ª ¼³Á¤ÇØÁÖ¼¼¿ä
+//ë¬¸ì œì—ì„œ ì£¼ì–´ì§„ ì—°ì‚° ê²°ê³¼ì˜ ë²”ìœ„ë¡œ ì²˜ìŒ MAXê°’ê³¼ MINê°’ ì„¤ì •í•´ì£¼ì„¸ìš”
 int MAX = -1000000001;
 int MIN = 1000000001;
 
@@ -25,7 +25,7 @@ int arithmeticOpt(int n1, int n2, int opt) {
 			return n1 * n2;
 			break;
 		case 3:
-			return n1 / n2; //C¾ð¾î¿¡¼­ À½¼ö ³ª´©±â°¡ ¾î¶»°Ô ÀÌ·ç¾îÁö´ÂÁö °øºÎÇØÁÖ¼¼¿ä!
+			return n1 / n2; //Cì–¸ì–´ì—ì„œ ìŒìˆ˜ ë‚˜ëˆ„ê¸°ê°€ ì–´ë–»ê²Œ ì´ë£¨ì–´ì§€ëŠ”ì§€ ê³µë¶€í•´ì£¼ì„¸ìš”!
 			break;
 		default:
 			break;
@@ -61,6 +61,7 @@ void Solution(int cnt) {
 			opt_order.push_back(i);
 
 			Solution(cnt+1);
+			
 
 			opt[i]++;
 			opt_order.pop_back();
@@ -70,9 +71,9 @@ void Solution(int cnt) {
 }
 
 /*
-* Solution ÇÑ ¹ø¿¡ ÇÏ³ªÀÇ ¿¬»êÀÚ¸¦ ¼±ÅÃÇÏ°í Àç±Í
-* base´Â ¿¬»êÀÚÀÇ °³¼ö°¡ n-1ÀÏ ¶§ -> calc ÇÔ¼ö·Î ÇöÀç ¿¬»êÀÚ ¼ø¼­´ë·Î °è»êÇØ¼­ MAX, MIN°»½Å
-* arithmeticOpt´Â ¿¬»êÀÚÀÇ Á¾·ù¿¡ µû¶ó¼­ °è»êÇØÁÖ´Â ÇÔ¼ö
+* Solution í•œ ë²ˆì— í•˜ë‚˜ì˜ ì—°ì‚°ìžë¥¼ ì„ íƒí•˜ê³  ìž¬ê·€
+* baseëŠ” ì—°ì‚°ìžì˜ ê°œìˆ˜ê°€ n-1ì¼ ë•Œ -> calc í•¨ìˆ˜ë¡œ í˜„ìž¬ ì—°ì‚°ìž ìˆœì„œëŒ€ë¡œ ê³„ì‚°í•´ì„œ MAX, MINê°±ì‹ 
+* arithmeticOptëŠ” ì—°ì‚°ìžì˜ ì¢…ë¥˜ì— ë”°ë¼ì„œ ê³„ì‚°í•´ì£¼ëŠ” í•¨ìˆ˜
 */
 
 int main(void) {
