@@ -10,19 +10,21 @@
 * 입력값의 범위에 주목해주세요!
 * -0을 나타내는 자료형은 없어요.
 */
-#define SCOPE 4000
 using namespace std;
 
+const int SCOPE = 4000; //입력되는 정수의 최대 절댓값
+typedef pair<int,int> pi; //자주 쓰는 pair<int,int>를 pi로 선언
+
 // 비교함수
-bool cmp(const pair<int,int> & a, const pair<int, int> & b) {
-   //개수(second)에 대해 내림차순, 값(first)에 대해 오름차순으로 정렬
+bool cmp(const pi & a, const pi & b) {
+	//개수(second)에 대해 내림차순, 값(first)에 대해 오름차순으로 정렬
 	if (a.second != b.second) {
 		return a.second > b.second;
 	}
 	return a.first < b.first;
 }
 
-int findMode(int n, vector<pair<int,int>>& frequency) {
+int findMode(int n, vector<pi>& frequency) {
     //정렬된 벡터에서 최빈값을 찾아 반환하는 함수
     //최빈값이 여러 개라면 두번째로 작은 값을 반환
     
@@ -39,11 +41,10 @@ int findMode(int n, vector<pair<int,int>>& frequency) {
 int main() {
 	int n;
 	double sum = 0.0; //입력된 숫자의 합
-	bool flag_first = false; bool flag_second = false;
 
 	cin >> n;
 	vector<int> v(n);
-	vector<pair<int, int>> frequency(2 * SCOPE + 1); // 정수의 값와 해당 정수 개수를 pair로 묶어서 저장
+	vector<pi> frequency(2 * SCOPE + 1); // 정수의 값와 해당 정수 개수를 pair로 묶어서 저장
 	//기본적으로 0으로 초기화된다
 	//각 pair는 first, second로 접근 가능
 
@@ -54,7 +55,6 @@ int main() {
 		frequency[v[i] + SCOPE].second++; //second: 개수
 	}
 	sort(v.begin(), v.end());
-
 
 	//출력
 	cout << (int)round(sum / n) << '\n'; //산술평균: -0 안나오게 유의
