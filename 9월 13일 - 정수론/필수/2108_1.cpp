@@ -48,10 +48,11 @@ int main() {
 	for (int i = 0; i < n; i++) {
 		cin >> v[i];
 		sum += v[i];
-		frequency[v[i] + SCOPE]++; //빈도수 갱신. 인덱스 값이 음수가 안되게 유의
-		if (max_freq < frequency[v[i] + SCOPE]) { 
-			max_freq = frequency[v[i] + SCOPE]; //최대 빈도수 갱신
-		}
+		int cur_freq = ++frequency[v[i] + SCOPE];
+		
+		int idx = v[i] + SCOPE;
+		int cur_freq = ++frequency[idx]; //인덱스 값이 음수가 안되게 유의하며 빈도수 갱신, 해당 빈도수를 cur_freq에 저장(current frequency)
+		max_freq = max(max_freq, cur_freq) //최대 빈도수 갱신
 	}
 	sort(v.begin(), v.end());
 
