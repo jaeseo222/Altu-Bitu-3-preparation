@@ -7,8 +7,10 @@ using namespace std;
 typedef pair<int, int> ci;//반복되는 형태는 typedef로 미리 선언하고 사용해요!
 map<int, int> order;
 
-bool cmp(const ci& a, const ci& b) {//비교 정렬 함수 사용 시, 비교 변수는 함수 내에서 절대로 값이 변경되면 안돼 상수화를 권장해요!
-	if (a.second != b.second) {//비교함수 작성 시, 가독성을 위해, 같지 않을 경우에 대한 조건을 먼저 처리 하는 것을 권장해요! -> 국영수 문제를 참고해보세요!
+//비교 정렬 함수 사용 시, 비교 변수는 함수 내에서 절대로 값이 변경되면 안돼 상수화를 권장해요!
+//또 가독성을 위해, 같지 않을 경우에 대한 조건을 먼저 처리 하는 것을 권장해요! -> 국영수 문제를 참고해보세요!
+bool cmp(const ci& a, const ci& b) {
+	if (a.second != b.second) {
 		return a.second > b.second; //빈도가 다르면 빈도수 내림차순
 	}
 	return order[a.first] < order[b.first]; //빈도가 같다면 순서 오름차순
