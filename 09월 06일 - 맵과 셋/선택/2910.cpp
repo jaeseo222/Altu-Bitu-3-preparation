@@ -30,7 +30,7 @@ int main() {
 		if (!frequency[num]) {//입력받은 정수의 frequency값이 0이면
 			order[num] = i; //order에 처음 나온 순서 i기록
 		}
-		frequency[num]++;//빈도수 증가
+		frequency[num]++;
 	}
 
 	/*
@@ -40,7 +40,7 @@ int main() {
 	*/
 	vector<ci> v(frequency.begin(), frequency.end());//map은 정렬 함수가 따로 없어서 vector로 바꿔야해요!
 
-	sort(v.begin(), v.end(), cmp); //비교 정렬 함수 cmp사용해서 정렬
+	sort(v.begin(), v.end(), cmp); 
 
 	for (int i = 0; i < v.size(); i++) {
 		while (v[i].second--) {
