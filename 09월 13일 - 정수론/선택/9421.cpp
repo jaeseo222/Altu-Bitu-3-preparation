@@ -47,7 +47,7 @@ bool isSangguen(int n) {
 }
 
 
-vector<int> isAnswer(int n) {
+vector<int> Solution(int n) {
 
 	vector<bool> is_prime(n + 1, true);
 	vector<int> answer;
@@ -77,7 +77,7 @@ int main() {
 
 	cin >> n;
 
-	 vector<int> v = isAnswer(n);
+	 vector<int> v = Solution(n);
 
 	for (int i = 0; i <v.size(); i++) {
 		cout << v[i] << '\n';
