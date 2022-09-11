@@ -34,11 +34,11 @@ int goldbach(int n, vector<bool>& is_prime) {
 }
 
 int main() {
-
-    int n;
-
+    
     cin.tie(NULL);
     ios_base::sync_with_stdio(0);
+    
+    int n;
 
     vector<bool> is_prime = isPrime();
 
