@@ -1,52 +1,49 @@
 #include<iostream>
+#include<vector>
 using namespace std;
 
 int n;
-int number[11];
-int opt[4];
-//문제에서 주어진 연산 결과의 범위로 처음 MAX값과 MIN값 설정해주세요
-int MAX = -1000000001;
-int MIN = 1000000001;
+vector<int> number(11);
+vector<int> opt(4);
 
-void Solution(int result, int idx) {
+int my_max = -(1e9 + 1);
+int my_min = 1e9 + 1;
+
+int calculation(int a, int b, int c) {
+	switch (c) {
+	case 0: //+
+		return a + b;
+	case 1: //-
+		return a - b;
+	case 2: //*
+		return a * b;
+	case 3: // 나누기 c++에서 음수 나누기가 어떻게 이루어 지는지 확인해주세요~!
+		return a / b;
+	}
+}
+
+void solution(int result, int idx) {
 	if (idx == n) {
-		if (result > MAX) {
-			MAX = result;
-		}
-		if (result < MIN) {
-			MIN = result;
-		}
+
+		my_max = max(my_max, result);
+		my_min = min(my_min, result);
+
 		return;
 	}
 
 	for (int i = 0; i < 4; i++) {
 		if (opt[i]) {
 			opt[i]--;
-			if (i == 0) {
-				Solution(result + number[idx], idx + 1);
-			}
-			else if (i == 1) {
-				Solution(result - number[idx], idx + 1);
-
-			}
-			else if (i == 2) {
-				Solution(result * number[idx], idx + 1);
-
-			}
-			else {
-				Solution(result / number[idx], idx + 1);
-			}
-			opt[i]++; //재귀에서 return했을 때 상요한 연산자 다시 돌려놓기
+			solution(calculation(result, number[idx], i), idx + 1);
+			opt[i]++; 
 		}
 	}
-	
-	return;
 }
 
 /*
 * Solution 한 번에 하나의 연산자를 선택하고 재귀 
 *-> 함수의 매개변수로 그 시점에서 선택한 연산자로 계산한 결과(result)와 다음 연산에 사용할 숫자의 인덱스 정보 idx를 넘김
-*  base는 다음 연산에 사용할 숫자의 인덱스가 n일 때 즉 숫자가 없을 때->result와 MAX, MIN 비교해서 값 갱신
+*  base는 다음 연산에 사용할 숫자의 인덱스가 n일 때 즉 숫자가 없을 때->result와 max, min 비교해서 값 갱신
 */
 
 int main() {
@@ -55,10 +52,12 @@ int main() {
 		cin >> number[i];
 	}
 
-	cin >> opt[0] >> opt[1] >> opt[2] >> opt[3];
+	for (int i = 0; i < 4; i++) {
+		cin >> opt[i];
+	}
 
-	Solution(number[0], 1);
-	cout << MAX << '\n' << MIN;
+	solution(number[0], 1);
+	cout << my_max << '\n' << my_min;
 
 	return 0;
 }
