@@ -41,12 +41,12 @@ ll findNum(vector<ll> v, int n){ //벡터에서 n번째 감소하는 수 찾는 
 
 int main(){
     //입력
-    int N;
-    cin>>N;
+    int n;
+    cin>>n;
 
     //연산, 출력
     vector<ll> v = decreaseNum();
-    cout << findNum(v, N)<<'\n';
+    cout << findNum(v, n)<<'\n';
 
     return 0;
 }
