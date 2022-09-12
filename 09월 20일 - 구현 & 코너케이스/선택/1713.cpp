@@ -44,8 +44,7 @@ int main()
 	cin >> n >> m;
 	vector<ci> v; // 후보 번호, 추천 횟수 (게시 시간은 vector의 순서와 일치)
 	// 연산
-	while (m--)
-	{
+	while (m--){
 		cin >> input;
 		// 이미 게시된 후보인지 확인
 		if (currCandidate(v, input)) {
@@ -60,6 +59,7 @@ int main()
 	}
 	// 출력
 	sort(v.begin(), v.end());
-	for (int i = 0; i < v.size(); i++)
+	for (int i = 0; i < v.size(); i++){
 		cout << v[i].first << ' ';
+	}
 }
