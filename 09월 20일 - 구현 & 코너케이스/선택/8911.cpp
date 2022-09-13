@@ -1,5 +1,4 @@
 ﻿#include<iostream>
-#include<vector>
 using namespace std;
 
 int turtle(string str) {
