@@ -2,16 +2,18 @@
 #include<set>
 using namespace std;
 
-bool isCycle(set<string>& s, string a) {
-	for (int i = 0; i < a.size(); i++) {
+bool isCycle(set<string>& s, string str) {
+	int cnt = str.length();
+
+	while (cnt--) {
 		// 같은 단어가 있는 경우
-		if (s.find(a) != s.end()) {
+		if (s.find(str) != s.end()) {
 			return true;
 		}
 
 		// 시계 방향대로, 앞 글자를 떼어서 뒤에 붙여줌.
-		a = a + a[0];
-		a.erase(0, 1);
+		str = str + str[0];
+		str.erase(0, 1);
 	}
 	return false;
 }
