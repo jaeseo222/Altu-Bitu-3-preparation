@@ -4,8 +4,9 @@
 #include<set>
 using namespace std;
 
-void isPrime(int n, vector<bool> &is_prime) {//¿¡¶óÅä½ºÅ×³×½ºÀÇ Ã¼ 
+vector<bool> isPrime(int n) {//ì—ë¼í† ìŠ¤í…Œë„¤ìŠ¤ì˜ ì²´ 
 
+	vector<bool> is_prime(n + 1, true);
 	is_prime[0] = is_prime[1] = false;
 
 	for (int i = 2; i <= sqrt(n); i++) {
@@ -15,10 +16,11 @@ void isPrime(int n, vector<bool> &is_prime) {//¿¡¶óÅä½ºÅ×³×½ºÀÇ Ã¼
 			}
 		}
 	}
+	return is_prime;
 }
 
 
-int calSumNum(int n) {//°¢ ÀÚ¸´¼öÀÇ Á¦°öÀ» ´õÇÑ °ª ±¸ÇÏ´Â ÇÔ¼ö
+int calSumNum(int n) {//ê° ìë¦¿ìˆ˜ì˜ ì œê³±ì„ ë”í•œ ê°’ êµ¬í•˜ëŠ” í•¨ìˆ˜
 	int sum = 0;
 	while (n) {
 		sum += pow(n % 10, 2);
@@ -28,18 +30,18 @@ int calSumNum(int n) {//°¢ ÀÚ¸´¼öÀÇ Á¦°öÀ» ´õÇÑ °ª ±¸ÇÏ´Â ÇÔ¼ö
 }
 
 
-bool isSangguen(int n) {
+bool isAnswer(int n) {
 
-	set<int> s;//ÀúÀåÇÑ ¼ıÀÚ¸¦ key·Î Å½»öÇÒ ¼ö ÀÖ´Â setÀ» »ç¿ë (vs ¹è¿­Àº ÀÎµ¥½º ÇüÅÂÀÌ±â¿¡ ÀúÀåµÈ ¼ıÀÚ¸¦ key·Î Å½»öÇÏ±â ¾î·Á¿ö¿ä)
+	set<int> s;//ì €ì¥í•œ ìˆ«ìë¥¼ keyë¡œ íƒìƒ‰í•  ìˆ˜ ìˆëŠ” setì„ ì‚¬ìš© (vs ë°°ì—´ì€ ì¸ë±ìŠ¤ í˜•íƒœì´ê¸°ì— ì €ì¥ëœ ìˆ«ìë¥¼ keyë¡œ íƒìƒ‰í•˜ê¸° ì–´ë ¤ì›Œìš”)
 	int tmp = n;
 	while (1) {
 
-		tmp = calSumNum(tmp); //°¢ ÀÚ¸´¼ö Á¦°öÀÇ ÇÕ ±¸ÇÏ±â
+		tmp = calSumNum(tmp); //ê° ìë¦¿ìˆ˜ ì œê³±ì˜ í•© êµ¬í•˜ê¸°
 
-		if (tmp == 1) {// »ó±Ù¼öÀÌ¸é
+		if (tmp == 1) {// ìƒê·¼ìˆ˜ì´ë©´
 			return true;
 		}
-		if (s.find(tmp) != s.end()) { //»ó±Ù¼ö°¡ ¾Æ´Ï¸é
+		if (s.find(tmp) != s.end()) { //ìƒê·¼ìˆ˜ê°€ ì•„ë‹ˆë©´
 			return false;
 		}
 		s.insert(tmp);
@@ -47,29 +49,22 @@ bool isSangguen(int n) {
 }
 
 
-vector<int> Solution(int n) {
+vector<int> solution(int n) {
 
-	vector<bool> is_prime(n + 1, true);
 	vector<int> answer;
-	isPrime(n, is_prime);
+	vector<bool> is_prime  = isPrime(n);
 
 	for (int i = 2; i < n; i ++ ) {
-		if (!is_prime[i]) continue; //¼Ò¼ö ÆÇ´Ü
-		else{ 
-			if (!isSangguen(i)) {//»ó±Ù¼ö ÆÇ´Ü
-				continue;
-			}
-			else {
-				answer.push_back(i);
-			}
+		if (is_prime[i] && isAnswer(i)) {
+			answer.push_back(i);;
 		}
 	}
 	return answer;
 }
 
 /*
-* isPrimeÇÔ¼ö·Î ¼Ò¼öÀÎÁö ÆÇ´ÜÇÏ°í
-* isSangguenÇÔ¼ö·Î »ó±Ù¼öÀÎÁö ÆÇ´ÜÇØ¿ä. »ó±Ù¼ö ÆÇ´Ü ½Ã¿¡´Â »ó±Ù¼öÀÏ Á¶°Ç + »ó±Ù¼ö°¡ ¾Æ´Ñ Á¶°ÇÀ» »ı°¢ÇØÁÖ¼¼¿ä
+* isPrimeí•¨ìˆ˜ë¡œ ì†Œìˆ˜ì¸ì§€ íŒë‹¨í•˜ê³  isAnswerí•¨ìˆ˜ë¡œ ìƒê·¼ìˆ˜ì¸ì§€ íŒë‹¨í•´ìš”. 
+* ìƒê·¼ìˆ˜ íŒë‹¨ ì‹œì—ëŠ” ìƒê·¼ìˆ˜ì¼ ì¡°ê±´ + ìƒê·¼ìˆ˜ê°€ ì•„ë‹Œ ì¡°ê±´ì„ ìƒê°í•´ì£¼ì„¸ìš”
 */
 
 int main() {
@@ -77,7 +72,7 @@ int main() {
 
 	cin >> n;
 
-	 vector<int> v = Solution(n);
+	 vector<int> v = solution(n);
 
 	for (int i = 0; i <v.size(); i++) {
 		cout << v[i] << '\n';
