@@ -14,7 +14,8 @@ typedef pair<int, char> ci;
     2. 룰렛에 중복되는 문자가 있는 경우
 */
 
-string makeResult(int index, int n, vector<char> &wheel) {
+//특정 화살표에서 시작한 행운의 바퀴 리턴
+string arrowStartWheel(int index, int n, vector<char> &wheel) {
     string ans = "";
 
     for (int i = n; i > 0; i--) {
@@ -50,7 +51,7 @@ string makeWheel(int n, vector<ci> &record) {
         is_available[ch - 'A'] = true; // 2번 조건을 체크하기 위함
     }
 
-    return makeResult(index, n, wheel);
+    return arrowStartWheel(index, n, wheel);
 }
 
 int main() {
