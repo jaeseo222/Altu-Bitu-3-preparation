@@ -63,7 +63,7 @@ vector<string> solution(int t, vector<string>& log_list) {
 }
 
 int main() {
-	int tc;
+    int tc;
     //입력
     cin >> tc;
 
