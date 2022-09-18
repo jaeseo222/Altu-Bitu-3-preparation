@@ -2,6 +2,9 @@
 #include<string>
 using namespace std;
 
+/*
+통화가 끝나는 시각을 계산하여 중간에 요금이 바뀌는지 안바뀌는지 체크한 후에 각 case에 맞게 계산
+*/
 int calculateCharge(int h, int m,int time) {
 	int end_h = h;
 	int end_m = (m + time) % 60;
@@ -9,7 +12,7 @@ int calculateCharge(int h, int m,int time) {
 	//끝나는 시간 계산
 	end_h += ((m + time) / 60) % 24;
 
-	//요금이 중간에 바뀌는 경우
+	//요금이 중간에 바뀌는 경우(통화시간이 최대 60분이므로 시간도 최대 1만큼만 바뀔 수 있어서 아래와 같이 조건을 작성했습니다!)
 	if (h == 6 && end_h == 7) {
 		return (time - end_m) * 5 + end_m * 10;
 	}
