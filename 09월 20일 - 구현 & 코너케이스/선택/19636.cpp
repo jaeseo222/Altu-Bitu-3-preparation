@@ -19,8 +19,8 @@ using namespace std;
  * 
  * energy_out = a + b
  * 체중 (weight) += (energy_in - energy_out)
- * if (energy_in - energy_out > t) { b += [ (energy_in - energy_out)/2] }
- *  -> !주의! 이때 일일 기초 대사량에서 더해지는 값이 Floor 함수 적용이므로 음수일 때 값처리 주의해야 함
+ * 일일 기초 대사량 변화 계산 방법 : if (energy_in - energy_out > t) { b += [ (energy_in - energy_out)/2] }
+ *          -> !주의! 이때 일일 기초 대사량에서 더해지는 값이 Floor 함수 적용이므로 음수일 때 값처리 주의해야 함
  */
 
  typedef pair<int, int> ci;
