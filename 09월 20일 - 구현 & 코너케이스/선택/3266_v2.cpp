@@ -1,7 +1,11 @@
 #include<iostream>
 #include<string>
 using namespace std;
-
+/*
+통화 시간이 최대 60까지이므로 입력받은 통화 시간만큼 분당 요금을 더해주는 반복문으로 풀이
+->7시~18시 : +10원
+->그 외: +5원
+*/
 int calculateCharge(int h, int m, int time) {
 	int ans = 0;
 	while (time--) {
