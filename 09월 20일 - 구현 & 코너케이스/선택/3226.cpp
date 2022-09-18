@@ -21,9 +21,7 @@ int calculateCharge(int h, int m,int time) {
 		if (6 < h && h < 19) {
 			return 10 * time;
 		}
-		else {
-			return 5 * time;
-		}
+		return 5 * time;
 	}
 }
 
