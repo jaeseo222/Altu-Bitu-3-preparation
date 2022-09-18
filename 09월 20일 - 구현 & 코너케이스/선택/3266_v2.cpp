@@ -8,6 +8,7 @@ using namespace std;
 */
 int calculateCharge(int h, int m, int time) {
 	int ans = 0;
+	//통화 시각이 0이 될 때까지 반복
 	while (time--) {
 		if (h >= 7 && h < 19) {
 			ans += 10;
