@@ -47,10 +47,12 @@ string playGame(int m, deque<int> &dodo, deque<int> &su)
             mergeCards(do_gr, su_gr, su);
     }
 
-    if (dodo.size() > su.size())
+    if (dodo.size() > su.size()){
         return "do";
-    else if (dodo.size() < su.size())
+    }
+    else if (dodo.size() < su.size()){
         return "su";
+    }
     return "dosu";
 }
 /*
