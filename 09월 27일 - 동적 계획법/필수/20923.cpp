@@ -7,12 +7,12 @@ void mergeCards(deque<int> &src1, deque<int> &src2, deque<int> &des)
 {
     while (!src1.empty())
     {
-        des.push_back(src1.back()); // 상대방덱을 뒤집어서(즉 맨 뒤부터) 아래로 힙치기
+        des.push_back(src1.back()); // 상대방 덱을 뒤집어서(맨 뒤부터) 아래로 합치기
         src1.pop_back();
     }
     while (!src2.empty())
     {
-        des.push_back(src2.back()); // 자신의 덱을 뒤집어서(즉 맨 뒤부터) 아래로 힙치기
+        des.push_back(src2.back()); // 자신의 덱을 뒤집어서(맨 뒤부터) 아래로 합치기
         src2.pop_back();
     }
 }
