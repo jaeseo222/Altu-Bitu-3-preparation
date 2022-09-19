@@ -21,8 +21,7 @@ string stackToString(stack<char>& left, stack<char>& right) {
 	return password;
 }
 
-string find_password(string log) {
-    
+string findPassword(string log) {
     stack<char> left;   //커서 이전 내용을 저장
     stack<char> right;  //커서 이후 내용을 저장
 
@@ -54,13 +53,15 @@ string find_password(string log) {
     return password;
 }
 
-vector<string> solution(int t, vector<string>& log_list) {
-    vector<string> answer;
-    for (int i = 0; i < t; i++) {
-        answer.push_back(find_password(log_list[i]));
-    }
-    return answer;
-}
+/**
+ * [키로거]
+ *
+ * 해당 풀이는, 글자 삽입 삭제 시 이동시키는 과정에서 생기는 코너케이스를 해결하기 위해 커서를 기준으로 왼쪽, 오른쪽으로 나눠서 값을 저장함
+ *
+ * 1. 커서 앞의 글자를 지울 때, 글자가 없는 경우 주의
+ * 2. 커서를 왼쪽으로 이동할 때, 이미 가장 왼쪽에 커서가 있는 경우 주의
+ * 3. 커서를 오른쪽으로 이동할 때, 이미 가장 오른쪽에 커서가 있는 경우 주의
+ */
 
 int main() {
     int tc;
@@ -71,7 +72,7 @@ int main() {
     while(tc--) {
         string s;
         cin >> s;
-        cout << find_password(s) << '\n';
+        cout << findPassword(s) << '\n';
     }
     return 0;
 }
