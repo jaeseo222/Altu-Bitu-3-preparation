@@ -16,16 +16,15 @@ int calculateCharge(int h, int m,int time) {
 	if (h == 6 && end_h == 7) {
 		return (time - end_m) * 5 + end_m * 10;
 	}
-	else if (h == 18 && end_h == 19) {
+	if (h == 18 && end_h == 19) {
 		return (time - end_m) * 10 + end_m * 5;
 	}
 	//바뀌지 않는 경우
-	else {
-		if (6 < h && h < 19) {
-			return 10 * time;
-		}
-		return 5 * time;
+	if (6 < h && h < 19) {
+		return 10 * time;
 	}
+	return 5 * time;
+	
 }
 
 
