@@ -1,16 +1,16 @@
 ﻿#include<iostream>
 using namespace std;
 
-int turtle(string str) {
+int getMinimumArea(string str) {
 	// 북 동 남 서
 	int dx[4] = { 0, 1, 0, -1 };
-	int dy[4] = { -1, 0, 1, 0 };
+	int dy[4] = { 1, 0, -1, 0 };
 
 	// 각 최대 최소 x, y 위치값
-	int  my = 0, sy = 0, mx = 0, sx = 0;
+	int  max_y = 0, min_y = 0, max_x = 0, min_x = 0;
 
 	// 맨 처음은 북쪽 방향
-	int dire = 0;
+	int direction = 0;
 
 	// 현재 위치 (0, 0)
 	pair<int, int> curr = { 0, 0 };
@@ -19,25 +19,46 @@ int turtle(string str) {
 		switch (str[i])
 		{
 		case 'F':
-			curr = make_pair(curr.first + dx[dire], curr.second + dy[dire]);
+			curr = { curr.first + dx[direction], curr.second + dy[direction] };
 			break;
 		case 'B':
-			curr = make_pair(curr.first - dx[dire], curr.second - dy[dire]);
+			curr = { curr.first - dx[direction], curr.second - dy[direction] };
 			break;
 		case 'L':
-			dire = (dire + 1) % 4;
+			direction = (direction + 1) % 4;
 			break;
 		case 'R':
-			dire = (dire + 3) % 4;
+			direction = (direction + 3) % 4;
 			break;
 		}
-		my = max(my, curr.second);
-		sy = min(sy, curr.second);
-		mx = max(mx, curr.first);
-		sx = min(sx, curr.first);
+		max_y = max(max_y, curr.second);
+		min_y = min(min_y, curr.second);
+		max_x = max(max_x, curr.first);
+		min_x = min(min_x, curr.first);
 	}
-	return (my - sy) * (mx - sx);
+	return (max_y - min_y) * (max_x - min_x);
 }
+/*
+* [거북이]
+*
+* 문제에 나와있는 대로 구현
+*
+* 2차원 평면 위에서 움직이는 거북이 로봇
+* -> 현재 위치를 { x, y } 로 구현 -> pair
+*
+* 거북이에게 내릴 수 있는 명령
+* - F : 한 눈금 앞으로
+* - B : 한 눈금 뒤로
+* - L : 왼쪽으로 90도 회전
+* - R : 오른쪽으로 90도 회전
+*
+* 거북이에게 내린 명령대로 회전 및 이동 진행
+* -> { 북, 동, 남, 서 } 방향 배열 사용
+*
+* 거북이가 지나간 영역을 모두 포함할 수 있는 가장 작은 직사각형의 넓이 구하기
+* -> 최소 넓이를 구하기 위해서, 거북이가 이동한 좌표의 가장 끝과 끝점 구하기
+* -> 각각 x좌표와 y좌표의 최대, 최소 위치값의 차이값을 곱하기
+*/
 int main() {
 	int t;
 	string str;
@@ -47,6 +68,6 @@ int main() {
 	while (t--) {
 		cin >> str;
 		// 계산 & 출력
-		cout << turtle(str) << '\n';
+		cout << getMinimumArea(str) << '\n';
 	}
 }
