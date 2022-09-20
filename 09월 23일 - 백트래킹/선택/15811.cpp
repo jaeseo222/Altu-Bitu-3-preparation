@@ -4,14 +4,14 @@
 #include<string>
 using namespace std;
 
-//Àç±Í¿¡¼­´Â Áö¿ªº¯¼ö¸¦ È°¿ëÇÑ´Ù¸é ¸Å ÇÔ¼ö¸¶´Ù ¸Å°³º¯¼ö·Î °ªÀ» ³Ñ°ÜÁÖ¾î ºÒÇÊ¿äÇÑ ¸Ş¸ğ¸® ³¶ºñ°¡ ÀÏ¾î³¯ ¼öµµ ÀÖ±â¿¡ Àü¿ªº¯¼ö·Î ¼±¾ğÇØ¿ä!
+//ì¬ê·€ì—ì„œëŠ” ì§€ì—­ë³€ìˆ˜ë¥¼ í™œìš©í•œë‹¤ë©´ ë§¤ í•¨ìˆ˜ë§ˆë‹¤ ë§¤ê°œë³€ìˆ˜ë¡œ ê°’ì„ ë„˜ê²¨ì£¼ì–´ ë¶ˆí•„ìš”í•œ ë©”ëª¨ë¦¬ ë‚­ë¹„ê°€ ì¼ì–´ë‚  ìˆ˜ë„ ìˆê¸°ì— ì „ì—­ë³€ìˆ˜ë¡œ ì„ ì–¸í•´ìš”!
 
-vector<int> store_used_alphabet;//»ç¿ëµÈ ¾ËÆÄºªÀ» ÀúÀåÇÒ º¤ÅÍ -> 
+vector<int> store_used_alphabet;//ì‚¬ìš©ëœ ì•ŒíŒŒë²³ì„ ì €ì¥í•  ë²¡í„°
 vector<string> words(3);
-vector<pair<bool,int>> alphabet_to_number(26, make_pair(false, -1));//<¾ËÆÄºª »ç¿ë¿©ºÎ, ÇÒ´çµÈ ¼ıÀÚ>
-vector<bool> used_number(10, false);//¼ıÀÚ »ç¿ë ¿©ºÎ
+vector<pair<bool,int>> alphabet_to_number(26, make_pair(false, -1));//<ì•ŒíŒŒë²³ ì‚¬ìš©ì—¬ë¶€, í• ë‹¹ëœ ìˆ«ì>
+vector<bool> used_number(10, false);//ìˆ«ì ì‚¬ìš© ì—¬ë¶€
 
-long long wordToNumber(string word) {//word¸¦ ¼ıÀÚ·Î ¹Ù²Ù´Â ÇÔ¼ö
+long long wordToNumber(string word) {//wordë¥¼ ìˆ«ìë¡œ ë°”ê¾¸ëŠ” í•¨ìˆ˜
 	long long num = 0;
 	for (int i = 0; i < word.length(); i++) {
 		num = num * 10 + alphabet_to_number[word[i] - 'A'].second;
@@ -19,8 +19,8 @@ long long wordToNumber(string word) {//word¸¦ ¼ıÀÚ·Î ¹Ù²Ù´Â ÇÔ¼ö
 	return num;
 }
 
-bool calc() {//´äÀÌ Á¸ÀçÇÏ´ÂÁö ¿©ºÎ¸¦ ÆÇ´ÜÇÏ´Â ÇÔ¼ö
-	vector<long long> number(3);//word¸¦ ¼ıÀÚ·Î ¹Ù²Û °á°ú¸¦ ÀúÀåÇÒ º¤ÅÍ
+bool calc() {//ë‹µì´ ì¡´ì¬í•˜ëŠ”ì§€ ì—¬ë¶€ë¥¼ íŒë‹¨í•˜ëŠ” í•¨ìˆ˜
+	vector<long long> number(3);//wordë¥¼ ìˆ«ìë¡œ ë°”ê¾¼ ê²°ê³¼ë¥¼ ì €ì¥í•  ë²¡í„°
 
 	for (int i = 0; i < 3; i++) {
 		number[i] = wordToNumber(words[i]);
@@ -32,10 +32,10 @@ bool calc() {//´äÀÌ Á¸ÀçÇÏ´ÂÁö ¿©ºÎ¸¦ ÆÇ´ÜÇÏ´Â ÇÔ¼ö
 	return false;
 }
 
-void checkUsedAlphabet(string word) {//¾ËÆÄºªÀ» ¼ıÀÚ·Î ¹Ù²Û °á°ú¸¦ ÀúÀåÇÏ´Â º¤ÅÍ¿Í »ç¿ëµÈ ¾ËÆÄºªÀ» ÀúÀåÇÏ´Â º¤ÅÍ ¸¸µå´Â ÇÔ¼ö
+void checkUsedAlphabet(string word) {//ì•ŒíŒŒë²³ì„ ìˆ«ìë¡œ ë°”ê¾¼ ê²°ê³¼ë¥¼ ì €ì¥í•˜ëŠ” ë²¡í„°ì™€ ì‚¬ìš©ëœ ì•ŒíŒŒë²³ì„ ì €ì¥í•˜ëŠ” ë²¡í„° ë§Œë“œëŠ” í•¨ìˆ˜
 	for (int i = 0; i < word.length(); i++) {
 
-		if (!alphabet_to_number[word[i] - 'A'].first) {//¾ËÆÄºªÀÌ ³ª¿ÂÀûÀÌ ¾ø´Ù¸é
+		if (!alphabet_to_number[word[i] - 'A'].first) {//ì•ŒíŒŒë²³ì´ ë‚˜ì˜¨ì ì´ ì—†ë‹¤ë©´
 			alphabet_to_number[word[i] - 'A'].first = true;
 			store_used_alphabet.push_back(word[i] - 'A');
 		}
@@ -45,7 +45,7 @@ void checkUsedAlphabet(string word) {//¾ËÆÄºªÀ» ¼ıÀÚ·Î ¹Ù²Û °á°ú¸¦ ÀúÀåÇÏ´Â º¤ÅÍ
 
 void backtracking(int level) {
 
-	if (level == store_used_alphabet.size()) {//ÇÑ¹øÀÇ bactracking¸¶´Ù ¾ËÆÄºª ÇÏ³ª¿¡ ¼ıÀÚ°¡ ÇÒ´çµÇ¹Ç·Î store_used_alphabetº¤ÅÍÀÇ »çÀÌÁî¿Í bactrackingÀÇ levelÀÌ °°À¸¸é ¸ğµç ¾ËÆÄºª¿¡ ¼ıÀÚ°¡ ÇÒ´çµÈ °Í
+	if (level == store_used_alphabet.size()) {//í•œë²ˆì˜ bactrackingë§ˆë‹¤ ì•ŒíŒŒë²³ í•˜ë‚˜ì— ìˆ«ìê°€ í• ë‹¹ë˜ë¯€ë¡œ store_used_alphabet ë²¡í„°ì˜ ì‚¬ì´ì¦ˆì™€ bactrackingì˜ levelì´ ê°™ìœ¼ë©´ ëª¨ë“  ì•ŒíŒŒë²³ì— ìˆ«ìê°€ í• ë‹¹ëœ ê²ƒ
 		if (calc()) {
 			cout << "YES";
 			exit(0);
@@ -53,7 +53,7 @@ void backtracking(int level) {
 
 	}
 
-	for (int i = 0; i < 10; i++) {//¾ËÆÄºª¿¡ Â÷·Ê·Î ¼ıÀÚ ÇÒ´ç
+	for (int i = 0; i < 10; i++) {//ì•ŒíŒŒë²³ì— ì°¨ë¡€ë¡œ ìˆ«ì í• ë‹¹
 		if (!used_number[i]) {
 
 			used_number[i] = true;
@@ -69,19 +69,19 @@ void backtracking(int level) {
 }
 
 /*
-* 1. main¿¡¼­ ´Ü¾î¸¦ ÀÔ·Â¹Ş¾Æ checkUsedAlphabetÇÔ¼ö·Î »ç¿ëµÈ ¾ËÆÄºª Ã¼Å©
-* 2. backtrackigÇÔ¼ö·Î ¾ËÆÄºª¿¡ Â÷·Ê·Î ¼ıÀÚ¸¦ ÇÒ´çÇÏ°í
-* 3. ¸ğµç ¾ËÆÄºª¿¡ ¼ıÀÚ°¡ ÇÒ´ç µÇ¾úÀ» ¶§
-* 4. calc ÇÔ¼ö·Î º¹¸é»ê Á¶°ÇÀ» ¸¸Á·ÇÏ´ÂÁö È®ÀÎ -> Á¶°ÇÀ» ¸¸Á·ÇÏ¸é YES Ãâ·ÂÇÏ°í Á¾·á
+* 1. mainì—ì„œ ë‹¨ì–´ë¥¼ ì…ë ¥ë°›ì•„ checkUsedAlphabetí•¨ìˆ˜ë¡œ ì‚¬ìš©ëœ ì•ŒíŒŒë²³ ì²´í¬
+* 2. backtrackigí•¨ìˆ˜ë¡œ ì•ŒíŒŒë²³ì— ì°¨ë¡€ë¡œ ìˆ«ìë¥¼ í• ë‹¹í•˜ê³ 
+* 3. ëª¨ë“  ì•ŒíŒŒë²³ì— ìˆ«ìê°€ í• ë‹¹ ë˜ì—ˆì„ ë•Œ
+* 4. calc í•¨ìˆ˜ë¡œ ë³µë©´ì‚° ì¡°ê±´ì„ ë§Œì¡±í•˜ëŠ”ì§€ í™•ì¸ -> ì¡°ê±´ì„ ë§Œì¡±í•˜ë©´ YES ì¶œë ¥í•˜ê³  ì¢…ë£Œ
 */
 int main() {
 
 	for (int i = 0; i < 3; i++) {
 		cin >> words[i];
-		checkUsedAlphabet(words[i]);//ÀÔ·Â¹ŞÀº ´Ü¾î¿¡ »ç¿ëµÈ ¾ËÆÄºª Ã¼Å©
+		checkUsedAlphabet(words[i]);//ì…ë ¥ë°›ì€ ë‹¨ì–´ì— ì‚¬ìš©ëœ ì•ŒíŒŒë²³ ì²´í¬
 	}
 	
-	if (store_used_alphabet.size() > 10) {//¾ËÆÄºª Á¾·ù°¡ 10°³ ÃÊ°ú¸é 
+	if (store_used_alphabet.size() > 10) {//ì•ŒíŒŒë²³ ì¢…ë¥˜ê°€ 10ê°œ ì´ˆê³¼ë©´ 
 		cout << "NO";
 		return 0;
 	}
