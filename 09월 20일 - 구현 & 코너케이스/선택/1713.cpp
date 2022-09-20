@@ -10,7 +10,7 @@ typedef pair<int, int> ci;
   * 1. 비어있는 사진틀이 없는 경우 후보를 삭제
   * -> min_element() 함수로 추천수가 가장 적은 학생, 추천수가 같다면 게시 시간이 오래된 학생 찾기
   * -> min_element(x.begin(), x.end(), cmp): x 컨테이너 내에서 최솟값을 찾아주는 함수로 sort 함수와 비슷하게 cmp 함수로 조건 설정 가능
-  * 2. 후보를 처음 게시하는 경우 게시 시간 기록
+  * 2. 후보를 처음 게시하는 경우에만 게시 시간 기록
 */
 
 bool cmp(const pair<int, ci>& c1, const pair<int, ci>& c2) {
