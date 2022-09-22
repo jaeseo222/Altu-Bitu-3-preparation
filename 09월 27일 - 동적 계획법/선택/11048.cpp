@@ -7,6 +7,7 @@ using namespace std;
 /*
 * 동적프로그래밍을 이용하여 값을 업데이트
 * 더미 인덱스를 사용하여 예외 없이 한 번에 처리
+* max(): 두 개 이상의 값을 비교할 때는 {}로 묶기
 */
 
 int maxCandy(int n, int m, vector<vector<int>>dp)
