@@ -1,5 +1,5 @@
-#include "iostream"
-#include "queue"
+#include<iostream>
+#include<queue>
 
 using namespace std;
 
@@ -9,7 +9,7 @@ int main(){
     cin.tie(NULL);
 
     int n,x;
-    priority_queue<int, vector<int>, greater<int>> pq; //최소 힙 구현(오름차순 정렬)
+    priority_queue<int, vector<int>, greater<int>> pq; //최소 힙 구현(오름차순)
 
     //입력
     cin >> n;
