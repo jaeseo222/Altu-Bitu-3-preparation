@@ -3,9 +3,15 @@
 #include <algorithm>
 using namespace std;
 
+//최대로 마실 수 있는 포도주 양을 구하는 함수
 int maxWine(int n, vector<int> wine) {
 	vector<int> dp(n, 0);
 	dp[0] = wine[0];
+	
+	/*
+	입력이 3 이하일 경우는 for문 안에 넣어서 check
+	max() 함수 사용 시 3개 이상의 값 비교시 {}로 묶으면 한 번에 사용 가능합니다!
+	*/
 	
 	for (int i = 1; i < n; i++) {
 		if (i < 2) {
