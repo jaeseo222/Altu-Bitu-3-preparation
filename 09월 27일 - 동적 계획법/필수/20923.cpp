@@ -88,5 +88,5 @@ int main() {
     else {
         cout << "dosu\n";
     }
-
+    return 0;
 }
