@@ -3,11 +3,11 @@
 using namespace std;
 
 /*
-* ¾ÆÀÌµéÀº ¼±¹°ÀÌ °¡Àå ¸¹ÀÌ ´ã°ÜÀÖ´Â »óÀÚ¿¡¼­ ¼±¹°À» °¡Á®°¨
-* ¼±¹°ÀÇ °³¼ö°¡ ¸¹À»¼ö·Ï »óÀÚÀÇ ¿ì¼±¼øÀ§°¡ ³ô´Ù...!
-* ½Ç¸ÁÇÏ´Â Á¶°Ç -> »óÀÚ¿¡ ¿øÇÏ´Â °³¼öº¸´Ù Àû°Ô ¼±¹°ÀÌ µé¾îÀÖ´Â...!
+* ì•„ì´ë“¤ì€ ì„ ë¬¼ì´ ê°€ìž¥ ë§Žì´ ë‹´ê²¨ìžˆëŠ” ìƒìžì—ì„œ ì„ ë¬¼ì„ ê°€ì ¸ê°
+* ì„ ë¬¼ì˜ ê°œìˆ˜ê°€ ë§Žì„ìˆ˜ë¡ ìƒìžì˜ ìš°ì„ ìˆœìœ„ê°€ ë†’ë‹¤...!
+* ì‹¤ë§í•˜ëŠ” ì¡°ê±´ -> ìƒìžì— ì›í•˜ëŠ” ê°œìˆ˜ë³´ë‹¤ ì ê²Œ ì„ ë¬¼ì´ ë“¤ì–´ìžˆëŠ”...!
 * 
-* Hint ¾ÆÀÌµéÀÌ ¼±ÅÃÇÑ »óÀÚ´Â ¾î¶² Æ¯Â¡ÀÌ ÀÖ³ª¿ä?
+* Hint ì•„ì´ë“¤ì´ ì„ íƒí•œ ìƒìžëŠ” ì–´ë–¤ íŠ¹ì§•ì´ ìžˆë‚˜ìš”?
 */
 
 
@@ -16,15 +16,15 @@ int solution(int n, int m) {
 	int tmp, child_want, max;
 	priority_queue<int> max_heap;
 
-	//¿ì¼±¼øÀ§Å¥¿¡ ¼±¹° »ðÀÔ
+	//ìš°ì„ ìˆœìœ„íì— ì„ ë¬¼ ì‚½ìž…
 	for (int i = 0; i < n; i++) {
 		cin >> tmp;
 		max_heap.push(tmp);
 	}
 
-	//¾ÆÀÌµéÀÌ ¿øÇÏ´Â °³¼ö¸¦ ÀÔ·Â¹Þ°í ¿ì¼±¼øÀ§°¡ ³ôÀº »óÀÚ¿¡ ±× °³¼öº¸´Ù Àû°Ô ¼±¹°ÀÌ µé¾îÀÖ´Ù¸é return 0
-	//¿ì¼±¼øÀ§°¡ ³ôÀº »óÀÚ popÇØ¼­ ¾ÆÀÌ°¡ °¡Á®°¥ °³¼ö »©°í ´Ù½Ã Å¥¿¡ »ðÀÔ -> »óÀÚÀÇ ¿ì¼±¼øÀ§ º¯°æ
-	for (int i = 0; i < m; i++) {
+	//ì•„ì´ë“¤ì´ ì›í•˜ëŠ” ê°œìˆ˜ë¥¼ ìž…ë ¥ë°›ê³  ìš°ì„ ìˆœìœ„ê°€ ë†’ì€ ìƒìžì— ê·¸ ê°œìˆ˜ë³´ë‹¤ ì ê²Œ ì„ ë¬¼ì´ ë“¤ì–´ìžˆë‹¤ë©´ return 0
+	//ìš°ì„ ìˆœìœ„ê°€ ë†’ì€ ìƒìž popí•´ì„œ ì•„ì´ê°€ ê°€ì ¸ê°ˆ ê°œìˆ˜ ë¹¼ê³  ë‹¤ì‹œ íì— ì‚½ìž… -> ìƒìžì˜ ìš°ì„ ìˆœìœ„ ë³€ê²½
+	for (int i = 0; i< m; i++) {
 
 		cin >> child_want;
 		if (max_heap.top() < child_want) {
