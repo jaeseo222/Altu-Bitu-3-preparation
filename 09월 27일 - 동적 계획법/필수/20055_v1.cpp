@@ -70,7 +70,7 @@ void put(deque<info> &belt) {
 int count_zero(deque<info> &belt, int n) { //벨트에서 내구도가 0인 칸 세기
     int cnt=0;
     for(int i=0; i<2*n; i++) {
-        if(belt[i].power==0) {
+        if(!belt[i].power) {
             cnt++;
         }
     }
