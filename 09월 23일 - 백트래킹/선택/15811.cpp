@@ -1,5 +1,4 @@
 #include<iostream>
-#include<map>
 #include<vector>
 #include<string>
 using namespace std;
@@ -22,12 +21,12 @@ long long wordToNumber(string &word) {//word를 숫자로 바꾸는 함수
 void checkUsedAlphabet() {//알파벳을 숫자로 바꾼 결과를 저장하는 벡터와 사용된 알파벳을 저장하는 벡터 만드는 함수
 	vector<bool> check_used_alphabet(26,false);
 
-	for (int j = 0; j < 3; j++) {
-		for (int i = 0; i < words[j].length(); i++) {
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < words[i].length(); j++) {
 
-			if (!check_used_alphabet[words[j][i] - 'A']) {
-				check_used_alphabet[words[j][i] - 'A'] = true;
-				store_used_alphabet.push_back(words[j][i] - 'A');
+			if (!check_used_alphabet[words[i][j] - 'A']) {
+				check_used_alphabet[words[i][j] - 'A'] = true;
+				store_used_alphabet.push_back(words[i][j] - 'A');
 			}
 
 		}
@@ -35,7 +34,8 @@ void checkUsedAlphabet() {//알파벳을 숫자로 바꾼 결과를 저장하는
 }
 
 bool backtracking(int cnt) {
-	bool ans = false;//할당된 숫자의 복면산 조건 만족 여부를 저장해 다음 백트래킹의 실행 여부 결정
+	bool ans = false;//(생각해보기)백트래킹 탐색의 과정에서 해당 변수가 꼭 필요한 이유가 무엇일까요?!
+
 	if (cnt == store_used_alphabet.size()) {//한번의 bactracking마다 알파벳 하나에 숫자가 할당되므로 store_used_alphabet 벡터의 사이즈와 bactracking의 level이 같으면 모든 알파벳에 숫자가 할당된 것
 		if (wordToNumber(words[0]) + wordToNumber(words[1]) == wordToNumber(words[2])) {
 			return true;
