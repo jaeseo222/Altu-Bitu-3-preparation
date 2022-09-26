@@ -9,7 +9,7 @@ int check[9] = { false, };
 int arr[8] = { 0, };
 int num[8] = { 0, };
 
-void permutaion(int cnt) {
+void backtracking(int cnt) {
 
 	if (cnt == m) {
 		for (int i = 0; i < m; i++) {
@@ -49,5 +49,5 @@ int main() {
 		
 	sort(num, num + n);
 
-	permutaion(0);
+	backtracking(0);
 }
