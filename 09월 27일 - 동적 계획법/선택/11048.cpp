@@ -26,7 +26,7 @@ int main()
 	// 입력
 	int n, m;
 	cin >> n >> m;
-	vector<vector<int>> maze(n+1, vector<int>(m+1));
+	vector<vector<int>> maze(n+1, vector<int>(m+1, 0));
 	for (int i = 1; i <= n; i++) {
 		for (int j = 1; j <= m; j++) {
 			cin >> maze[i][j];
