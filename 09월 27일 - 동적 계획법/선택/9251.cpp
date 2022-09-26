@@ -9,7 +9,7 @@ using namespace std;
  * 2) 두 문자가 다른 경우 : dp[i][j] = max(dp[i-1][j], dp[i][j-1])
  */
 
-int LCS(string str1, string str2) {
+int lcs(string str1, string str2) {
     int n = str1.length();
     int m = str2.length();
     vector<vector<int>> dp(n + 1, vector<int>(m + 1, 0));
@@ -32,7 +32,7 @@ int main() {
     cin >> a >> b;
 
     //연산, 출력
-    cout << LCS(a, b);
+    cout << lcs(a, b);
 
     return 0;
 }
