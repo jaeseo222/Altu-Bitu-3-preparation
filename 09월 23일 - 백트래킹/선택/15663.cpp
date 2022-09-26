@@ -6,14 +6,14 @@ using namespace std;
 
 int n, m;
 int check[9] = { false, };
-int pArr[8] = { 0, };
+int arr[8] = { 0, };
 int num[8] = { 0, };
 
-void permutaion(int depth) {
+void permutaion(int cnt) {
 
-	if (depth == m) {
+	if (cnt == m) {
 		for (int i = 0; i < m; i++) {
-			cout << pArr[i] << ' ';
+			cout << arr[i] << ' ';
 		}
 		cout << '\n';
 		return;
@@ -26,7 +26,7 @@ void permutaion(int depth) {
 		if (!check[i] && before != num[i]) { //바로 이전에 선택된 값이 이번 값과 동일하지 않을 경우만 재귀탐색 진행
 			check[i] = true;
 			before = num[i];
-			pArr[depth] = num[i];
+			arr[cnt] = num[i];
 			permutaion(depth + 1);
 			check[i] = false;
 		}
