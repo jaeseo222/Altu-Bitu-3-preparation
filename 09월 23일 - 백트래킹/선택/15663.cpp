@@ -27,7 +27,7 @@ void backtracking(int cnt) {
 			check[i] = true;
 			before = num[i];
 			arr[cnt] = num[i];
-			permutaion(depth + 1);
+			backtracking(cnt + 1);
 			check[i] = false;
 		}
 	}
@@ -36,7 +36,7 @@ void backtracking(int cnt) {
 * [N과 M (9)] - 백트래킹
 * 이전 수열의 마지막 항과 새로 추가할 값이 같으면 중복된 수열이 된다는 점을 활용! 
 * 기본 재귀 순열에서 이전에 선택된 값을 저장하기 위해 before라는 변수를 사용하여 
-* depth번째에 같은 숫자가 중복되서 사용되지 않도록 함
+* cnt 번째 같은 숫자가 중복되서 사용되지 않도록 함
 */
 int main() {
 
