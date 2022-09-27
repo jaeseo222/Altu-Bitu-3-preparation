@@ -3,28 +3,27 @@
 #include <algorithm>
 using namespace std;
 
-//ìµœëŒ€ë¡œ ë§ˆì‹¤ ìˆ˜ ìˆëŠ” í¬ë„ì£¼ ì–‘ì„ êµ¬í•˜ëŠ” í•¨ìˆ˜
 int maxWine(int n, vector<int> wine) {
-	vector<int> dp(n+1, 0);
-	//ë”ë¯¸ ì¸ë±ìŠ¤ ì‚¬ìš©í•˜ì—¬ ì˜ˆì™¸ ì²˜ë¦¬
-	dp[1] = wine[0];
-	dp[2] = wine[0] + wine[1];
+	vector<int> dp(n + 1, 0);
+	dp[1] = wine[1];
+	dp[2] = wine[1] + wine[2];
 
-	//max() í•¨ìˆ˜ ì‚¬ìš© ì‹œ 3ê°œ ì´ìƒì˜ ê°’ ë¹„êµì‹œ {}ë¡œ ë¬¶ìœ¼ë©´ í•œ ë²ˆì— ì‚¬ìš© ê°€ëŠ¥í•©ë‹ˆë‹¤!
-	for (int i = 3; i < n+1; i++) {
-		//ê°€ì¥ í° ê°’ìœ¼ë¡œ ê°±ì‹ 
-		dp[i] = max({ dp[i - 4] + wine[i - 2] + wine[i-1],dp[i - 3] + wine[i-1],dp[i - 2] });
+	//max() ÇÔ¼ö »ç¿ë ½Ã 3°³ ÀÌ»óÀÇ °ª ºñ±³½Ã {}·Î ¹­À¸¸é ÇÑ ¹ø¿¡ »ç¿ë °¡´ÉÇÕ´Ï´Ù!
+
+	for (int i = 3; i < n + 1; i++) {
+		//°¡Àå Å« °ªÀ¸·Î °»½Å
+		dp[i] = max({ dp[i - 3] + wine[i - 1] + wine[i],dp[i - 2] + wine[i],dp[i - 1] });
 	}
 	return dp[n];
 }
 int main() {
 	int n;
-	
-	cin >> n;
-	vector<int> wine(n+1);
-	
 
-	for (int i = 1; i < n+1; i++) {
+	cin >> n;
+	vector<int> wine(n + 1);
+
+
+	for (int i = 1; i < n + 1; i++) {
 		cin >> wine[i];
 	}
 
