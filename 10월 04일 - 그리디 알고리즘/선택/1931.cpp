@@ -12,7 +12,7 @@ typedef pair<int, int> ci;
 */
 bool cmp(const ci& m1, const ci& m2)
 {
-	if (m1.second != m2.second) { // 회의가 끝나는 시간이 같은 경우
+	if (m1.second != m2.second) { // 회의가 끝나는 시간이 다른 경우
 		return m1.second < m2.second;
 	}
 	return m1.first < m2.first;
