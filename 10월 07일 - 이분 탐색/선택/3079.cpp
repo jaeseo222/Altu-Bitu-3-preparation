@@ -1,5 +1,5 @@
 /*
-* Æ¯Á¤ Á¶°ÇÀ» ¸¸Á·ÇÏ°í(¸ğµç »ç¶÷ÀÌ ½É»ç¸¦ ¹Ş´Â´Ù) ÃÖ¼Ò°ªÀ» ±¸ÇÏ´Â Çü½Ä -> ÆÄ¶ó¹ÌÅÍ Å½»ö
+* íŠ¹ì • ì¡°ê±´ì„ ë§Œì¡±í•˜ê³ (ëª¨ë“  ì‚¬ëŒì´ ì‹¬ì‚¬ë¥¼ ë°›ëŠ”ë‹¤) ìµœì†Œê°’ì„ êµ¬í•˜ëŠ” í˜•ì‹ -> íŒŒë¼ë¯¸í„° íƒìƒ‰
 */
 
 
@@ -19,7 +19,7 @@ long long parametricSearch(long long left, long long right, int n, int m,vector<
 		long long mid = (left + right)/2;
 		long long people = 0;
 
-		for (int i = 0; i < n; i++) {//½Ã°£(mid)¾È¿¡ °Ë»ç¹ŞÀ» ¼ö ÀÖ´Â »ç¶÷ ¼ö ±¸ÇÏ±â
+		for (int i = 0; i < n; i++) {//ì‹œê°„(mid)ì•ˆì— ê²€ì‚¬ë°›ì„ ìˆ˜ ìˆëŠ” ì‚¬ëŒ ìˆ˜ êµ¬í•˜ê¸°
 			people += mid / time[i];
 		}
 
@@ -33,7 +33,6 @@ long long parametricSearch(long long left, long long right, int n, int m,vector<
 		}
 		
 	}
-
 	return answer;
 	
 }
