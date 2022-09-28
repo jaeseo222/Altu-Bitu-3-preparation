@@ -13,6 +13,16 @@ using namespace std;
 
 int solution(int n, int m) {
 
+	
+	return 1;
+}
+
+
+int main() {
+	int n, m;
+	int flag = 1;
+	cin >> n >> m;
+
 	int tmp, child_want, max;
 	priority_queue<int> max_heap;
 
@@ -22,29 +32,23 @@ int solution(int n, int m) {
 		max_heap.push(tmp);
 	}
 
-	//아이들이 원하는 개수를 입력받고 우선순위가 높은 상자에 그 개수보다 적게 선물이 들어있다면 return 0
+	//아이들이 원하는 개수를 입력받고 우선순위가 높은 상자에 그 개수보다 적게 선물이 들어있다면 flag를 0으로
 	//우선순위가 높은 상자 pop해서 아이가 가져갈 개수 빼고 다시 큐에 삽입 -> 상자의 우선순위 변경
-	for (int i = 0; i< m; i++) {
+	for (int i = 0; i < m; i++) {
 
 		cin >> child_want;
 		if (max_heap.top() < child_want) {
-			return 0;
+			flag= 0;
+			break;
 		}
-		else {
-			max = max_heap.top();
-			max_heap.pop();
-			max_heap.push(max - child_want);
-		}
+
+		max = max_heap.top();
+		max_heap.pop();
+		max_heap.push(max - child_want);
+
 	}
-	return 1;
-}
 
-
-int main() {
-	int n, m;
-	cin >> n >> m;
-
-	cout << solution(n, m);
+	cout << flag;
 
 	return 0;
 }
