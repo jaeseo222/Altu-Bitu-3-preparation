@@ -22,9 +22,9 @@ int schedule(vector<ci> m)
 {
 	int cnt = 0, curr = 0; // cnt: 회의 회수, curr: 현재 시간
 	sort(m.begin(), m.end(), cmp);
-	for (auto iter = m.begin(); iter != m.end(); iter++) {
-		if (iter->first >= curr) { // 회의 추가
-			curr = iter->second;
+	for (int i = 0; i < m.size(); i++) {
+		if (m[i].first >= curr) { // 회의 추가
+			curr = m[i].second;
 			cnt++;
 		}
 	}
