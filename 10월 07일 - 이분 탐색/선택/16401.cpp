@@ -3,7 +3,7 @@
 #include<vector>
 using namespace std;
 
-//조카 1명에게 줄 수 있는 과자의 최대 길이 구하는 함수
+//조카 1명에게 줄 수 있는 과자조각의 최대 길이 구하는 함수
 int findMax(vector<int> snack_len, int left, int right, int m){
     int ans = 0;
 
@@ -15,7 +15,7 @@ int findMax(vector<int> snack_len, int left, int right, int m){
         for (int i = 0; i < snack_len.size(); i++) {
             cnt += snack_len[i] / mid; //최대길이(mid)만큼 만들 수 있는 조각의 수
         }
-        if (cnt >= m) { //과자조각 수 > 조카 수 -> 최대 길이 갱신
+        if (cnt >= m) { //과자조각 수 >= 조카 수 -> 최대 길이 갱신
             ans = mid;
             left = mid + 1;
         }
