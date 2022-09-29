@@ -16,7 +16,7 @@ int main() {
     cin.tie(NULL);
 
     int n, input;
-    priority_queue<int, vector<int>, greater<>> pq; //최소 힙, 정렬이랑 반대
+    priority_queue<int, vector<int>, greater<>> pq; //최소 힙, 비교함수 처리가 정렬이랑 반대
 
     cin >> n;
     int size = n * n;
