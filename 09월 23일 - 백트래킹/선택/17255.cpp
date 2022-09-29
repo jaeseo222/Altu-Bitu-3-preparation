@@ -37,6 +37,7 @@ int main() {
 
 	// 계산
 	for (int i = 0; i < str.length(); i++) {
+		// str[i]를 string 형태로 바꾸기 위해 tmp를 더함
 		string tmp = "";
 		makeNum(i, i, tmp + str[i]);
 	}
