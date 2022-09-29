@@ -10,13 +10,15 @@ using namespace std;
 * Hint 아이들이 선택한 상자는 어떤 특징이 있나요?
 */
 
+
 int main() {
-	int n, m, tmp, child_want, max;
-	priority_queue<int> max_heap;
+	int n, m;
 	int flag = 1;
-	
 	cin >> n >> m;
-	
+
+	int tmp, child_want, max;
+	priority_queue<int> max_heap;
+
 	//우선순위큐에 선물 삽입
 	for (int i = 0; i < n; i++) {
 		cin >> tmp;
@@ -29,17 +31,16 @@ int main() {
 
 		cin >> child_want;
 		if (max_heap.top() < child_want) {
-			flag= 0;
-			break;
+			cout << 0;
+			return 0;
 		}
 
-		max = max_heap.top();
+		max_heap.push(max_heap.top() - child_want);
 		max_heap.pop();
-		max_heap.push(max - child_want);
 
 	}
 
-	cout << flag;
-
+	cout << 1;
 	return 0;
+
 }
