@@ -35,7 +35,7 @@ int main() {
 			return 0;
 		}
 
-		max_heap.push(max_heap.top() - child_want);
+		max_heap.push(max_heap.top() - child_want);//(생각해보기) max_heap.top()_child를 바로 push 해도 될까요?
 		max_heap.pop();
 
 	}
