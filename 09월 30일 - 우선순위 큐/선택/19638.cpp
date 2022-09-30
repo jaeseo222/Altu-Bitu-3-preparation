@@ -12,7 +12,7 @@ int attack(priority_queue<int>& q, int h, int t) {
 		}
 		cnt++;
 		q.pop();
-		q.push(floor(tmp / 2));
+		q.push(tmp / 2);
 	}
 	return cnt;
 }
@@ -20,8 +20,7 @@ int attack(priority_queue<int>& q, int h, int t) {
 /*
 * [센티와 마법의 뿅망치]
 *
-* 가장 키가 큰 거인 가운데 하나를 때리기 위해
-* 내림차순 우선순위 큐 사용
+* 가장 키가 큰 거인 가운데 하나를 때리기 위해, 최대 힙 사용
 */
 int main() {
 	priority_queue<int> q;
