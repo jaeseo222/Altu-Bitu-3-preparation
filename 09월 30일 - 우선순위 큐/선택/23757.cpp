@@ -35,8 +35,14 @@ int main() {
 			return 0;
 		}
 
-		max_heap.push(max_heap.top() - child_want);//(생각해보기) max_heap.top()_child를 바로 push 해도 될까요?
+		max = max_heap.top();
 		max_heap.pop();
+		max_heap.push(max - child_want);
+		/*max_heap.push(max_heap.top() - child_want);
+ㅡ		*max_heap.pop();
+		* (생각해보기)line38~40은 주서과 같이 쓸 수 있어요!
+		* push를 한 후에 pop을 하면 기존의 max_heap.top()이 어떻게 삭제될까요?
+		*/
 
 	}
 
