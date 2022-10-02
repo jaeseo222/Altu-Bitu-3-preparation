@@ -38,11 +38,6 @@ int main() {
 		max = max_heap.top();
 		max_heap.pop();
 		max_heap.push(max - child_want);
-		/*max_heap.push(max_heap.top() - child_want);
-ㅡ		*max_heap.pop();
-		* (생각해보기)line38~40은 주석과 같이 쓸 수 있어요!
-		* push를 한 후에 pop을 하면 기존의 max_heap.top()이 어떻게 삭제될까요?
-		*/
 
 	}
 
