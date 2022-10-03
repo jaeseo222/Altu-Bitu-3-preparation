@@ -19,8 +19,7 @@ int solution(int n, vector<int> &arr) {
     }
     return ans;
 }
-// 더 다양한 풀이방법 (아래 링크 참조)
-// https://github.com/Altu-Bitu-2/Notice/blob/main/03%EC%9B%94%2029%EC%9D%BC%20-%20%EB%8F%99%EC%A0%81%20%EA%B3%84%ED%9A%8D%EB%B2%95/%EA%B3%BC%EC%A0%9C/11053.cpp 
+
 
 int main() {
     int n;
