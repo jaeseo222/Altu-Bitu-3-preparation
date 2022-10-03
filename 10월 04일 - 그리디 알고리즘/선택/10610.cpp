@@ -14,13 +14,13 @@ using namespace std;
 */
 
 //모든 자릿수 합이 3의 배수인지 확인하는 함수
-bool checkThree(string num) {
+bool checkThree(string n) {
     int sum = 0;
-    for (int i = 0; i < num.size(); i++) {
-        sum += num[i];
+    for (int i = 0; i < n.size(); i++) {
+        sum += n[i];
     }
 
-    //더한 자릿수의 합이 3의 배수이면 num도 3의 배수
+    //더한 자릿수의 합이 3의 배수이면 n도 3의 배수
     if (sum % 3 == 0) {
         return true;
     }
@@ -42,14 +42,11 @@ string findNum(string n) {
 int main() {
     string n;
     cin >> n;
-
+    
+    //N이 최대 10^5개의 숫자로 구성되어 있으므로 string타입 사용
     string ans = findNum(n);
 
-    //N이 최대 10^5개의 숫자로 구성되어 있으므로 string타입으로 하나씩 출력
-    for (int i = 0; i < ans.size(); i++) {
-        cout << ans[i];
-    }
-    cout << '\n';
+    cout<<ans;
     return 0;
 
 }
