@@ -16,10 +16,10 @@ int schedule(vector<ci> lecture)
 {
 	priority_queue<int, vector<int>, greater<>> pq; // 강의 종료 시간을 우선순위 큐에 저장
 	pq.push(lecture[0].second); // 첫 수업의 강의 종료 시간 저장
-	for (int i = 1; i < lecture.size(); i++)
-	{
-		if (pq.top() <= lecture[i].first) // 수업이 끝난 직후 다음 수업 시작 (같은 강의실)
+	for (int i = 1; i < lecture.size(); i++) {
+		if (pq.top() <= lecture[i].first) { // 수업이 끝난 직후 다음 수업 시작 (같은 강의실)
 			pq.pop(); 
+		}
 		pq.push(lecture[i].second); // 새로운 강의실
 	}
 	return pq.size(); // 총 강의실 수
