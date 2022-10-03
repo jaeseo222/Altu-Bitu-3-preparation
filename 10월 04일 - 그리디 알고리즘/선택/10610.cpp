@@ -5,33 +5,33 @@ using namespace std;
 
 
 /*
-[°¡Àå Å« ¼ö]
--ÀÔ·Â ¹ÞÀº °¢ ¼ö¸¦ °¡Àå Å« ¼ø¼­´ë·Î Á¤·Ä
+[ê°€ìž¥ í° ìˆ˜]
+-ìž…ë ¥ ë°›ì€ ê° ìˆ˜ë¥¼ ê°€ìž¥ í° ìˆœì„œëŒ€ë¡œ ì •ë ¬
 
-[30ÀÇ ¹è¼ö Á¶°Ç]
--3ÀÇ ¹è¼ö : °¢ ÀÚ¸®ÀÇ ¼öÀÇ ÇÕÀÌ 3ÀÇ ¹è¼ö
--10ÀÇ ¹è¼ö : ÀÏÀÇ ÀÚ¸®°¡ 0
+[30ì˜ ë°°ìˆ˜]
+-3ì˜ ë°°ìˆ˜ : ê° ìžë¦¬ì˜ ìˆ˜ì˜ í•©ì´ 3ì˜ ë°°ìˆ˜
+-10ì˜ ë°°ìˆ˜ : ì¼ì˜ ìžë¦¬ê°€ 0
 */
 
-//¸ðµç ÀÚ¸´¼ö ÇÕÀÌ 3ÀÇ ¹è¼öÀÎÁö È®ÀÎÇÏ´Â ÇÔ¼ö
+//ëª¨ë“  ìžë¦¿ìˆ˜ í•©ì´ 3ì˜ ë°°ìˆ˜ì¸ì§€ í™•ì¸í•˜ëŠ” í•¨ìˆ˜
 bool checkThree(string num) {
     int sum = 0;
     for (int i = 0; i < num.size(); i++) {
         sum += num[i];
     }
 
-    //´õÇÑ ÀÚ¸´¼öÀÇ ÇÕÀÌ 3ÀÇ ¹è¼öÀÌ¸é numµµ 3ÀÇ ¹è¼ö
+    //ë”í•œ ìžë¦¿ìˆ˜ì˜ í•©ì´ 3ì˜ ë°°ìˆ˜ì´ë©´ numë„ 3ì˜ ë°°ìˆ˜
     if (sum % 3 == 0) {
         return true;
     }
     return false;
 }
 
-//nÀ¸·Î ¸¸µé ¼ö ÀÖ´Â 30ÀÇ ¹è¼ö Áß °¡Àå Å« ¼ö¸¦ ±¸ÇÏ´Â ÇÔ¼ö
+//nìœ¼ë¡œ ë§Œë“¤ ìˆ˜ ìžˆëŠ” 30ì˜ ë°°ìˆ˜ ì¤‘ ê°€ìž¥ í° ìˆ˜ë¥¼ êµ¬í•˜ëŠ” í•¨ìˆ˜
 string findNum(string n) {
-    sort(n.begin(), n.end(), greater<>()); //°¢ ÀÚ¸´¼ö ³»¸²Â÷¼ø Á¤·Ä
+    sort(n.begin(), n.end(), greater<>()); //ê° ìžë¦¿ìˆ˜ ë‚´ë¦¼ì°¨ìˆœ ì •ë ¬
 
-    //30ÀÇ ¹è¼öÀÌ¸é ¼ýÀÚ ¸®ÅÏ
+    //30ì˜ ë°°ìˆ˜ì´ë©´ ìˆ«ìž ë¦¬í„´
     if (n[n.size() - 1] == '0' && checkThree(n)) {
         return n;
     }
@@ -45,7 +45,7 @@ int main() {
 
     string ans = findNum(n);
 
-    //NÀÌ ÃÖ´ë 10^5°³ÀÇ ¼ýÀÚ·Î ±¸¼ºµÇ¾î ÀÖÀ¸¹Ç·Î stringÅ¸ÀÔÀ¸·Î ÇÏ³ª¾¿ Ãâ·Â
+    //Nì´ ìµœëŒ€ 10^5ê°œì˜ ìˆ«ìžë¡œ êµ¬ì„±ë˜ì–´ ìžˆìœ¼ë¯€ë¡œ stringíƒ€ìž…ìœ¼ë¡œ í•˜ë‚˜ì”© ì¶œë ¥
     for (int i = 0; i < ans.size(); i++) {
         cout << ans[i];
     }
