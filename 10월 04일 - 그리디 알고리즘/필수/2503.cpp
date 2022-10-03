@@ -11,16 +11,20 @@ typedef struct
 bool check(int n, int t, Data arr[])
 {
     string s = to_string(t); //숫자 t를 문자열 s로 바꿈
-    if (s[0] == s[1] || s[1] == s[2] || s[0] == s[2])
-        return false; //서로 같은 수 하나라도 있다면
+    if (s[0] == s[1] || s[1] == s[2] || s[0] == s[2])//서로 같은 수 하나라도 있다면 
+    {
+        return false; 
+    }
     for (int qst = 0; qst < n; qst++)
     {
         int strike = 0, ball = 0;
         string num = to_string(arr[qst].num);
         for (int i = 0; i < 3; i++)
         {
-            if (s[i] == '0')
-                return false; //하나라도 0이 있으면
+            if (s[i] == '0')//하나라도 0이 있으면
+            {
+                return false; 
+            }
             for (int j = 0; j < 3; j++)
             {
                 if (i == j && s[i] == num[j])
@@ -30,7 +34,9 @@ bool check(int n, int t, Data arr[])
             }
         }
         if (arr[qst].strike != strike || arr[qst].ball != ball)
+        {
             return false;
+        }
     }
     return true;
 }
