@@ -13,7 +13,6 @@ using namespace std;
 
 int main() {
 	int n, m;
-	int flag = 1;
 	cin >> n >> m;
 
 	int tmp, child_want, max;
