@@ -3,18 +3,27 @@
 #include<vector>
 using namespace std;
 
+//최대 길이(len)만큼 만들 수 있는 과자조각의 수 구하는 함수(이분탐색에서 사용)
+int snackNum(vector<int> snack_len, int len) {
+    int cnt = 0; //만들 수 있는 과자조각 수
+
+    for (int i = 0; i < snack_len.size(); i++) {
+        if (snack_len[i] < len) break; // len보다 과자 길이가 작아지면 탈출
+        cnt += snack_len[i] / len; 
+    }
+    return cnt;
+}
+
 //조카 1명에게 줄 수 있는 과자조각의 최대 길이 구하는 함수
-int findMax(vector<int> snack_len, int left, int right, int m){
+int parametricSearch(vector<int> snack_len, int left, int right, int m){
     int ans = 0;
 
     //이분탐색
     while (left <= right) {
         int mid = (left + right) / 2; //mid를 과자조각 최대 길이라고 가정
-        int cnt = 0; //만들 수 있는 과자조각 수
 
-        for (int i = 0; i < snack_len.size(); i++) {
-            cnt += snack_len[i] / mid; //최대길이(mid)만큼 만들 수 있는 조각의 수
-        }
+        int cnt = snackNum(snack_len, mid); //최대길이(mid) 만큼 만들 수 있는 과자조각의 수
+
         if (cnt >= m) { //과자조각 수 >= 조카 수 -> 최대 길이 갱신
             ans = mid;
             left = mid + 1;
@@ -35,12 +44,11 @@ int main(){
         cin>>snack_len[i];
     }
 
-    sort(snack_len.begin(), snack_len.end()); //오름차순 정렬
-
-    int min_len = 1, max_len = snack_len[n-1];  //과자조각의 최소, 최대 길이
-
+    sort(snack_len.begin(), snack_len.end(), greater<>()); //내림차순 정렬
+    int min_len = 1, max_len = snack_len[0];  //과자조각의 최소, 최대 길이
+    
     //연산, 출력
-    cout<<findMax(snack_len, min_len, max_len, m)<<'\n';
+    cout<< parametricSearch(snack_len, min_len, max_len, m)<<'\n';
 
     return 0;
 }
