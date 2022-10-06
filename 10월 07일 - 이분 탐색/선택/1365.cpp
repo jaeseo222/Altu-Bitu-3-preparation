@@ -47,7 +47,7 @@ int main() {
 		cin >> twist[i];
 	}
 
-	// 입력 & 계산
+	// 계산
 	for (int i = 0; i < n; i++) {
 		cut(twist[i], line);
 	}
