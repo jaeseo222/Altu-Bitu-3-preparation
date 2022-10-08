@@ -2,13 +2,17 @@
 #include <queue>
 #include <map>
 using namespace std;
-typedef long long ll;   //int 사용시 입력값으로 INT_MIN 들어올 경우 - 연산 시 에러 발생
+typedef long long ll;   //int 사용시 입력값으로 INT_MIN 들어올 경우, - (마이너스) 연산 시 INT 범위를 벗어나므로 에러 발생
 
 /*
- * [힌트] 우선순위 큐를 활용해 최솟값을 뽑아볼까요? 
- * 최댓값과 최솟값을 따로 관리해주려면 해당 원소가 몇 개가 남았는지도 알아둬야겠어요!
+ * [힌트] 최솟값이라고 최소힙을 쓰라는 보장은 없죠.
+ *        대신 최댓값과 최솟값을 따로 관리해주려면 해당 원소가 몇 개가 남았는지도 알아둬야겠어요!
  */
-
+void popDummies(priority_queue<ll> &heap, map<ll, ll> &remained, int x) {
+    while(!heap.empty() && remained[heap.top() * x]==0) {
+        heap.pop();
+    }
+}
 int main() {
     int t; cin>>t;  //테스트 케이스
     while(t--) {
@@ -31,20 +35,16 @@ int main() {
                 case 'D':
                     if(x==-1) {
                         //이미 삭제된 값은 pop 하기
-                        while(!min_queue.empty() && remained[-min_queue.top()]==0) {
-                            min_queue.pop();
-                        }
-                        //최댓값 pop
+                        popDummies(min_queue, remained, x);
+                        //최솟값 pop
                         if(!min_queue.empty()) {
                             remained[-min_queue.top()]--;
                             min_queue.pop();
                         }
                     } else {
                         //이미 삭제된 값은 pop 하기
-                        while(!max_queue.empty() && remained[max_queue.top()]==0) {
-                            max_queue.pop();
-                        }
-                        //최솟값 pop
+                        popDummies(max_queue, remained, x);
+                        //최댓값 pop
                         if(!max_queue.empty()) {
                             remained[max_queue.top()]--;
                             max_queue.pop();
@@ -53,12 +53,8 @@ int main() {
             }
         }
         //이미 삭제된 값은 pop 하기
-        while(!max_queue.empty() && remained[max_queue.top()]==0) {
-            max_queue.pop();
-        }
-        while(!min_queue.empty() && remained[-min_queue.top()]==0) {
-            min_queue.pop();
-        }
+        popDummies(min_queue, remained, -1);
+        popDummies(max_queue, remained, 1);
         
         if(max_queue.empty()) {
             cout<<"EMPTY\n";
