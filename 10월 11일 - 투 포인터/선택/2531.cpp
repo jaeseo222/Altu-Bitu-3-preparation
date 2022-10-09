@@ -8,12 +8,12 @@ int calMax(int count, int* check, int* food,int k,int n) {
 
 	while (left < n) {
 		result = max(result, count);
-		//leftÀÇ Á¢½Ã ¼±ÅÃX
+		//leftì˜ ì ‘ì‹œ ì„ íƒ ì œê±°
 		check[food[left]]--;
 		if (check[food[left++]] == 0) {
 			count--;
 		}
-		//right+1ÀÇ Á¢½Ã »õ·Î ¼±ÅÃ
+		//right+1ì˜ ì ‘ì‹œ ìƒˆë¡œ ì„ íƒ
 		right = (right + 1) % n;
 		check[food[right]]++;
 		if (check[food[right]] == 1) {
@@ -29,20 +29,20 @@ int main() {
 	int count = 0;
 	cin >> n >> d >> k >> c;
 
-	//Åõ Æ÷ÀÎÅÍ
+	//íˆ¬ í¬ì¸í„°
 	int left = 0, right = k - 1;
 
 	for (int i = 0; i < n; i++) {
 		cin >> food[i];
 	}
-	//¿¬¼ÓÇØ¼­ ¸ÔÀ» ¼ö ÀÖ´Â ÃÊ¹ä
+	//ì—°ì†í•´ì„œ ë¨¹ì„ ìˆ˜ ìˆëŠ” ì´ˆë°¥
 	for (int i = 0; i < k; i++) {
 		check[food[i]]++;
 		if (check[food[i]] == 1) {
 			count++;
 		}
 	}
-	//ÄíÆùÀ¸·Î ¸ÔÀ» ¼ö ÀÖ´Â ÃÊ¹ä
+	//ì¿ í°ìœ¼ë¡œ ë¨¹ì„ ìˆ˜ ìˆëŠ” ì´ˆë°¥
 	check[c]++;
 	if (check[c] == 1) {
 		count++;
