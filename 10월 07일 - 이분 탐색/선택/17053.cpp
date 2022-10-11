@@ -23,10 +23,9 @@ ll check (ll n,ll m,vector<cl> beers,ll level ) {
 	for (auto beer : beers) {
 		if (beer.second <= level) {
 			possibles.push_back(beer.first);
-			cout << beer.first<<' ';
 		}
 	}
-	cout << "\n";
+	
 	if (possibles.size() < n) {
 		return -1;
 	}
