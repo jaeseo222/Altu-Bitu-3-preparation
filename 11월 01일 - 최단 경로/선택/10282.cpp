@@ -15,7 +15,7 @@ const int INF = 1e7; // 지나는 최대 간선의 개수(n - 1) * 간선 가중
 
 ci dijkstra(int vertex, int start, vector<vector<ci>>& graph) {
     vector<int> dist(vertex + 1, INF);
-    priority_queue<ci, vector<ci>, greater<>> pq; //first : 시작점으로부터의 거리, second : 정점
+    priority_queue<ci, vector<ci>, greater<>> pq; // first : 시작점으로부터의 거리, second : 정점
 
     dist[start] = 0;
     pq.push({ 0, start });
@@ -24,14 +24,14 @@ ci dijkstra(int vertex, int start, vector<vector<ci>>& graph) {
         int weight = pq.top().first;
         int node = pq.top().second;
         pq.pop();
-        if (weight > dist[node]) //이미 확인했던 정점
+        if (weight > dist[node]) // 이미 확인한 정점
             continue;
         cnt++; // 감염된 컴퓨터 증가
         time = weight; // 마지막으로 감염되는 컴퓨터까지의 최단 거리(시간)
         for (int i = 0; i < graph[node].size(); i++) {
             int next_node = graph[node][i].first;
             int next_weight = weight + graph[node][i].second;
-            if (dist[next_node] > next_weight) { //더 짧은 경로로 갈 수 있는 경우
+            if (dist[next_node] > next_weight) { // 더 짧은 경로로 갈 수 있는 경우
                 dist[next_node] = next_weight;
                 pq.push({ next_weight, next_node });
             }
@@ -43,18 +43,18 @@ ci dijkstra(int vertex, int start, vector<vector<ci>>& graph) {
 int main() {
     int t, n, d, c, a, b, s;
 
-    //입력
+    // 입력
     cin >> t; // 테스크 케이스의 개수
     while (t--) {
         cin >> n >> d >> c;
-        vector<vector<ci>> graph(n + 1, vector<ci>(0)); //인접 리스트
+        vector<vector<ci>> graph(n + 1, vector<ci>(0)); // 인접 리스트
         while (d--) {
             cin >> a >> b >> s;
-            graph[b].emplace_back(a, s); //방향 그래프 ( b -> a )
+            graph[b].emplace_back(a, s); // 방향 그래프 ( b -> a )
         }
-        //연산
+        // 연산
         ci ans = dijkstra(n, c, graph);
-        //출력
+        // 출력
         cout << ans.first << ' ' << ans.second << '\n';
     }
  }
