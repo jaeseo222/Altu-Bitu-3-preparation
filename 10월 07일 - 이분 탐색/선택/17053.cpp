@@ -1,14 +1,14 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-
+#include <math.h>
 
 using namespace std;
 
 typedef long long ll;
 typedef pair<ll, ll> cl; // 맥주의 선호도, 도수 레벨
 
-const long long MAX_LEVEL = 1e13;
+const long long MAX_LEVEL = pow(2,31);
 
 
 bool cmp(cl beer1, cl beer2) {
@@ -31,6 +31,11 @@ ll maxPrefSum (ll n,vector<cl> beers,ll level ) {
 		possibles.push_back(beers[i].first);
 	
 	}
+
+	if (possibles.size() < n) {
+		return -1;
+	}
+		
 
 	// 상위 n개의 선호도 합 계산 
 	sort(possibles.begin(), possibles.end(), greater<ll>()); // 내림차순 정렬
@@ -98,7 +103,6 @@ int main() {
 	}
 
 	sort(beers.begin(), beers.end(), cmp); // 도수레벨 기준 오름차순 정렬
-
 	cout << binarySearch(n, m, k, beers, 1, MAX_LEVEL);
 
 }
