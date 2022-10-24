@@ -1,12 +1,14 @@
+#include <iostream>
 #include <vector>
 #include <algorithm>
+
 
 using namespace std;
 
 typedef long long ll;
 typedef pair<ll, ll> cl; // 맥주의 선호도, 도수 레벨
 
-const long long MAX_LEVEL = pow(2,31);
+const long long MAX_LEVEL = 1e13;
 
 
 bool cmp(cl beer1, cl beer2) {
@@ -15,21 +17,20 @@ bool cmp(cl beer1, cl beer2) {
 }
 
 // 간레벨이 level일때 가능한 선호도의 최댓값
-ll check (ll n,ll m,vector<cl> beers,ll level ) {
+ll maxPrefSum (ll n,vector<cl> beers,ll level ) {
 
 
 	// 도수가 간 레벨 이하인 맥주들의 선호도 구하기
 	vector<ll> possibles;
-	for (auto beer : beers) {
-		if (beer.second <= level) {
-			possibles.push_back(beer.first);
+
+	for (int i = 0; i < beers.size(); i++) {
+
+		if (beers[i].second > level) { 
+			break;
 		}
-	}
+		possibles.push_back(beers[i].first);
 	
-	if (possibles.size() < n) {
-		return -1;
 	}
-		
 
 	// 상위 n개의 선호도 합 계산 
 	sort(possibles.begin(), possibles.end(), greater<ll>()); // 내림차순 정렬
@@ -38,7 +39,6 @@ ll check (ll n,ll m,vector<cl> beers,ll level ) {
 	for (int i = 0; i < n; i++) {
 		sum += possibles[i];
 	}
-	
 
 	return sum;
 
@@ -48,9 +48,9 @@ ll binarySearch(ll n,ll m, ll k, vector<cl> beers,ll left, ll right) {
 	ll ans = MAX_LEVEL;
 	while (left <= right) { 
 		ll mid = (left + right) / 2; // 현재 기준 도수 레벨
-		
+
 		// 마실 수 있는 맥주가 n개조차 되지 않거나 선호도 합보다 작다면 
-		if (check(n, m, beers, mid) < m ) {
+		if (maxPrefSum(n,beers, mid) < m ) {
 			left = mid + 1; //도수레벨을 높힘
 
 		}	
@@ -58,8 +58,6 @@ ll binarySearch(ll n,ll m, ll k, vector<cl> beers,ll left, ll right) {
 			right = mid - 1; // 도수레벨을 낮춤
 			ans = min(ans, mid);                                                                                         
 		}
-		
-		
 
 	}
 
@@ -92,15 +90,15 @@ int main() {
 	
 	cin >> n >> m >> k;
 
-	vector<cl> beers(n);
-
-	for (int i = 0; i < n; i++) {
+	vector<cl> beers(k);
+	
+	for (int i = 0; i < k; i++) {
 		cin >> beers[i].first >> beers[i].second;
 		
 	}
+
 	sort(beers.begin(), beers.end(), cmp); // 도수레벨 기준 오름차순 정렬
 
 	cout << binarySearch(n, m, k, beers, 1, MAX_LEVEL);
-
 
 }
