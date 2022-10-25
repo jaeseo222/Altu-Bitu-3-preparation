@@ -9,44 +9,38 @@ const int INF = 5e6; //최대 n-1개의 간선을 지나게 됨 -> n * (가중�
 
 bool bellmanFord(int n,  vector<tp>& edges) {
  
+    vector<int> dist(n + 1,0);
 
-    vector<int> dist(n + 1, 0);
+    for (int i = 1; i <= n; i++) {
+        bool flag = true;
+        for (int j = 0; j < edges.size(); j++) {
+            //s->d인 간선의 가중치가 w
+            int s = get<0>(edges[j]);
+            int d = get<1>(edges[j]);
+            int w = get<2>(edges[j]);
 
-    //모든 정점에 대해 벨만포드 
-    for (int s = 1; s <= n; s++) {
-        for (int i = 1; i <= n; i++) {
-            bool flag = true;
-            for (int j = 0; j < edges.size(); j++) {
-                //s->d인 간선의 가중치가 w
-                int s = get<0>(edges[j]);
-                int d = get<1>(edges[j]);
-                int w = get<2>(edges[j]);
-             
-                if (dist[s] == INF) { //아직 시작점에서 s로 가는 경로가 발견되지 않았으므로 갱신할 수 없음
-                    continue;
+            int next_weight = dist[s] + w;
+
+
+            if (next_weight < dist[d]) {
+                flag = false;
+
+                dist[d] = next_weight;
+
+                if (i == n) { //n번째 단계에서 최단 거리 테이블 갱신 -> 음의 사이클 발생 확인
+
+                    return false;
+
                 }
-                int next_weight = dist[s] + w;
-           
-
-                if (next_weight < dist[d]) {
-                    flag = false;
-
-                    dist[d] = next_weight;
-
-                    if (i == n) { //n번째 단계에서 최단 거리 테이블 갱신 -> 음의 사이클 발생 확인
-
-                        return false;
-
-                    }
-                }
-            }
-
-            if (flag) {
-                break;
             }
         }
-   
-   
+
+        if (flag) {
+            break;
+        }
+
+
+
     }
    
     return true;
@@ -55,10 +49,14 @@ bool bellmanFord(int n,  vector<tp>& edges) {
 * [1865번 웜홀] 벨만 포드 
 * 
 * 시간이 줄어들면서 출발 위치로 돌아오는 것 = 음의 사이클이 존재. 
-* 특정 정점 하나만 확인하면 해당 정점과 연결되어 있지 않은 노드가 있을때 그 노드의 음수 사이클을 벨만포드 알고리즘으로 발견 할 수 없다
-* => 따라서 모든 정점을 시작점으로 하여 벨만 포드 연산 수행하여 음의 사이클이 발생하는지 확인한다.
+* 벨만포드는 출발점이 특정한 한 점일때 가능한 알고리즘.
+* 그러나 특정 정점 하나만 확인하면 해당 정점과 단절된 노드가 포함된 음수 사이클을 발견할 수 없음.
+* 따라서 1) 모든 정점에 대해서 벨만포드 알고리즘을 돌려서 음수 사이클이 발생하는지 확인 하거나
+* 2) cycle의 형성 유무에 대해서 생각해보는 방법이 있다. 
+* 사실 초깃값을 INF로 설정하는 이유는 단절된 경우의 경로는 배제시키고 , 어떤 지점까지의 거리를 구하기 위해서이다. 
+* 따라서 만약 단순 그래프에서 사이클 유무만 파악할 때는 dist[]초기화를 어떤 값으로 해주어도 상관이 없다.
+* 왜냐하면 거리를 구하는 것이 목적이 아닌, 음의 사이클 존재여부만 판별하고 싶기 때문이다.
 * ! 무방향 그래프일때는 방향 그래프 두개로 쪼개서 생각하기!
-* 
 */
 int main() {
     int tc, n, m, w, s, e, t;
@@ -99,8 +97,6 @@ int main() {
             cout << "YES\n";
 
         }
-    
-
-   
+ 
     }
 }
