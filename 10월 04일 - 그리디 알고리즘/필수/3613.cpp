@@ -1,4 +1,3 @@
-#include <cctype> //isupper(), islower(), toupper(), tolower()
 #include <iostream>
 using namespace std;
 
@@ -8,62 +7,42 @@ using namespace std;
 
     C++ : 소문자만 사용한다. 단어와 단어를 구분하기 위해서 밑줄('_')을 이용한다.
         ex) c_identifier, long_and_mnemonic_identifier, name, b_a_e_k_j_o_o_n
-
-
-    ** 예외처리가 많은 문제 **
-    <에러인 경우>
-    1) 첫 글자가 소문자가 아닌 경우 (대문자나 _로 시작하는 경우)
-    2) 마지막 문자가 _인 경우
-    3) 대문자와 _가 같이 나오는 경우
-    4) _가 연속으로 나오는 경우
-
-    <고려사항>
-    ** 변수명이 소문자로 이루어진 "한단어"인 경우, java, c++ 모두 해당되므로 그대로 출력
 */
 
-bool capital = false, underbar = false;
+/**
+ * 1. 입력으로 주어진 변수가 C++ 형식에도 맞고, JAVA 형식에도 맞을 수 있음 (ex. name)
+ * 2. "Error!"인 경우 (C++)
+ *    2-1. 언더바('_')로 시작하거나, 끝나는 변수
+ *    2-2. 언더바('_')가 연속해서 등장하는 변수
+ *    2-3. 대문자가 등장하는 변수
+ * 3. "Error!"인 경우 (Java)
+ *    3-1. 대문자로 시작하는 변수
+ *    3-2. 언더바('_')가 등장하는 변수
+ */
 
-bool isError(string &str) {
-    // 1번 조건 체크 - 첫 글자가 소문자가 아닌 경우
-    if (!islower(str[0])) {
-        return true;
+bool isCpp(string str) { // c++ 형식인가?
+    for (int i = 0; i < str.size(); i++) {
+        if (isupper(str[i])) //대문자가 있으면 안됨
+            return false;
+        if (str[i] == '_' &&
+            (i == 0 || i == str.size() - 1 || str[i - 1] == '_')) //첫 or 마지막 글자가 '_' 또는 '_'가 연속 등장
+            return false;
     }
-
-    // 2번 조건 체크 - 마지막 문자가 _인 경우
-    if (str[str.length() - 1] == '_') {
-        return true;
-    }
-
-    // 3번 조건 체크 - 대문자와 _가 같이 나오는 경우
-    // 4번 조건 체크 - _가 연속으로 나오는 경우
-    for (int i = 1; i < str.length(); i++) { // 1번 조건을 체크해뒀기 때문에 1부터 시작해도 된다.
-        if (isupper(str[i])) {
-            capital = true;
-        }
-        if (str[i] == '_') {
-            underbar = true;
-            if (str[i - 1] == '_') { // 4번 조건
-                return true;
-            }
-        }
-    }
-    if (capital && underbar) { // 3번 조건
-        return true;
-    }
-
-    return false;
+    return true;
 }
 
-string changeToCPP(string &str) {
+bool isJava(string str) {                                     // java 형식인가?
+    return !isupper(str[0]) && str.find('_') == string::npos; //첫 글자가 대문자거나, '_'가 있으면 안됨
+}
+
+string changeToCpp(string &str) {
     string result = "";
 
     for (int i = 0; i < str.length(); i++) {
-        if (islower(str[i])) {
-            result += str[i];
-        } else {
+        if (isupper(str[i])) { // 대문자라면 앞에 _ 삽입
             result += '_';
-            result += tolower(str[i]);
         }
+        result += tolower(str[i]); //소문자로 추가
     }
 
     return result;
@@ -71,14 +50,11 @@ string changeToCPP(string &str) {
 
 string changeToJava(string &str) {
     string result = "";
-    bool checkUnderbar = false;
 
     for (int i = 0; i < str.length(); i++) {
         if (str[i] == '_') {
-            checkUnderbar = true;
-        } else if (checkUnderbar) { //대문자로 바꾸어 넣기
-            result += toupper(str[i]);
-            checkUnderbar = false;
+            result += toupper(str[i + 1]); // _ 다음 문자를 대문자로 바꿈
+            i++;
         } else {
             result += str[i];
         }
@@ -91,14 +67,15 @@ int main() {
     string str;
     cin >> str;
 
-    if (isError(str)) {
-        cout << "Error!\n";
-    } else if (capital) { //입력받은 문자열이 Java
-        cout << changeToCPP(str) << '\n';
-    } else if (underbar) { //입력받은 문자열이 C++
-        cout << changeToJava(str) << '\n';
-    } else {
-        //변수명이 소문자로 이루어진 "한단어"인 경우
-        cout << str << '\n';
-    }
+    bool is_cpp = isCpp(str);
+    bool is_java = isJava(str);
+
+    if (is_cpp && is_java) { //두 형식에 모두 부합하면 그냥 출력
+        cout << str;
+    } else if (is_cpp) { // c++ 형식이라면 java로 바꿔서 출력
+        cout << changeToJava(str);
+    } else if (is_java) { // java 형식이라면 c++로 바꿔서 출력
+        cout << changeToCpp(str);
+    } else //둘 다 아니라면 에러
+        cout << "Error!";
 }
