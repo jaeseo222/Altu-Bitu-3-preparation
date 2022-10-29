@@ -1,17 +1,24 @@
 ﻿#include <iostream>
-#include <algorithm>
 #include <vector>
 
 using namespace std;
 
-void cut(int target, vector<int>& arr) {
-	auto arr_left = lower_bound(arr.begin(), arr.end(), target);
-	if (arr_left != arr.end()) {
-		*arr_left = target;
+int cut(int n, vector<int>& twist) {
+	vector<int> line;
+
+	for (int i = 0; i < n; i++) {
+		int target = twist[i];
+
+		auto line_left = lower_bound(line.begin(), line.end(), target);
+		if (line_left != line.end()) {
+			*line_left = target;
+		}
+		else {
+			line.push_back(target);
+		}
 	}
-	else {
-		arr.push_back(target);
-	}
+
+	return n - line.size();
 }
 
 /*
@@ -38,7 +45,6 @@ void cut(int target, vector<int>& arr) {
 
 int main() {
 	int n;
-	vector<int> line;
 
 	// 입력
 	cin >> n;
@@ -47,11 +53,6 @@ int main() {
 		cin >> twist[i];
 	}
 
-	// 계산
-	for (int i = 0; i < n; i++) {
-		cut(twist[i], line);
-	}
-
-	// 출력
-	cout << n - line.size();
+	// 계산 & 출력
+	cout << cut(n, twist);
 }
