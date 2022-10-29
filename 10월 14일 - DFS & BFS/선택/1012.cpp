@@ -17,12 +17,14 @@ void bfs(int x, int y, int n, int m, vector<vector<bool>> &board) {
 		for (int i = 0; i < 4; i++) {
 			int nx = x + dx[i];
 			int ny = y + dy[i];
-			if ((nx >= 0 && nx < n) && (ny >= 0 && ny < m)) {
-				if (board[nx][ny]) {
-					board[nx][ny] = false;
-					q.push(make_pair( nx, ny ));
-				}
+			if (nx < 0 || nx >= n || ny < 0 || ny >= m) {
+				continue;
 			}
+			if (board[nx][ny]) {
+				board[nx][ny] = false;
+				q.push(make_pair( nx, ny ));
+			}
+			
 		}
 	}
 }
@@ -47,11 +49,8 @@ int main(void) {
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < m; j++) {
 				if (board[i][j]) {
-
 					cnt++;
 					bfs(i, j, n, m, board);
-					
-
 				}
 			}
 		}
