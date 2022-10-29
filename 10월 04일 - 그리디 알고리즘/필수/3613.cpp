@@ -22,11 +22,13 @@ using namespace std;
 
 bool isCpp(string str) { // c++ 형식인가?
     for (int i = 0; i < str.size(); i++) {
-        if (isupper(str[i])) //대문자가 있으면 안됨
+        if (isupper(str[i])) { //대문자가 있으면 안됨
             return false;
+        }
         if (str[i] == '_' &&
-            (i == 0 || i == str.size() - 1 || str[i - 1] == '_')) //첫 or 마지막 글자가 '_' 또는 '_'가 연속 등장
+            (i == 0 || i == str.size() - 1 || str[i - 1] == '_')) { //첫 or 마지막 글자가 '_' 또는 '_'가 연속 등장
             return false;
+        }
     }
     return true;
 }
