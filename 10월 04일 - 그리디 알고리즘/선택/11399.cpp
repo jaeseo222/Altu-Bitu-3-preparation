@@ -6,10 +6,10 @@
 
 using namespace std;
 
-vector<int> withdraw_time;
+
 
 //첫번째 풀이 -> 시간복잡도 : O(n^2)
-int calcTime(int n) {
+int calcTime(vector<int> withdraw_time, int n) {
     int sum = 0;
     for (int i = 0; i < n; i++) { //i번째 사람의 대기시간은 0, 1,...,i - 1, i번째 사람의 인출 시간은 합한 값
         for (int j = 0; j <= i; j++)
@@ -19,7 +19,7 @@ int calcTime(int n) {
 }
 
 //두번째 풀이 -> 시간복잡도 : O(n)
-int calcTimeAdv(int n) {
+int calcTimeAdv(vector<int> withdraw_time,int n) {
     int sum = 0;
     for (int i = 0; i < n; i++)
         sum += (withdraw_time[i] * (n - i));
@@ -62,7 +62,7 @@ ex)  1*5 + 2*4 + 3*3 + 3*2 + 4*1
  */
 int main() {
     int n;
-
+    vector<int> withdraw_time;    
     //입력
     cin >> n;
     withdraw_time.assign(n, 0);
@@ -73,5 +73,5 @@ int main() {
     sort(withdraw_time.begin(), withdraw_time.end());
 
     //출력
-    cout << calcTimeAdv(n);
+    cout << calcTimeAdv(withdraw_time,n);
 }
