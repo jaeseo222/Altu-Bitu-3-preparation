@@ -1,6 +1,6 @@
-.
 #include <vector>
 #include <queue>
+
 
 using namespace std;
 
@@ -11,8 +11,7 @@ int dc[4]={0,0,-1,1};
 
 
 
-//(r,c)로부터 같은 영역 마킹
-
+//(r,c)로부터 상하좌우로 뻗어나가며 같은 색상을 지닌곳을 방문체크
 int bfs(vector<vector<int>> & picture,int m,int n,int r,int c,int color){
     
     
@@ -21,6 +20,7 @@ int bfs(vector<vector<int>> & picture,int m,int n,int r,int c,int color){
     queue<ci> q;
     
     q.push({r,c});
+    picture[r][c]=0;
     
     while(!q.empty()){
         
@@ -28,26 +28,31 @@ int bfs(vector<vector<int>> & picture,int m,int n,int r,int c,int color){
         int cr = q.front().first;
         int cc = q.front().second; 
         
-        picture[cr][cc]=0; //방문체크
         q.pop();
-            
+       
+        size_of_area++; // 같은 영역 수 증가
+
+        // 상하좌우 탐색
+        for(int i=0;i<4;i++){
+            int nr = cr + dr[i];
+            int nc = cc + dc[i];
             
             //범위를 벗어나거나 색깔이 다르면
-        if(cr<0 || cr>=n || cc<0 || cr >=n || picture[cr][cc]!=color)
-            continue;
+            if(nr<0 || nr>=n || nc<0 || nr >=n || picture[nr][nc]!=color)
+                continue;
+                
+    
         
+            q.push({nr,nc});
+        }
         
-        
-        size_of_area++; // 같은 영역 수 
-        
-        q.push({cr,cc});
+       
     }
     
     return size_of_area;
     
 }
 
-// 전역 변수를 정의할 경우 함수 내에 초기화 코드를 꼭 작성해주세요.
 vector<int> solution(int m, int n, vector<vector<int>> picture) {
     int number_of_area = 0;
     int max_size_of_one_area = 0;
@@ -55,11 +60,14 @@ vector<int> solution(int m, int n, vector<vector<int>> picture) {
     
     for(int i=0;i<m;i++){
         for (int j=0;j<n;j++){
-            if(picture[m][n]!=0){
+            if(picture[i][j]!=0){
+   
                 int size = bfs(picture,m,n,i,j,picture[i][j]);
                 max_size_of_one_area=max(max_size_of_one_area,size); //최댓값 갱신
                 number_of_area++; //영역 수 증가 
                 
+
+                    
             }
                 
         }
