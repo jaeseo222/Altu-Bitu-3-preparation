@@ -6,22 +6,22 @@
 using namespace std;
 
 typedef long long ll;
-typedef pair<ll, ll> cl; // 맥주의 선호도, 도수 레벨
+typedef pair<int, int> ci; // 맥주의 선호도, 도수 레벨
 
 const long long MAX_LEVEL = pow(2,31);
 
 
-bool cmp(cl beer1, cl beer2) {
+bool cmp(ci beer1, ci beer2) {
 
 	return beer1.second < beer2.second; // 도수레벨이 높은 순서대로
 }
 
 // 간레벨이 level일때 가능한 선호도의 최댓값
-ll maxPrefSum (ll n,vector<cl> beers,ll level ) {
+ll maxPrefSum (int n,vector<cl> beers,int level ) {
 
 
 	// 도수가 간 레벨 이하인 맥주들의 선호도 구하기
-	vector<ll> possibles;
+	vector<int> possibles;
 
 	for (int i = 0; i < beers.size(); i++) {
 
@@ -48,9 +48,9 @@ ll maxPrefSum (ll n,vector<cl> beers,ll level ) {
 	return sum;
 
 }
-ll binarySearch(ll n,ll m, ll k, vector<cl> beers,ll left, ll right) {
+ll binarySearch(int n,int m, int k, vector<cl> beers,ll left, ll right) {
 
-	ll ans = MAX_LEVEL;
+	ll ans = -1;
 	while (left <= right) { 
 		ll mid = (left + right) / 2; // 현재 기준 도수 레벨
 
@@ -61,12 +61,12 @@ ll binarySearch(ll n,ll m, ll k, vector<cl> beers,ll left, ll right) {
 		}	
 		else {// 선호도 합보다 크거나 같다면 
 			right = mid - 1; // 도수레벨을 낮춤
-			ans = min(ans, mid);                                                                                         
+			ans = mid;                                                                                      
 		}
 
 	}
 
-	return ans == MAX_LEVEL ? -1 : ans;
+	return ans;
 }
 
 
@@ -81,8 +81,9 @@ ll binarySearch(ll n,ll m, ll k, vector<cl> beers,ll left, ll right) {
 * 2-2. 선호도 합이 충분하다면, 도수 레벨을 낮추어 마실 수 있는 맥주 개수를 줄인다.
 * 이때, 조건(맥주 n개의 선호도 합 m 이상)을 만족시키는 경우의 수를 찾았더라도 바로 탐색을 종료하지 않는다.
 * 왜냐하면 조건을 충족하는 레벨의 "최솟값" 을 구해야하기 때문이다.
-* 
-* !주의! 선호도 합, 도수레벨은 int형 범위를 초과하므로 long long 자료형을 사용해야함에 유의. 
+*
+* !주의! 선호도 합, 도수레벨 자체는 int 형 범위(-2^31 ~ 2^31) 이내이나 이분탐색과정에서 left+right값이 
+* int형 범위를 초과할 경우가 생기니 long long 자료형을 사용해야함에 유의
 * 
 */
 
@@ -91,11 +92,11 @@ int main() {
 	ios::sync_with_stdio(false);
 	cin.tie(0); cout.tie(0);
 
-	ll n, m, k; // 축제 기간, 선호도 합, 맥주 종류 수
+	int n, m, k; // 축제 기간, 선호도 합, 맥주 종류 수
 	
 	cin >> n >> m >> k;
 
-	vector<cl> beers(k);
+	vector<ci> beers(k);
 	
 	for (int i = 0; i < k; i++) {
 		cin >> beers[i].first >> beers[i].second;
