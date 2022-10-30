@@ -6,13 +6,14 @@ using namespace std;
 
 typedef pair<int,int> ci;
 
-int dr[4]={-1,1,0,0};
-int dc[4]={0,0,-1,1};
 
 
 //(r,c)로부터 상하좌우로 뻗어나가며 같은 색상을 지닌곳을 방문체크
 int bfs(vector<vector<int>> & picture,int m,int n,int r,int c,int color){
     
+    int dr[4]={-1,1,0,0};
+    int dc[4]={0,0,-1,1};
+
     
     int cnt=0;
     
