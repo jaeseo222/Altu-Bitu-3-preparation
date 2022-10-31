@@ -1,4 +1,3 @@
-
 #include <iostream> 
 #include <algorithm> 
 
@@ -10,21 +9,17 @@ typedef struct {
     ball;
 } Data;
 
-bool sol(string s, string num, int qst, int strike, int ball) {
-    int strike1 = 0, ball1 = 0;
-    for (int i = 0; i < 3; i ++) {
-        if (s[i] == '0') { // 하나라도 0이 있으면
-            return false;
+bool checkStrikeBall(string s1, string s2, int qst, int strike, int ball) {
+    int strike_cnt = 0, ball_cnt = 0;
+    for (int i = 0; i < 3; i++) {
+        if (s1[i] == s2[i]) { //위치+수 정확히 일치 -> 스트라이크
+            strike_cnt++;
         }
-        for (int j = 0; j < 3; j ++) {
-            if (i == j && s[i] == num[j]) {
-                strike1 ++;
-            } else if (s[i] == num[j]) {
-                ball1 ++;
-            }
+        else if (s1.find(s2[i]) != s1.npos) { //위치 다른데 수가 존재 -> 볼
+            ball_cnt++;
         }
     }
-    if (strike != strike1 || ball != ball1) {
+    if (strike != strike_cnt || ball != ball_cnt) {
         return false;
     }
     return true;
@@ -32,12 +27,15 @@ bool sol(string s, string num, int qst, int strike, int ball) {
 
 bool check(int n, int t, Data arr[]) {
     string s = to_string(t); // 숫자 t를 문자열 s로 바꿈
+    if (s[0] == '0' || s[1] == '0' || s[2] == '0') { //0이 하나라도 있다면
+        return false;
+    }
     if (s[0] == s[1] || s[1] == s[2] || s[0] == s[2]) { // 서로 같은 수 하나라도 있다면
         return false;
     }
     for (int qst = 0; qst < n; qst ++) {
         string num = to_string(arr[qst].num);
-        if (!sol(s, num, qst, arr[qst].strike, arr[qst].ball)) {
+        if (!checkStrikeBall(s, num, qst, arr[qst].strike, arr[qst].ball)) {
             return false;
         }
     }
