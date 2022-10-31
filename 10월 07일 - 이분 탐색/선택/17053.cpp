@@ -32,7 +32,7 @@ int maxPrefSum(int n, vector<ci>& beers, int level) {
 
 
 	// 상위 n개의 선호도 합 계산 
-	sort(possibles.begin(), possibles.end(), greater<ll>()); // 내림차순 정렬
+	sort(possibles.begin(), possibles.end(), greater<>()); // 내림차순 정렬
 
 	int sum = 0; // 선호도 합
 	for (int i = 0; i < n; i++) {
