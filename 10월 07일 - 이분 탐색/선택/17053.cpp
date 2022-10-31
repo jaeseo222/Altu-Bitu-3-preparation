@@ -11,7 +11,7 @@ typedef pair<int, int> ci; // 맥주의 선호도, 도수 레벨
 
 
 // 간레벨이 level일때 가능한 선호도의 최댓값
-ll maxPrefSum(int n, vector<ci>& beers, int level) {
+int maxPrefSum(int n, vector<ci>& beers, int level) {
 
 
 	// 도수가 간 레벨 이하인 맥주들의 선호도 구하기
@@ -34,7 +34,7 @@ ll maxPrefSum(int n, vector<ci>& beers, int level) {
 	// 상위 n개의 선호도 합 계산 
 	sort(possibles.begin(), possibles.end(), greater<ll>()); // 내림차순 정렬
 
-	ll sum = 0; // 선호도 합
+	int sum = 0; // 선호도 합
 	for (int i = 0; i < n; i++) {
 		sum += possibles[i];
 	}
