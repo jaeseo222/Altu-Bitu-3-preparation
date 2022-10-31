@@ -10,11 +10,11 @@ int calMax(vector<int> &food, int k, int n, int d ,int c) {
 	vector<int> check(d + 1, 0);
 
 	//초기화
-	//쿠폰으로 먹을 수 있는 초밥
+	//1. 쿠폰으로 먹을 수 있는 초밥
 	check[c]++;
 	count++;
 	
-	//연속해서 먹을 수 있는 초밥
+	//2. 연속해서 먹을 수 있는 초밥
 	for (int i = 0; i < k; i++) {
 		check[food[i]]++;
 		if (check[food[i]] == 1) {
