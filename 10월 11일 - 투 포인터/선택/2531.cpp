@@ -9,29 +9,29 @@ int calMax(vector<int> &food, int k, int n, int d ,int c) {
 	int result = 0, count = 0;
 	vector<int> check(d + 1, 0);
 
-	//ÃÊ±âÈ­
-	//¿¬¼ÓÇØ¼­ ¸ÔÀ» ¼ö ÀÖ´Â ÃÊ¹ä
+	//ì´ˆê¸°í™”
+	//ì¿ í°ìœ¼ë¡œ ë¨¹ì„ ìˆ˜ ìˆëŠ” ì´ˆë°¥
+	check[c]++;
+	count++;
+	
+	//ì—°ì†í•´ì„œ ë¨¹ì„ ìˆ˜ ìˆëŠ” ì´ˆë°¥
 	for (int i = 0; i < k; i++) {
 		check[food[i]]++;
 		if (check[food[i]] == 1) {
 			count++;
 		}
 	}
-	//ÄíÆùÀ¸·Î ¸ÔÀ» ¼ö ÀÖ´Â ÃÊ¹ä
-	check[c]++;
-	//°ªÀÌ 1 ÀÌ¶ó¸é ¿ø·¡ ¸ÔÁö ¸øÇß´ø ÃÊ¹äÀ» Ãß°¡·Î ¸Ô°Ô µÇ´Â °ÍÀÌ¹Ç·Î count ++
-	if (check[c] == 1) {
-		count++;
-	}
 
-	//½½¶óÀÌµù À©µµ¿ì
+	
+
+	//ìŠ¬ë¼ì´ë”© ìœˆë„ìš°
 	while (left < n) {
-		//left Á¢½Ã ¼±ÅÃ Á¦°Å
+		//left ì ‘ì‹œ ì„ íƒ ì œê±°
 		check[food[left]]--;
 		if (check[food[left++]] == 0) {
 			count--;
 		}
-		//right+1 Á¢½Ã »õ·Î ¼±ÅÃ
+		//right+1 ì ‘ì‹œ ìƒˆë¡œ ì„ íƒ
 		right = (right + 1) % n;
 		check[food[right]]++;
 		if (check[food[right]] == 1) {
