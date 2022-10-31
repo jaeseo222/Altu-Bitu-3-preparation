@@ -8,7 +8,9 @@ int snackNum(vector<int> snack_len, int len) {
     int cnt = 0; //만들 수 있는 과자조각 수
 
     for (int i = 0; i < snack_len.size(); i++) {
-        if (snack_len[i] < len) break; // len보다 과자 길이가 작아지면 탈출
+        if (snack_len[i] < len) { // len보다 과자 길이가 작아지면 탈출
+            break;
+        }
         cnt += snack_len[i] / len; 
     }
     return cnt;
