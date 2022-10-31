@@ -72,3 +72,14 @@ vector<int> solution(int m, int n, vector<vector<int>> picture) {
     answer[1] = max_size_of_one_area;
     return answer;
 }
+
+int main() {
+    vector<vector<int>> picture = { {1, 1, 1, 0},{1, 2, 2, 0},{1, 0, 0, 1},{0, 0, 0, 1},{0, 0, 0, 3},{0, 0, 0, 3}};
+  
+    int m=6, n = 4;
+
+    auto ans = solution(m,n,picture);
+
+    cout << ans[0] << " " << ans[1];
+    return 0;
+}
