@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <math.h>
+
 
 using namespace std;
 
@@ -9,12 +9,6 @@ typedef long long ll;
 typedef pair<int, int> ci; // 맥주의 선호도, 도수 레벨
 
 
-
-
-bool cmp(ci beer1, ci beer2) {
-
-	return beer1.second < beer2.second; // 도수레벨이 높은 순서대로
-}
 
 // 간레벨이 level일때 가능한 선호도의 최댓값
 ll maxPrefSum(int n, vector<ci>& beers, int level) {
@@ -25,10 +19,10 @@ ll maxPrefSum(int n, vector<ci>& beers, int level) {
 
 	for (int i = 0; i < beers.size(); i++) {
 
-		if (beers[i].second > level) {
+		if (beers[i].first > level) {
 			break;
 		}
-		possibles.push_back(beers[i].first);
+		possibles.push_back(beers[i].second);
 
 	}
 
@@ -98,15 +92,15 @@ int main() {
 
 	vector<ci> beers(k);
 
-	int max_level = -1;
+	int  max_level = -1;
 
 	for (int i = 0; i < k; i++) {
-		cin >> beers[i].first >> beers[i].second;
-		max_level = max(beers[i].first, MAX_LEVEL);
+		cin >> beers[i].second >> beers[i].first; // first : 도수레벨 , second : 선호도 저장
+		max_level = max(beers[i].first, max_level);
 
 	}
 
-	sort(beers.begin(), beers.end(), cmp); // 도수레벨 기준 오름차순 정렬
+	sort(beers.begin(), beers.end()); // 도수레벨 기준 오름차순 정렬 
 	cout << binarySearch(n, m, k, beers, 1, max_level);
 
 }
