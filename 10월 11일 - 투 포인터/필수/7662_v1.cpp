@@ -36,7 +36,7 @@ int main() {
             switch(op) {
                 case 'I':
                     max_queue.push(x);
-                    min_queue.push(x); //최솟값 찾을 수 있도록 부호를 바꾸어 저장
+                    min_queue.push(x);
                     remained[x]++;  //원소 개수 1 증가
                     break;
 
@@ -58,11 +58,13 @@ int main() {
                             max_queue.pop();
                         }
                     }
+                    break;
             }
         }
         //이미 삭제된 값은 pop 하기
         popMin(min_queue, remained);
         popMax(max_queue, remained);
+        
         if(max_queue.empty()) {
             cout<<"EMPTY\n";
         } else {

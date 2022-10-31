@@ -44,9 +44,11 @@ int main() {
         }
 
         //출력
-        if (ms.empty())
+        if (ms.empty()) {
             cout << "EMPTY\n";
-        else
+        }
+        else{
             cout << *(--ms.end()) << ' ' << *ms.begin() << '\n';
+        }
     }
 }
