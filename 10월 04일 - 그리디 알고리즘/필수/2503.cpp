@@ -1,5 +1,5 @@
-#include <iostream> 
-#include <algorithm> 
+#include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -9,7 +9,7 @@ typedef struct {
     ball;
 } Data;
 
-bool checkStrikeBall(string s1, string s2, int qst, int strike, int ball) {
+bool checkStrikeBall(string s1, string s2, int strike, int ball) {
     int strike_cnt = 0, ball_cnt = 0;
     for (int i = 0; i < 3; i++) {
         if (s1[i] == s2[i]) { //위치+수 정확히 일치 -> 스트라이크
@@ -35,7 +35,7 @@ bool check(int n, int t, Data arr[]) {
     }
     for (int qst = 0; qst < n; qst ++) {
         string num = to_string(arr[qst].num);
-        if (!checkStrikeBall(s, num, qst, arr[qst].strike, arr[qst].ball)) {
+        if (!checkStrikeBall(s, num, arr[qst].strike, arr[qst].ball)) {
             return false;
         }
     }
