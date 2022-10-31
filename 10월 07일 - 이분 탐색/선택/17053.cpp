@@ -8,7 +8,7 @@ using namespace std;
 typedef long long ll;
 typedef pair<int, int> ci; // 맥주의 선호도, 도수 레벨
 
-const long long MAX_LEVEL = pow(2, 31);
+
 
 
 bool cmp(ci beer1, ci beer2) {
@@ -17,7 +17,7 @@ bool cmp(ci beer1, ci beer2) {
 }
 
 // 간레벨이 level일때 가능한 선호도의 최댓값
-ll maxPrefSum(int n, vector<ci> beers, int level) {
+ll maxPrefSum(int n, vector<ci>& beers, int level) {
 
 
 	// 도수가 간 레벨 이하인 맥주들의 선호도 구하기
@@ -98,12 +98,15 @@ int main() {
 
 	vector<ci> beers(k);
 
+	int max_level = -1;
+
 	for (int i = 0; i < k; i++) {
 		cin >> beers[i].first >> beers[i].second;
+		max_level = max(beers[i].first, MAX_LEVEL);
 
 	}
 
 	sort(beers.begin(), beers.end(), cmp); // 도수레벨 기준 오름차순 정렬
-	cout << binarySearch(n, m, k, beers, 1, MAX_LEVEL);
+	cout << binarySearch(n, m, k, beers, 1, max_level);
 
 }
