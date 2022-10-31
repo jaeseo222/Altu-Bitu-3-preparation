@@ -3,10 +3,7 @@
 
 
 using namespace std;
-
 typedef pair<int,int> ci;
-
-
 
 //(r,c)로부터 상하좌우로 뻗어나가며 같은 색상을 지닌곳을 방문체크
 int bfs(vector<vector<int>> & picture,int m,int n,int r,int c,int color){
@@ -73,6 +70,7 @@ vector<int> solution(int m, int n, vector<vector<int>> picture) {
     return answer;
 }
 
+// 프로그래머스 예제 테스트 할 수 있는 메인 함수 
 int main() {
     vector<vector<int>> picture = { {1, 1, 1, 0},{1, 2, 2, 0},{1, 0, 0, 1},{0, 0, 0, 1},{0, 0, 0, 3},{0, 0, 0, 3}};
   
