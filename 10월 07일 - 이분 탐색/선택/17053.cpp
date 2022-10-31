@@ -32,7 +32,7 @@ int maxPrefSum(int n, vector<ci>& beers, int level) {
 
 
 	// 상위 n개의 선호도 합 계산 
-	sort(possibles.begin(), possibles.end(), greater<>()); // 내림차순 정렬
+	sort(possibles.begin(), possibles.end(), greater<ll>()); // 내림차순 정렬
 
 	int sum = 0; // 선호도 합
 	for (int i = 0; i < n; i++) {
@@ -92,15 +92,13 @@ int main() {
 
 	vector<ci> beers(k);
 
-	int  max_level = -1;
-
 	for (int i = 0; i < k; i++) {
-		cin >> beers[i].second >> beers[i].first; // first : 도수레벨 , second : 선호도 저장
-		max_level = max(beers[i].first, max_level);
+		cin >> beers[i].second >> beers[i].first; // 선호도 도수레벨
+
 
 	}
 
-	sort(beers.begin(), beers.end()); // 도수레벨 기준 오름차순 정렬 
-	cout << binarySearch(n, m, k, beers, 1, max_level);
+	sort(beers.begin(), beers.end()); // 도수레벨 기준 오름차순 정렬
+	cout << binarySearch(n, m, k, beers, 1, beers[k-1].first);
 
 }
