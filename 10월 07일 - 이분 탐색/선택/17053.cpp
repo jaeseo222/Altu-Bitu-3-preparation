@@ -9,7 +9,6 @@ typedef long long ll;
 typedef pair<int, int> ci; // 맥주의 선호도, 도수 레벨
 
 
-
 // 간레벨이 level일때 가능한 선호도의 최댓값
 int maxPrefSum(int n, vector<ci>& beers, int level) {
 
@@ -23,16 +22,14 @@ int maxPrefSum(int n, vector<ci>& beers, int level) {
 			break;
 		}
 		possibles.push_back(beers[i].second);
-
 	}
 
 	if (possibles.size() < n) {
 		return -1;
 	}
 
-
 	// 상위 n개의 선호도 합 계산 
-	sort(possibles.begin(), possibles.end(), greater<ll>()); // 내림차순 정렬
+	sort(possibles.begin(), possibles.end(), greater<>()); // 내림차순 정렬
 
 	int sum = 0; // 선호도 합
 	for (int i = 0; i < n; i++) {
@@ -57,7 +54,6 @@ ll binarySearch(int n, int m, int k, vector<ci>& beers, ll left, ll right) {
 			right = mid - 1; // 도수레벨을 낮춤
 			ans = mid;
 		}
-
 	}
 
 	return ans;
@@ -93,9 +89,7 @@ int main() {
 	vector<ci> beers(k);
 
 	for (int i = 0; i < k; i++) {
-		cin >> beers[i].second >> beers[i].first; // 선호도 도수레벨
-
-
+		cin >> beers[i].second >> beers[i].first; // first: 도수레벨, second : 선호도 
 	}
 
 	sort(beers.begin(), beers.end()); // 도수레벨 기준 오름차순 정렬
