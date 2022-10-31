@@ -39,7 +39,7 @@ int maxPrefSum(int n, vector<ci>& beers, int level) {
 	return sum;
 
 }
-ll binarySearch(int n, int m, int k, vector<ci>& beers, ll left, ll right) {
+ll binarySearch(int n, int m, vector<ci>& beers, ll left, ll right) {
 
 	ll ans = -1;
 	while (left <= right) {
@@ -93,6 +93,6 @@ int main() {
 	}
 
 	sort(beers.begin(), beers.end()); // 도수레벨 기준 오름차순 정렬
-	cout << binarySearch(n, m, k, beers, 1, beers[k-1].first);
+	cout << binarySearch(n, m, beers, 1, beers[k-1].first);
 
 }
