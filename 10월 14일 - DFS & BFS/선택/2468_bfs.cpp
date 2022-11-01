@@ -5,7 +5,7 @@
 using namespace std;
 
 //높이가 heigt이하인 지점이 물에 잠길때의 bfs함수: queue 이용
-void bfs(int r, int c, int height, int n, vector<vector<int>> board, vector<vector<bool>>& visit) {
+void bfs(int r, int c, int height, int n, vector<vector<int>>& board, vector<vector<bool>>& visit) {
     queue<pair<int,int>> q;
     int dr[4]={-1, 0, 1, 0};
     int dc[4]={0, -1, 0, 1};
@@ -34,7 +34,7 @@ void bfs(int r, int c, int height, int n, vector<vector<int>> board, vector<vect
 }
 
 //물에 잠기지 않는 영역의 최대 개수를 계산하는 함수
-int countArea(int n, vector<vector<int>> board, int max_height) { 
+int countArea(int n, vector<vector<int>>& board, int max_height) { 
     int max_cnt = 1; //물에 잠기지 않는 영역의 최대 개수
 
     for (int height = 1; height <= max_height - 1; height++) { //잠기는 높이를 변화시킨다
