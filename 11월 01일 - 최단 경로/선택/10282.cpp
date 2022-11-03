@@ -24,8 +24,9 @@ ci dijkstra(int vertex, int start, vector<vector<ci>>& graph) {
         int weight = pq.top().first;
         int node = pq.top().second;
         pq.pop();
-        if (weight > dist[node]) // 이미 확인한 정점
+        if (weight > dist[node]) {// 이미 확인한 정점
             continue;
+        }
         cnt++; // 감염된 컴퓨터 증가
         time = weight; // 마지막으로 감염되는 컴퓨터까지의 최단 거리(시간)
         for (int i = 0; i < graph[node].size(); i++) {
