@@ -56,6 +56,7 @@ int solution(int n, int s, int a, int b, vector<vector<int>> fares) {
  * 2. n개의 지점에 대해 n번 지점까지 합승을 하고 각자의 집으로 가는 최단거리 계산
  */
 
+ //프로그래머스 예제 테스트할 수 있는 메인함수
 int main() {
     vector<vector<int>> fares = { {4, 1, 10},
                                  {3, 5, 24},
