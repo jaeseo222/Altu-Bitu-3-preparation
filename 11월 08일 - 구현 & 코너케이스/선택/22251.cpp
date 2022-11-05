@@ -35,7 +35,9 @@ int solution(int n, int k, int p, int x) {
 			continue;
 		}
 		int diff = calcDiff(start_number, i, k);
-		if (diff > p || diff == 0)continue;//다른 비트의 개수가 p보다 크거나 0이면 조건에 맞지 않으므로 넘어가기
+		if (diff > p || diff == 0){
+			continue;//다른 비트의 개수가 p보다 크거나 0이면 조건에 맞지 않으므로 넘어가기
+		}
 		result++;
 	}
 
