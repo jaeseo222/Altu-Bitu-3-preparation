@@ -4,6 +4,10 @@
 
 using namespace std;
 
+/*
+입력 범위가 작으므로, 사탕을 전부 바꿔보며 계산하자
+*/
+
 int n;
 vector<string> arr;
 int dr[2] = {1, 0};
@@ -11,14 +15,14 @@ int dc[2] = {0, 1};
 
 int countCandy(int row, int col, int dir) {
     int result = 0, cnt = 0;
-    char cur = ' ';
+    char prev = ' ';
     for (int i = 0; i < n; i++) {
-        if (cur == arr[row][col]) { //연속된 사탕
+        if (prev == arr[row][col]) { //연속된 사탕
             cnt++;
             result = max(result, cnt);
         } else { //불연속
             cnt = 1;
-            cur = arr[row][col];
+            prev = arr[row][col];
         }
         row += dr[dir];
         col += dc[dir];
@@ -35,6 +39,19 @@ int findCandy() {
     return result;
 }
 
+int switchCandy(int row, int col, char candy) {
+    int result = 0;
+    for (int i = 0; i < 2; i++) {
+        int nr = row + dr[i], nc = col + dc[i];
+        if (nr < n && nc < n && candy != arr[nr][nc]) {
+            swap(arr[row][col], arr[nr][nc]);
+            result = max(result, findCandy());
+            swap(arr[row][col], arr[nr][nc]);
+        }
+    }
+    return result;
+}
+
 int main() {
     // 입력
     cin >> n;
@@ -43,19 +60,10 @@ int main() {
         cin >> arr[i];
     }
 
-    // swap 해서 사탕 체크
     int result = 0;
     for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n - 1; j++) { // j+1과 swap해야 하기 때문
-            //좌우
-            swap(arr[i][j], arr[i][j + 1]);
-            result = max(result, findCandy());
-            swap(arr[i][j], arr[i][j + 1]);
-
-            //위아래
-            swap(arr[j][i], arr[j + 1][i]);
-            result = max(result, findCandy());
-            swap(arr[j][i], arr[j + 1][i]);
+        for (int j = 0; j < n; j++) {
+            result = max(result, switchCandy(i, j, arr[i][j]));
         }
     }
 
