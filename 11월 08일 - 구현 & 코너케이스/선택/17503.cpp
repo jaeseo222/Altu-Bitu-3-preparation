@@ -47,7 +47,7 @@ int simulate(vector<vector<int>> board,int r,int c,int d) {
 
 			int br = r + dr[back]; 
 			int bc = c + dc[back]; 
-			//cout << "앞쪽" << d << "뒤쪽" << back;
+			
 			if (board[br][bc] == 1) { //뒤쪽 방향이 벽인 경우 작동 멈춤 
 				break;
 			}
