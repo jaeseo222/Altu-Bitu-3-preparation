@@ -2,17 +2,15 @@
 #include<queue>
 #include<vector>
 
-
 using namespace std;
 
 typedef pair<int, int> pii;
 const int INF = 1e5 * 8 * 3;
 
-
 vector<int> dijkstra(int start,int n, vector<vector<pii>>&graph) {
 	vector<int> dist(n+ 1, INF);
 	dist[start] = 0;
-	//pq ¼±¾ğ
+	//pq ì„ ì–¸
 	priority_queue < pii, vector<pii>, greater<pii>> pq;
 	pq.push(pii(0, start));
 
@@ -26,11 +24,11 @@ vector<int> dijkstra(int start,int n, vector<vector<pii>>&graph) {
 			continue;
 		}
 
-		//Å½»ö & °Å¸® °ª °»½Å
+		//íƒìƒ‰ & ê±°ë¦¬ ê°’ ê°±ì‹ 
 		for (int i = 0; i < graph[v].size(); i++) {
 			int nxt_v = graph[v][i].first;
 			int cost = graph[v][i].second;
-			//°Å¸®°¡ ÀÛÀ¸¸é °»½Å ÈÄ pq¿¡ »ğÀÔ
+			//ê±°ë¦¬ê°€ ì‘ìœ¼ë©´ ê°±ì‹  í›„ pqì— ì‚½ì…
 			if (dist[nxt_v] > dist[v] + cost) {
 				dist[nxt_v] = dist[v] + cost;
 				pq.push(pii(dist[nxt_v], nxt_v));
@@ -41,16 +39,16 @@ vector<int> dijkstra(int start,int n, vector<vector<pii>>&graph) {
 }
 
 /*
-ÇÊ¼öÀûÀ¸·Î Áö³ª¾ß ÇÏ´Â v1,v2 ³ëµå¸¦ Áö³ª°¡´Â ¹æ¹ı
+í•„ìˆ˜ì ìœ¼ë¡œ ì§€ë‚˜ì•¼ í•˜ëŠ” v1,v2 ë…¸ë“œë¥¼ ì§€ë‚˜ê°€ëŠ” ë°©ë²•
 1) 1->v1->v2->n
 2) 1->v2->v1->n
-¹«¹æÇâ ±×·¡ÇÁÀÌ¹Ç·Î 1,v1,v2¿¡ ´ëÇØ ´ÙÀÍ½ºÆ®¶ó¸¦ ÁøÇàÇÑ µÚ °á°ú¸¦ ´õÇØ ±× Áß min °ª ¼±ÅÃ
+ë¬´ë°©í–¥ ê·¸ë˜í”„ì´ë¯€ë¡œ 1,v1,v2ì— ëŒ€í•´ ë‹¤ìµìŠ¤íŠ¸ë¼ë¥¼ ì§„í–‰í•œ ë’¤ ê²°ê³¼ë¥¼ ë”í•´ ê·¸ ì¤‘ min ê°’ ì„ íƒ
 */
 int solve(int v1, int v2,int n, vector<vector<pii>> &graph) {
 	vector<int> start = { 1,v1,v2 };
 	vector<vector<int>> dist(3, vector<int>(n + 1, 0));
 
-	//1,v1,v2¿¡ ´ëÇØ ´ÙÀÍ½ºÆ®¶ó ÁøÇà
+	//1,v1,v2ì— ëŒ€í•´ ë‹¤ìµìŠ¤íŠ¸ë¼ ì§„í–‰
 	for (int i = 0; i < 3; i++) {
 		dist[i] = dijkstra(start[i], n, graph);
 	}
@@ -71,7 +69,7 @@ int main() {
 	while(e--){
 		int a, b, c;
 		cin >> a >> b >> c;
-		//ÀÔ·Â¹ŞÀº °ª ÀúÀå. ¾ç¹æÇâ ±×·¡ÇÁÀÌ¹Ç·Î a¿Í b ¸ğµÎ ÀúÀå ÇØÁÖ¾î¾ßÇÔ
+		//ì…ë ¥ë°›ì€ ê°’ ì €ì¥. ì–‘ë°©í–¥ ê·¸ë˜í”„ì´ë¯€ë¡œ aì™€ b ëª¨ë‘ ì €ì¥ í•´ì£¼ì–´ì•¼í•¨
 		graph[a].push_back(pii(b, c));
 		graph[b].push_back(pii(a, c));
 	}
