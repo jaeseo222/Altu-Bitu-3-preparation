@@ -5,7 +5,6 @@
 using namespace std;
 typedef tuple<int, int, int> tp;
 
-const int INF = 5e6; //최대 n-1개의 간선을 지나게 됨 -> n * (가중치 최대값)
 
 bool bellmanFord(int n,  vector<tp>& edges) {
  
@@ -70,7 +69,7 @@ int main() {
         vector<tp> edges; //간선 정보를 저장할 벡터
 
         //도로 입력
-        for (int i = 0; i < m; i++) {
+       while(m--){
             cin >> s >> e >> t;
 
             //무방향
@@ -79,7 +78,7 @@ int main() {
         }
         
         //간선 입력
-        for (int i = 0; i < w; i++) {
+       while(w--){
             cin >> s >> e >> t;
 
             //단방향
