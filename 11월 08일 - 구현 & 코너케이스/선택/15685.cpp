@@ -1,6 +1,6 @@
 #include<iostream>
 #include<vector>
-#define SIZE 100
+const int SIZE = 100;
 using namespace std;
 
 int dy[4] = {0, -1, 0, 1}; //순서대로 이동방향 0,1,2,3
