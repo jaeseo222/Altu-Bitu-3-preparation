@@ -33,12 +33,11 @@ void reproduceTree(int n, int x, int y, vector<deque<int>>& trees)
 		}
 	}
 }
-void solution(int n, vector<deque<int>>& trees, matrix& food, matrix& A)
+void solution(int n, vector<deque<int>>& trees, matrix& food, matrix& a, vector<pair<int, int>>& breeding_tree)
 {
-	vector<pair<int, int>> breeding_tree;
 	for (int i = 0; i < n; i++)
 	{
-		for (int j = 0; i < n; j++)
+		for (int j = 0; j < n; j++)
 		{
 			int leftover = 0;
 			deque<int> dq;
@@ -56,12 +55,8 @@ void solution(int n, vector<deque<int>>& trees, matrix& food, matrix& A)
 				}
 			}
 			trees[i * 10 + j] = dq;
-			food[i][j] += (A[i][j] + leftover);
+			food[i][j] += (a[i][j] + leftover);
 		}
-	}
-	for (auto [i, j] : breeding_tree)
-	{
-		reproduceTree(n, i, j, trees);
 	}
 }
 /**16235 나무 재테크
@@ -86,28 +81,32 @@ void solution(int n, vector<deque<int>>& trees, matrix& food, matrix& A)
 int main()
 {
 	int n, m, k;
-	matrix A(n, vector<int>(n));
-	matrix food(n, vector<int>(n, 5));
-	matrix arr;
-	vector<deque<int>> trees(n * 10 + n);
 	//입력
 	cin >> n >> m >> k;
+	matrix a(n, vector<int>(n, 0));
+	matrix food(n, vector<int>(n, 5));
+	vector<deque<int>> trees(n * 10 + n);
+
 	for (int i = 0; i < n; i++)
 	{
 		for (int j = 0; j < n; j++)
 		{
-			cin >> A[i][j];
+			cin >> a[i][j];
 		}
 	}
-	for (int i = 0; i < m; i++)
+	for (int i = 0, x, y, z; i < m; i++)
 	{
-		int x, y, z;
 		cin >> x >> y >> z;
 		x--; y--;
 		trees[x * 10 + y].push_front(z);
 	}
 	while (k--) {
-		solution(n, trees, food, A);
+		vector<pair<int, int>> breeding_tree;
+		solution(n, trees, food, a, breeding_tree);
+		for (auto [i, j] : breeding_tree)
+		{
+			reproduceTree(n, i, j, trees);
+		}
 	}
 	cout << countTrees(n, trees);
 	return 0;
