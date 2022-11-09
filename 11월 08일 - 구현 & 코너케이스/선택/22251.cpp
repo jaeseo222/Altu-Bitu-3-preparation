@@ -27,7 +27,7 @@ int solution(int n, int k, int p, int x) {
 	vector<int> start_number(k);
 	int tmp_x = x;
 	for (int i = 0; i < k; i++) {
-		start_number[i] = number_bit[tmp_x % NUMBER];
+		start_number[i] = number_bit[tmp_x % NUMBER];//일의 자리부터 해당하는 숫자의 비트값을 저장
 		tmp_x /= NUMBER;
 	}
 	
