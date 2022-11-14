@@ -2,13 +2,15 @@
 #include<vector>
 
 using namespace std;
+
 /*
-ÀüÀ§ ¼øÈ¸·Î ÀÔ·ÂµÈ ³ëµå °ªÀ» ÈÄÀ§ ¼øÀ§·Î Ãâ·Â
-ÀüÀ§ ¼øÈ¸ (ÀÚ±â ÀÚ½Å->left->right)°¡ Àç±ÍÀûÀ¸·Î ¹İº¹
-ÈÄÀ§ ¼øÈ¸ (left->right->ÀÚ±â ÀÚ½Å)ÀÌ Àç±ÍÀûÀ¸·Î ¹İº¹
- temp°¡ ±âÁØ
- temp¸¦ ±âÁØÀ¸·Î ÀÛÀº °ªÀÌ ÀÖÀ¸¸é ÇØ´ç ¿ø¼Ò¸¦ ±âÁØÀ¸·Î ¿ŞÂÊ,¿À¸¥ÂÊ ³ª´©¾î ´Ù½Ã postOrderÁøÇà
+ì „ìœ„ ìˆœíšŒë¡œ ì…ë ¥ëœ ë…¸ë“œ ê°’ì„ í›„ìœ„ ìˆœìœ„ë¡œ ì¶œë ¥
+ì „ìœ„ ìˆœíšŒ (ìê¸° ìì‹ ->left->right)ê°€ ì¬ê·€ì ìœ¼ë¡œ ë°˜ë³µ
+í›„ìœ„ ìˆœíšŒ (left->right->ìê¸° ìì‹ )ì´ ì¬ê·€ì ìœ¼ë¡œ ë°˜ë³µ
+ tempê°€ ê¸°ì¤€
+ tempë¥¼ ê¸°ì¤€ìœ¼ë¡œ ì‘ì€ ê°’ì´ ìˆìœ¼ë©´ í•´ë‹¹ ì›ì†Œë¥¼ ê¸°ì¤€ìœ¼ë¡œ ì™¼ìª½,ì˜¤ë¥¸ìª½ ë‚˜ëˆ„ì–´ ë‹¤ì‹œ postOrderì§„í–‰
 */
+
 void postOrder(int start, int end, vector<int> &tree) {
 	if (start > end) {
 		return;
@@ -26,10 +28,11 @@ void postOrder(int start, int end, vector<int> &tree) {
 	
 	cout << tree[start] << '\n';
 }
+
 int main() {
 	int input;
 	vector<int> tree;
-	//tree¿¡ ¿ø¼Ò ÀÔ·Â(ÀüÀ§¼øÈ¸)
+	//treeì— ì›ì†Œ ì…ë ¥(ì „ìœ„ìˆœíšŒ)
 	while (cin >> input) {
 		tree.push_back(input);
 	}
