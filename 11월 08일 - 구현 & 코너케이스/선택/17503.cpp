@@ -43,10 +43,8 @@ int simulate(vector<vector<int>> board,int r,int c,int d) {
 		if (step == 4) { //네 방향 모두 벽이거나 청소가 되어있는 경우
 
 			//바라 보는 방향을 유지한채로 한 칸 후진
-			int back = (d + 2) % 4;
-
-			int br = r + dr[back]; 
-			int bc = c + dc[back]; 
+			int br = r - dr[d]; 
+			int bc = c - dc[d]; 
 			
 			if (board[br][bc] == 1) { //뒤쪽 방향이 벽인 경우 작동 멈춤 
 				break;
