@@ -25,7 +25,7 @@ int simulate(vector<vector<int>> board,int r,int c,int d) {
 	
 		int step;
 		//왼쪽 방향에 아직 청소하지 않은 공간이 남아있는지
-		for ( step = 0; i < 4; i++) {
+		for ( step = 0; step < 4; step++) {
 	
 			d = (d + 3) % 4;//현재 방향의 왼쪽 좌표
 			int nr = r + dr[d];
