@@ -10,7 +10,14 @@ using namespace std;
 
 const int INF = 1e9;
 
-int minimumTime(int height, int block, int n, int m, vector<vector<int>> ground) {
+void compareTime(int time, int height, pair<int, int> &result) {
+    if (time <= result.first) { // 최소 시간이 같을 경우, 최대 높이를 출력해야 하기 때문에 등호 필요
+        result.first = time;
+        result.second = height;
+    }
+}
+
+int minimumTime(int height, int block, int n, int m, vector<vector<int>> &ground) {
     int time = 0;
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
@@ -35,24 +42,19 @@ int main() {
     cin >> n >> m >> b;
     vector<vector<int>> ground(n, vector<int>(m, 0));
 
-    int maxh = 0, minh = INF;
+    int max_h = 0, min_h = INF;
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
             cin >> ground[i][j];
-            maxh = max(maxh, ground[i][j]); // 제일 높은 곳의 높이
-            minh = min(minh, ground[i][j]); // 제일 낮은 곳의 높이
+            max_h = max(max_h, ground[i][j]); // 제일 높은 곳의 높이
+            min_h = min(min_h, ground[i][j]); // 제일 낮은 곳의 높이
         }
     }
 
-    int max_height = 0;
-    int min_time = INF;
-    for (int h = minh; h <= maxh; h++) {
-        int time = minimumTime(h, b, n, m, ground);
-        if (time <= min_time) { // 최소 시간이 같을 경우, 최대 높이를 출력해야 하기 때문에 등호 필요
-            min_time = time;
-            max_height = h;
-        }
+    pair<int, int> result = {INF, 0}; // 최소 시간, 최대 높이
+    for (int h = min_h; h <= max_h; h++) {
+        compareTime(minimumTime(h, b, n, m, ground), h, result);
     }
 
-    cout << min_time << " " << max_height;
+    cout << result.first << " " << result.second;
 }
