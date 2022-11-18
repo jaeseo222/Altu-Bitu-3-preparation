@@ -40,14 +40,12 @@ void backtracking(int x, int y, int cnt, int sum) {
             // 범위를 벗어나거나, 이미 방문했다면
             continue;
         }
-        if (cnt == 2) {
-            int temp = board[nx][ny];
-            board[nx][ny] = 0;
-            backtracking(x, y, cnt + 1, sum + temp);
-            board[nx][ny] = temp;
-        }
+
         int temp = board[nx][ny];
         board[nx][ny] = 0;
+        if (cnt == 2) {
+            backtracking(x, y, cnt + 1, sum + temp);
+        }
         backtracking(nx, ny, cnt + 1, sum + temp);
         board[nx][ny] = temp;
     }
