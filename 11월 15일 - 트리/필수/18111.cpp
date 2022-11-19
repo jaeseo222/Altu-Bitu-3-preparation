@@ -10,25 +10,32 @@ using namespace std;
 
 const int INF = 1e9;
 
-pair<int, int> minimumTime(int min_h, int max_h, int b, int n, int m, vector<vector<int>> &ground) {
+int minimumTime(int height, int block, int n, int m, vector<vector<int>> &ground) {
+    int time = 0;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (height < ground[i][j]) { //블록 제거
+                block += (ground[i][j] - height);
+                time += 2 * (ground[i][j] - height);
+            } else if (height > ground[i][j]) { //블록 추가
+                block -= (height - ground[i][j]);
+                time += (height - ground[i][j]);
+            }
+        }
+    }
+
+    if (block < 0) { //다 계산을 했는데 block이 음수이면 불가능한 경우
+        return INF;
+    }
+    return time;
+}
+
+pair<int, int> solution(int min_h, int max_h, int b, int n, int m, vector<vector<int>> &ground) {
     pair<int, int> result = {INF, 0}; //최소 시간, 최대 높이
 
     for (int height = min_h; height <= max_h; height++) {
-        int time = 0;
-        int block = b;
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                if (height < ground[i][j]) { //블록 제거
-                    block += (ground[i][j] - height);
-                    time += 2 * (ground[i][j] - height);
-                } else if (height > ground[i][j]) { //블록 추가
-                    block -= (height - ground[i][j]);
-                    time += (height - ground[i][j]);
-                }
-            }
-        }
-
-        if (block >= 0 && time <= result.first) {
+        int time = minimumTime(height, b, n, m, ground);
+        if (time <= result.first) { // 최소 시간이 같을 경우, 최대 높이를 출력해야 하기 때문에 등호 필요
             result = {time, height};
         }
     }
@@ -50,7 +57,7 @@ int main() {
         }
     }
 
-    pair<int, int> result = minimumTime(min_h, max_h, b, n, m, ground);
+    pair<int, int> result = solution(min_h, max_h, b, n, m, ground);
 
     cout << result.first << " " << result.second;
 }
