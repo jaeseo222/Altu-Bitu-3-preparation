@@ -6,11 +6,7 @@ using namespace std;
 
 //단절점, 단절선 파악 함수
 string check(int t, int k, vector<vector<int>>& tree) {
-	if (t == 2) {
-		return "yes";
-	}
-		
-	if (tree[k].size() >= 2) {
+	if (t == 2 || tree[k].size() >= 2) {
 		return "yes";
 	}
 		
