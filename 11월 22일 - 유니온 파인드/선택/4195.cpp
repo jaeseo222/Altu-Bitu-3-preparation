@@ -54,7 +54,7 @@ int main() {
 		parent.assign(MAX+1, -1);
 
 		cin >> f;
-		for (int i = 0; i < f; i++) {
+		whlie(f--){
 			cin >> a >> b;
 			if (!people[a]) {
 				people[a] = idx++;
@@ -67,6 +67,7 @@ int main() {
 
 			cout << -parent[findParent(people[a])]<<'\n';
 		}
+
 	}
 	return 0;
 }
