@@ -33,28 +33,20 @@ int hit(vector<bool> &state, int n) {
 }
 /* 타순이 결정됐을 때 경기에서 얻는 점수 구하기 */
 int getScore(vector<vector<int>> &inning, int n) {
-    int out = 0, score = 0, cur = 0;
+    int score = 0;
     vector<bool> state(4, false);
-    int i = 1;
-    while (true)
+    for (int cur = 0; cur<n; cur++)
     {
-        if (out == 3) { //3아웃
-            cur++; //다음 이닝
-            out = 0;
-            state = vector<bool>(4, false); //출루한 주자 리셋
-            continue;
+        state = vector<bool>(4, false); //출루한 주자 리셋
+        int i = 1;
+        for(int out=0; out<3; out++) {
+            int player = order[i++]; //타석으로 나갈 주자
+            i = i % 9 + 1;
+            if (inning[cur][player] == 0) { //아웃
+                break;
+            }
+            score += hit(state, inning[cur][player]);
         }
-        if (cur == n) { //이닝 종료
-            break;
-        }
-
-        int player = order[i++]; //타석으로 나갈 주자
-        i = i % 9 + 1;
-        if (inning[cur][player] == 0) { //아웃
-            out++;
-            continue;
-        }
-        score += hit(state, inning[cur][player]);
     }
     return score;
 }
