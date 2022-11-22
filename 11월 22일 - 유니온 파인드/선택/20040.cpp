@@ -2,25 +2,25 @@
 #include <vector>
 using namespace std;
 
-vector<int> parent; //부모 노드를 가리키는 벡터
+vector<int> parent; 
 
-//Find 연산: x가 포함된 트리를 찾음
+//Find 연산
 int find(int x){
-    if (parent[x] < 0) { //자기자신이 루트인 경우
+    if (parent[x] < 0) { 
         return x;
     }
-    return parent[x] = find(parent[x]); //부모 노드 리턴
+    return parent[x] = find(parent[x]); 
 }
 
-//Union 연산: x,y가 포함된 트리를 합침
+//Union 연산
 bool unionInput(int x, int y){
-    int xp = find(x); //x,y가 속한 트리의 루트 노드
+    int xp = find(x); 
     int yp = find(y);
 
     if (xp == yp){ //같은 트리에 속하는 경우 -> 사이클이다
         return false;
     }
-    //다른 트리에 속하는 경우
+    
     if (parent[xp] < parent[yp]){
         parent[xp] += parent[yp];
         parent[yp] = xp;
