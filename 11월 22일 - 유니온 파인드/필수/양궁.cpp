@@ -2,15 +2,15 @@
 #include <string>
 #include <vector>
 #include <algorithm>
-#define MAX_SCORE 10 // 양궁 최대 점수
 using namespace std;
 
+const int MAX_SCORE = 10; // 양궁 최대 점수
 vector<int> answer = {-1};
-int maxDiff = 0;
+int max_diff = 0;
 
 /* 라이언이 answer보다 낮은 점수의 비중이 높은지 여부 반환*/
 bool compare(vector<int> &ryan) {
-    for(int i=MAX_SCORE-1; i>=0; i--) {
+    for (int i = MAX_SCORE; i >= 0; i--) {
         if(answer[i] > ryan[i]) {
             return false;
         }
@@ -22,7 +22,7 @@ bool compare(vector<int> &ryan) {
 /* 라이언과 어피치의 점수 차 반환 */
 int getDiff(vector<int> &ryan, vector<int> &appeach) {
     int appeach_score = 0;
-    int lion_score = 0;
+    int ryan_score = 0;
     for(int i=0; i<MAX_SCORE; i++) {
         // 어피치와 라이언이 모두 0점을 쏠 경우 아무도 점수를 가져가지 않음
         if (appeach[i] == 0 && ryan[i] == 0) {
@@ -34,47 +34,44 @@ int getDiff(vector<int> &ryan, vector<int> &appeach) {
         }
         // 라이언이 어피치보다 더 많이 쏜 경우: 어피치 득점 
         else {
-            lion_score += MAX_SCORE - i;
+            ryan_score += MAX_SCORE - i;
         }
     }
-    return lion_score - appeach_score;
-}
-/* answer, maxDiff 엄데이트 */
-void update(int diff, vector<int> &ryan) {
-    // 1. 현재 점수 차가 가장 큰 경우: maxDiff 업데이트
-    if (diff > maxDiff) {
-        maxDiff = diff;
-        answer = ryan;
-    }
-    // 2. 현재 점수 차가 maxDiff과 같은 경우: 낮은 점수의 비중이 더 크면 maxDiff 업데이트
-    else if (diff == maxDiff && compare(ryan)){
-        answer = ryan;
-    }
+    return ryan_score - appeach_score;
 }
 
-void combination(int cnt, int not_used, vector<int> &ryan, vector<int> &appeach) {
-    if (not_used == 0 || cnt == MAX_SCORE + 1) {
-        ryan[MAX_SCORE] = not_used; // 남은 화살은 0점 개수로 포함
+void backtracking(int cnt, int extra_arrows, vector<int> &ryan, vector<int> &appeach) {
+    if (extra_arrows == 0 || cnt == MAX_SCORE + 1) {
+        ryan[MAX_SCORE] = extra_arrows; // 남은 화살은 0점 개수로 포함
         int diff = getDiff(ryan, appeach);
+        
         if(diff > 0) {
-            update(diff, ryan);
+            // 1. 현재 점수 차가 가장 큰 경우: max_diff 업데이트
+            if (diff > max_diff) {
+                max_diff = diff;
+                answer = ryan;
+            }
+            // 2. 현재 점수 차가 maxDiff과 같은 경우: 낮은 점수의 비중이 더 크면 max_diff 업데이트
+            else if (diff == max_diff && compare(ryan)){
+                answer = ryan;
+            }
         }
         ryan[MAX_SCORE] = 0; // 0점 개수 원래대로 초기화
         return;
     }
     // cnt번째 점수를 가져가는 경우 (appeach[cnt]+1만큼 쏘는 경우)
-    if (not_used > appeach[cnt]) { 
+    if (extra_arrows > appeach[cnt]) { 
         ryan[cnt] = appeach[cnt] + 1;
-        combination(cnt + 1, not_used - ryan[cnt], ryan, appeach);
+        backtracking(cnt + 1, extra_arrows - ryan[cnt], ryan, appeach);
         ryan[cnt] = 0;
     }
     // cnt번째 점수를 가져가지 않는 경우 (0점을 쏘는 경우)
-    combination(cnt + 1, not_used, ryan, appeach);
+    backtracking(cnt + 1, extra_arrows, ryan, appeach);
 }
 
 vector<int> solution(int n, vector<int> info) {
-    vector<int> order(MAX_SCORE + 1, 0);
-    combination(0, n, order, info);
+    vector<int> ryan(MAX_SCORE + 1, 0);
+    backtracking(0, n, ryan, info);
     return answer;
 }
 
@@ -91,8 +88,8 @@ vector<int> solution(int n, vector<int> info) {
  *    - 어피치가 라이언보다 많거나 동일하게 맞힌 경우: 어피치 득점
  *    - 라이언이 어피치보다 많이 맞힌 경우: 라이언 득점
  * 
- * 3. 얻은 점수차가 0점보다 큰 경우 -> 최대점수차(maxDiff) 업데이트할지 확인
- *    - 현재 점수차 > 최대 점수차: maxDiff와 answer 업데이트
+ * 3. 얻은 점수차가 0점보다 큰 경우 -> 최대점수차(max_diff) 업데이트할지 확인
+ *    - 현재 점수차 > 최대 점수차: max_diff와 answer 업데이트
  *    - 현재 점수차 == 최대 점수차: 현재 answer보다 낮은 점수의 배점이 큰 경우에만 업데이트
  */
 int main() {
