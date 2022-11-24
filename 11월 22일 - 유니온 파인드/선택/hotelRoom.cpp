@@ -4,23 +4,23 @@
 using namespace std;
 typedef long long ll;
 
-unordered_map <ll, ll> rooms;
+unordered_map <ll, ll> parent;
 
-ll find(ll num) {
-    if (rooms[num] == 0) { // 방이 비어있다면
+ll findParent(ll num) {
+    if (parent[num] == 0) { // 방이 비어있다면
         return num;
     }
-    else {
-        return rooms[num] = find(rooms[num]);
-    }
+
+    return parent[num] = find(parent[num]);
+
 }
 
 vector<ll> solution(ll k, vector<ll> room_number) {
     vector<ll> answer;
     for (ll num : room_number) {
-        ll x = find(num); // x: 배정된 방 번호
+        ll x = findParent(num); // x: 배정된 방 번호
         answer.push_back(x);
-        rooms[x] = x + 1; // 다음 방을 가리키도록 
+        parent[x] = x + 1; // 그 다음 빈방을 가리키도록 
     }
     return answer;
 }
