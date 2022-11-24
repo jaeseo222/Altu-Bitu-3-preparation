@@ -11,7 +11,7 @@ ll findParent(ll num) {
         return num;
     }
 
-    return parent[num] = find(parent[num]);
+    return parent[num] = findParent(parent[num]);
 
 }
 
