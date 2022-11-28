@@ -8,25 +8,25 @@ typedef tuple<int, int, int> tp;
 
 vector<int> parent;
 
-//Find ¿¬»ê
+//Find ì—°ì‚°
 int findParent(int node) {
-    if (parent[node] < 0) //°ªÀÌ À½¼ö¸é ·çÆ® Á¤Á¡
+    if (parent[node] < 0) //ê°’ì´ ìŒìˆ˜ë©´ ë£¨íŠ¸ ì •ì 
         return node;
-    return parent[node] = findParent(parent[node]); //±×·¡ÇÁ ¾ĞÃàÇÏ¸ç ·çÆ® Á¤Á¡ Ã£±â
+    return parent[node] = findParent(parent[node]); //ê·¸ë˜í”„ ì••ì¶•í•˜ë©° ë£¨íŠ¸ ì •ì  ì°¾ê¸°
 }
 
-//Union ¿¬»ê
+//Union ì—°ì‚°
 bool unionInput(int x, int y) {
     int xp = findParent(x);
     int yp = findParent(y);
 
-    if (xp == yp) //°°Àº ÁıÇÕ¿¡ ÀÖ´Ù¸é À¯´Ï¿Â ÇÒ ¼ö ¾øÀ½
+    if (xp == yp) //ê°™ì€ ì§‘í•©ì— ìˆë‹¤ë©´ ìœ ë‹ˆì˜¨ í•  ìˆ˜ ì—†ìŒ
         return false;
-    if (parent[xp] < parent[yp]) { //»õ·Î¿î ·çÆ® xp
+    if (parent[xp] < parent[yp]) { //ìƒˆë¡œìš´ ë£¨íŠ¸ xp
         parent[xp] += parent[yp];
         parent[yp] = xp;
     }
-    else { //»õ·Î¿î ·çÆ® yp
+    else { //ìƒˆë¡œìš´ ë£¨íŠ¸ yp
         parent[yp] += parent[xp];
         parent[xp] = yp;
     }
@@ -37,8 +37,8 @@ long long kruskal(int v, long long tot, priority_queue<tp, vector<tp>, greater<>
     int cnt = 0;
     long long sum = 0;
 
-    while (cnt < v - 1) { //»ç¿ëÇÑ °£¼±ÀÇ ¼ö°¡ v-1º¸´Ù ÀûÀ» µ¿¾È
-        if (pq.empty()) //»ç¿ëÇÑ °£¼±ÀÌ v-1°³°¡ ¾ÈµÆ´Âµ¥ ´õ ÀÌ»ó °Ë»çÇÒ °£¼±ÀÌ ¾ø´Ù¸é
+    while (cnt < v - 1) { //ì‚¬ìš©í•œ ê°„ì„ ì˜ ìˆ˜ê°€ v-1ë³´ë‹¤ ì ì„ ë™ì•ˆ
+        if (pq.empty()) //ì‚¬ìš©í•œ ê°„ì„ ì´ v-1ê°œê°€ ì•ˆëëŠ”ë° ë” ì´ìƒ ê²€ì‚¬í•  ê°„ì„ ì´ ì—†ë‹¤ë©´
             return -1;
 
         int cost = get<0>(pq.top());
@@ -46,7 +46,7 @@ long long kruskal(int v, long long tot, priority_queue<tp, vector<tp>, greater<>
         int y = get<2>(pq.top());
 
         pq.pop();
-        if (unionInput(x, y)) { //À¯´Ï¿Â Çß´Ù¸é
+        if (unionInput(x, y)) { //ìœ ë‹ˆì˜¨ í–ˆë‹¤ë©´
             cnt++;
             sum += cost;
         }
@@ -54,10 +54,10 @@ long long kruskal(int v, long long tot, priority_queue<tp, vector<tp>, greater<>
     return tot - sum;
 }
 
-/**
- * ±âº» MST ¹®Á¦¿¡¼­ Æ®¸®¸¦ ¸¸µé ¼ö ¾ø´Â °æ¿ì(°£¼±ÀÌ N-1°³°¡ ¾Æ´Ñ °æ¿ì)¸¦ °í·ÁÇÑ ¹®Á¦
+/*
+ * ê¸°ë³¸ MST ë¬¸ì œì—ì„œ íŠ¸ë¦¬ë¥¼ ë§Œë“¤ ìˆ˜ ì—†ëŠ” ê²½ìš°(ê°„ì„ ì´ N-1ê°œê°€ ì•„ë‹Œ ê²½ìš°)ë¥¼ ê³ ë ¤í•œ ë¬¸ì œ
  *
- * ÃÖ´ë ºñ¿ëÀÇ ¹üÀ§°¡ ¾à 10^6 x 10^5 ÀÌ¹Ç·Î long long ÀÚ·áÇüÀ» ½á¾ß ÇÔ
+ * ìµœëŒ€ ë¹„ìš©ì˜ ë²”ìœ„ê°€ ì•½ 10^6 x 10^5 ì´ë¯€ë¡œ long long ìë£Œí˜•ì„ ì¨ì•¼ í•¨
  */
 
 int main() {
@@ -65,15 +65,15 @@ int main() {
     long long tot = 0;
     priority_queue<tp, vector<tp>, greater<>> pq;
 
-    //ÀÔ·Â
+    //ì…ë ¥
     cin >> n >> m;
     parent.assign(n + 1, -1);
     while (m--) {
         cin >> a >> b >> c;
         pq.push({ c, a, b });
-        tot += c; //µµ·Î¸¦ ´Ù ¼³Ä¡ÇÒ ¶§ µå´Â ºñ¿ë
+        tot += c; //ë„ë¡œë¥¼ ë‹¤ ì„¤ì¹˜í•  ë•Œ ë“œëŠ” ë¹„ìš©
     }
-
-    //¿¬»ê & Ãâ·Â
+    
+    //ì—°ì‚° & ì¶œë ¥
     cout << kruskal(n, tot, pq);
 }
