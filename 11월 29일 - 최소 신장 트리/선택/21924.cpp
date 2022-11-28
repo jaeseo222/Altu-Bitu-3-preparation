@@ -9,11 +9,11 @@ const int INF = 1e6 + 1;
 long long prim(int n, vector<vector<pi>>& graph, int start) {
 	priority_queue<pi, vector<pi>, greater<>> pq;
 	vector<int> cost(n + 1, INF); //cost
-	vector<bool>visit(n + 1, false); //¹æ¹® check
-	int cnt = 0; //visitÇÑ Á¤Á¡ ¼ö
+	vector<bool>visit(n + 1, false); //ë°©ë¬¸ check
+	int cnt = 0; //visití•œ ì •ì  ìˆ˜
 	long long sum = 0;
 
-	//ÃÊ±âÈ­
+	//ì´ˆê¸°í™”
 	cost[start] = 0;
 	pq.push({ 0, start });
 
@@ -44,10 +44,9 @@ long long prim(int n, vector<vector<pi>>& graph, int start) {
 }
 
 /*
-Àı¾àÇÑ ºñ¿ëÀ» ±¸ÇØ¾ßÇÏ¹Ç·Î Ã³À½¿¡ ÃÑ ºñ¿ë ±¸ÇØ¾ßÇÔ
-pair ½Ö ¸¸µé¾î¼­ graph¿¡ »ğÀÔ ÈÄ primÀ¸·Î MST °£¼± ÇÕ ±¸ÇÏ±â
+ì ˆì•½í•œ ë¹„ìš©ì„ êµ¬í•´ì•¼í•˜ë¯€ë¡œ ì²˜ìŒì— ì´ ë¹„ìš© êµ¬í•´ì•¼í•¨
+pair ìŒ ë§Œë“¤ì–´ì„œ graphì— ì‚½ì… í›„ primìœ¼ë¡œ MST ê°„ì„  í•© êµ¬í•˜ê¸°
 */
-
 
 int main() {
 	int n, m;
@@ -65,6 +64,6 @@ int main() {
 	}
 
 	long long result = prim(n, graph, 1);
-	//Àı¾àÇÑ ±İ¾× °è»êÀÌ¹Ç·Î price¿¡¼­ MSTºñ¿ë »©ÁÖ±â
+	//ì ˆì•½í•œ ê¸ˆì•¡ ê³„ì‚°ì´ë¯€ë¡œ priceì—ì„œ MSTë¹„ìš© ë¹¼ì£¼ê¸°
 	printf("%lld", result == -1 ? -1 : price - result);
 }
