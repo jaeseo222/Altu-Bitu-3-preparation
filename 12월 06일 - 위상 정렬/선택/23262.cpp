@@ -30,7 +30,7 @@ vector<int> topologicalSort(int t, int n, vector<int> &indegree,  vector<vector<
             int resource = resources[x][i];
             
              // 서로 다른 건물끼리 생산하는 자원이 겹칠 수 있으므로, 
-             // 이미 확보한 자원으로는 중복해서 재료를 충족했다고 
+             // 이미 확보한 자원으로 중복해서 재료를 충족했다고 오판하지 않도록 함
             if (check[resource]) {
                 continue;
             }
@@ -54,7 +54,7 @@ vector<int> topologicalSort(int t, int n, vector<int> &indegree,  vector<vector<
  * [쿠키런 킹덤]
  *
  * 건물마다 필요로 하는 자원의 관계를 그래프로 표현하여 위상정렬 수행
- * 건물은 자원을 생성하고, 명시된 자원이 모두 충족되면 건물을 지을 수 있다 : 건물 -> 자원 -> 건물
+ * 이미 지어진 건물은 자원을 생성하고, 필요한 자원이 모두 충족되면 새로운 건물을 지을 수 있다 : 건물 -> 자원 -> 건물
  * => graph[i][j] : 건물 j 를 짓기 위해 자원 i가 필요함, i->j
  * - 초기에 이미 지어진 건물들이 생산하는 재료들로 새로운 건물들을 지어 새로운 자원을 확보하고, 
  * - 새롭게 확보된 자원으로 인해 재료가 모두 충족된 또 다른 건물을 연속적으로 지어나감
