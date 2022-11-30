@@ -10,8 +10,10 @@ vector<int> parent;
 
 //Find 연산
 int findParent(int node) {
-    if (parent[node] < 0) //값이 음수면 루트 정점
+//값이 음수면 루트 정점
+    if (parent[node] < 0) {
         return node;
+    }
     return parent[node] = findParent(parent[node]); //그래프 압축하며 루트 정점 찾기
 }
 
@@ -19,9 +21,10 @@ int findParent(int node) {
 bool unionInput(int x, int y) {
     int xp = findParent(x);
     int yp = findParent(y);
-
-    if (xp == yp) //같은 집합에 있다면 유니온 할 수 없음
+    //같은 집합에 있다면 유니온 할 수 없음
+    if (xp == yp){
         return false;
+    }
     if (parent[xp] < parent[yp]) { //새로운 루트 xp
         parent[xp] += parent[yp];
         parent[yp] = xp;
@@ -38,9 +41,10 @@ long long kruskal(int v, long long tot, priority_queue<tp, vector<tp>, greater<>
     long long sum = 0;
 
     while (cnt < v - 1) { //사용한 간선의 수가 v-1보다 적을 동안
-        if (pq.empty()) //사용한 간선이 v-1개가 안됐는데 더 이상 검사할 간선이 없다면
+        //사용한 간선이 v-1개가 안됐는데 더 이상 검사할 간선이 없다면
+        if (pq.empty()) {
             return -1;
-
+        }
         int cost = get<0>(pq.top());
         int x = get<1>(pq.top());
         int y = get<2>(pq.top());
