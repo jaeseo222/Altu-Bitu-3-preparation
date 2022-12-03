@@ -3,7 +3,7 @@
 #include <vector>
 using namespace std;
 /** 구조물 설치 */
-bool build(int n, vector<vector<vector<int>>> installed, int x, int y, int a) {
+bool build(int n, vector<vector<vector<int>>> &installed, int x, int y, int a) {
     if(a==0) { //기둥 설치
         // 1. 기둥이 바닥 위에 있는 경우
         if(y==0) { 
@@ -38,7 +38,7 @@ bool build(int n, vector<vector<vector<int>>> installed, int x, int y, int a) {
     return false;
 }
 /** 구조물 삭제*/
-bool remove(int n, vector<vector<vector<int>>> installed, int x, int y, int a) {
+bool remove(int n, vector<vector<vector<int>>> &installed, int x, int y, int a) {
     bool flag=true;
     installed[x][y][a]=0; // 현재 구조물 삭제
     if(a==0) { // 기둥 삭제
