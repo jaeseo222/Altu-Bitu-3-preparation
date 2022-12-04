@@ -27,8 +27,7 @@ vector<int> topologicalSort(int n, vector<int> &indegree, vector<vector<int>> &g
     }
 
     if (order.size() != n) { //사이클이 존재하는 경우: 0 출력
-        order.clear();
-        order.push_back(0);
+        order = { 0 };
     }
     return order;
 }
