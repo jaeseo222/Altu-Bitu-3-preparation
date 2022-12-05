@@ -29,7 +29,7 @@ int main()
     cin >> T;
     while (T--) {
         int n, m, k;
-        int prefix_sum[n] = { 0 }; 
+        int prefix_sum[MAX] = { 0 }; 
         cin >> n >> m >> k;
         for (int i = 1, c; i <= n; i++) {
             cin >> c;
