@@ -39,32 +39,31 @@ bool build(int n, vector<vector<vector<bool>>> &installed, int x, int y, int str
 }
 /** 구조물 삭제*/
 bool remove(int n, vector<vector<vector<bool>>> &installed, int x, int y, int structure) {
-    bool flag=true;
     if(structure==0) { // 기둥 삭제
         if(x-1>=0 && y+1<=n && installed[x-1][y+1][1] && !build(n, installed, x-1, y+1, 1)) {
-            flag=false;
+            return false;
         }
         else if(y+1<=n && installed[x][y+1][1] && !build(n, installed, x, y+1, 1)) {
-            flag=false;
+            return false;
         }
         else if(y+1<=n && installed[x][y+1][0] && !build(n, installed, x, y+1, 0)) {
-            flag=false;
+            return false;
         }
     } else { // 보 삭제
         if(x-1>=0 && installed[x-1][y][1] && !build(n, installed, x-1, y, 1)) {
-            flag=false;
+            return false;
         }
         else if(x+1<=n && installed[x+1][y][1] && !build(n, installed, x+1, y, 1)) {
-            flag=false;
+            return false;
         }
         else if(installed[x][y][0] && !build(n, installed, x, y, 0)) {
-            flag=false;
+            return false;
         }
         else if(x+1<=n && installed[x+1][y][0] && !build(n, installed, x+1, y, 0)) {
-            flag=false;
+            return false;
         }
     }
-    return flag;
+    return true;
 }
 vector<vector<int>> solution(int n, vector<vector<int>> build_frame) {
     vector<vector<vector<bool>>> installed=vector<vector<vector<bool>>> (n+1, vector<vector<bool>>(n+1, vector<bool>(2, false)));
