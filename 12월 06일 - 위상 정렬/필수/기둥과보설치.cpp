@@ -3,8 +3,8 @@
 #include <vector>
 using namespace std;
 /** 구조물 설치 */
-bool build(int n, vector<vector<vector<int>>> &installed, int x, int y, int a) {
-    if(a==0) { //기둥 설치
+bool build(int n, vector<vector<vector<bool>>> &installed, int x, int y, int structure) {
+    if(structure==0) { //기둥 설치
         // 1. 기둥이 바닥 위에 있는 경우
         if(y==0) { 
             return true;
@@ -38,10 +38,9 @@ bool build(int n, vector<vector<vector<int>>> &installed, int x, int y, int a) {
     return false;
 }
 /** 구조물 삭제*/
-bool remove(int n, vector<vector<vector<int>>> &installed, int x, int y, int a) {
+bool remove(int n, vector<vector<vector<bool>>> &installed, int x, int y, int structure) {
     bool flag=true;
-    installed[x][y][a]=0; // 현재 구조물 삭제
-    if(a==0) { // 기둥 삭제
+    if(structure==0) { // 기둥 삭제
         if(x-1>=0 && y+1<=n && installed[x-1][y+1][1] && !build(n, installed, x-1, y+1, 1)) {
             flag=false;
         }
@@ -65,25 +64,23 @@ bool remove(int n, vector<vector<vector<int>>> &installed, int x, int y, int a) 
             flag=false;
         }
     }
-    if(!flag) {
-        installed[x][y][a]=1;
-    }
     return flag;
 }
 vector<vector<int>> solution(int n, vector<vector<int>> build_frame) {
-    vector<vector<vector<int>>> installed=vector<vector<vector<int>>> (n+1, vector<vector<int>>(n+1, vector<int>(2, 0)));
+    vector<vector<vector<bool>>> installed=vector<vector<vector<bool>>> (n+1, vector<vector<bool>>(n+1, vector<bool>(2, false)));
     for(int i=0; i<build_frame.size(); i++) {
         int x=build_frame[i][0];
         int y=build_frame[i][1];
-        int a=build_frame[i][2];
-        int b=build_frame[i][3];
-        if(b==0) { // 구조물 삭제
-            if(remove(n, installed, x, y, a)) {
-                installed[x][y][a] = 0;
+        int structure=build_frame[i][2];
+        int cmd=build_frame[i][3];
+        if(cmd==0) { // 구조물 삭제
+            installed[x][y][structure] = false;
+            if(!remove(n, installed, x, y, structure)) { // 삭제할 수 없으면 원상복구
+                installed[x][y][structure] = true;
             }
         } else { // 구조물 설치
-            if(build(n, installed, x, y, a)) {
-                installed[x][y][a] = 1;
+            if(build(n, installed, x, y, structure)) {
+                installed[x][y][structure] = true;
             }
         }
     }
@@ -91,9 +88,9 @@ vector<vector<int>> solution(int n, vector<vector<int>> build_frame) {
     vector<vector<int>> answer;
     for(int i=0; i<=n; i++) {
         for(int j=0; j<=n; j++) {
-            for(int a=0; a<2; a++) {
-                if(installed[i][j][a]) {
-                    answer.push_back({i, j, a});
+            for(int structure=0; structure<2; structure++) {
+                if(installed[i][j][structure]) {
+                    answer.push_back({i, j, structure});
                 }
             }
         }
@@ -118,15 +115,16 @@ vector<vector<int>> solution(int n, vector<vector<int>> build_frame) {
  *    조건에 만족하는지(설치 가능한지) 확인
  * 3. 설치 불가능하면 구조물 삭제 취소
  */
+
+/** 로컬 디버깅용 테스트 main 함수*/
 int main() {
     int n = 5;
     vector<vector<int>> build_frame = {{1, 0, 0, 1}, {1, 1, 1, 1}, {2, 1, 0, 1}, {2, 2, 1, 1}, {5, 0, 0, 1}, {5, 1, 0, 1}, {4, 2, 1, 1}, {3, 2, 1, 1}};
     vector<vector<int>> answer = solution(n, build_frame);
     
     for (int i = 0; i < answer.size(); i++)
-        {
-            cout << answer[i][0] << "\t" << answer[i][1] << "\t" << answer[i][2];
-            cout << endl;
-        }
+    {
+        cout << answer[i][0] << "    " << answer[i][1] << "    " << answer[i][2] << "\n";
+    }
     return 0;
 }
