@@ -5,7 +5,7 @@
 using namespace std;
 typedef pair<int, int> ci;
 
-vector<int> bfs(int n, vector<vector<ci>> &graph) {
+vector<int> topologicalSort(int n, vector<vector<ci>> &graph) {
     queue<int> q;
     vector<int> cnt(n + 1, 0); //큐에 있는 부품 번호에 따른 개수 저장 + 방문체크
     vector<int> ans(n + 1, 0); //기본 부품 개수 저장
@@ -55,7 +55,7 @@ int main() {
     }
 
     //연산
-    vector<int> result = bfs(n, graph);
+    vector<int> result = topologicalSort(n, graph);
 
     //출력
     for (int i = 1; i <= n; i++) {
